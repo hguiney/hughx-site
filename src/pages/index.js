@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
 
@@ -23,6 +24,10 @@ const IndexPage = ( { data } ) => (
     <Link to="/page-2/">Go to page 2</Link>
   </Layout>
 );
+
+IndexPage.propTypes = {
+  "data": PropTypes.object,
+};
 
 export default IndexPage;
 
