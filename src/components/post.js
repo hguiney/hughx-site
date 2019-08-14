@@ -2,16 +2,24 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
 import PropTypes from "prop-types";
+import ReactMarkdown from "react-markdown";
 import Layout from "./layout";
 
-const PostTemplate = ( { data } ) => (
-  <Layout>
-    <h1>{ data.post.title }</h1>
-    <p>by <Link to={ `/authors/User_${data.post.authors[0].id}` }>{ data.post.authors[0].username }</Link></p>
-    { /* <Img fixed={ data.post.coverArt.childImageSharp.fixed }/> */ }
-    <p>{ data.post.content }</p>
-  </Layout>
-);
+const PostTemplate = ( { data } ) => {
+  const { post } = data;
+
+  return <Layout>
+    <header>
+      <h1>{ post.title }</h1>
+      <p>by <Link to={ `/authors/${post.authors[0].username}` }>{ post.authors[0].name }</Link></p>
+      <Img
+        fluid={ post.coverArt[0].localFile.childImageSharp.fluid }
+        alt={ post.coverArtAltText }
+      />
+    </header>
+    <ReactMarkdown source={ post.body } />
+  </Layout>;
+};
 
 PostTemplate.propTypes = {
   "data": PropTypes.object,
@@ -25,15 +33,19 @@ export const query = graphql`
       title
       authors {
         id
-        profilePhoto {
-          url
-        }
         username
         name
       }
       coverArt {
-        url
+        localFile {
+          childImageSharp {
+            fluid(maxWidth: 1200, maxHeight: 630) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
+      coverArtAltText
       body
     }
   }

@@ -16,7 +16,17 @@ const IndexPage = ( { data } ) => (
 
         return <article key={ post.id }>
           <h2>
-            <Link to={ `/${post.id}` }>{ post.title }</Link>
+            <Link to={ `/${
+              post.createdAt
+                .split( "T" )[0]
+                .replace( /-/g, "/" )}/${
+              encodeURIComponent(
+                post.title
+                  .toLowerCase()
+                  .replace( /\s/g, "-" )
+                  .replace( /[.,;:?!]/g, "" ),
+              )
+            }` }>{ post.title }</Link>
           </h2>
           <Img
             fluid={ post.coverArt[0].localFile.childImageSharp.fluid }
