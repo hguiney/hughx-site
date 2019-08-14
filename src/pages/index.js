@@ -11,15 +11,20 @@ const IndexPage = ( { data } ) => (
     <SEO title="Hugh Guiney – UX Designer, Web Developer" />
     <article>
       <h2>Recent Blog Posts</h2>
-      { data.allStrapiPost.edges.map( post => (
-        <article key={post.node.id}>
+      { data.posts.edges.map( ( edge ) => {
+        const post = edge.node;
+
+        return <article key={ post.id }>
           <h2>
-            <Link to={`/${post.node.id}`}>{post.node.title}</Link>
+            <Link to={ `/${post.id}` }>{ post.title }</Link>
           </h2>
-          <Img fluid={post.node.coverArt[0].localFile.childImageSharp.fluid}/>
-          <p>{ post.node.body.split( "\n\n" )[0] }</p>
-        </article>
-      ) ) }
+          <Img
+            fluid={ post.coverArt[0].localFile.childImageSharp.fluid }
+            alt={ post.coverArtAltText }
+          />
+          <p>{ post.body.split( "\n\n" )[0] }</p>
+        </article>;
+      } ) }
     </article>
     <Link to="/page-2/">Go to page 2</Link>
   </Layout>
@@ -33,7 +38,7 @@ export default IndexPage;
 
 export const pageQuery = graphql`
 query IndexQuery {
-  allStrapiPost(
+  posts: allStrapiPost(
     sort: {
       fields: [createdAt],
       order: DESC
@@ -56,6 +61,7 @@ query IndexQuery {
             }
           }
         }
+        coverArtAltText
         body
       }
     }
