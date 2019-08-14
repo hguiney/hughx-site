@@ -1,5 +1,6 @@
 module.exports = {
   "extends": [
+    "plugin:react/recommended",
     "hughx"
   ],
   "plugins": [
@@ -11,6 +12,6 @@ module.exports = {
     }
   },
   "rules": {
-    "quotes": ["error", "double"],
+    "quotes": ["error", "double"]
   }
 };
