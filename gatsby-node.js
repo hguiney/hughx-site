@@ -8,6 +8,7 @@
 
 // https://blog.strapi.io/building-a-static-website-using-gatsby-and-strapi/#articleview
 const path = require( "path" );
+const { getPermalink } = require( "./src/util/permalink.node.js" );
 
 const makeRequest = ( graphql, request ) => new Promise( ( resolve, reject ) => {
   // Query for nodes to use in creating pages.
@@ -43,16 +44,10 @@ exports.createPages = ( { actions, graphql } ) => {
     // Create pages for each article.
     result.data.allStrapiPost.edges.forEach( ( { node } ) => {
       createPage( {
-        "path": `/${
-          node.createdAt
-            .split( "T" )[0]
-            .replace( /-/g, "/" )
-        }/${encodeURIComponent(
-          node.title
-            .toLowerCase()
-            .replace( /\s/g, "-" )
-            .replace( /[.,;:?!]/g, "" ),
-        )}`,
+        "path": `/${getPermalink( {
+          "timestamp": node.createdAt,
+          "title": node.title,
+        } )}`,
         "component": path.resolve( "src/components/post.js" ),
         "context": {
           "id": node.id,

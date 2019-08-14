@@ -6,6 +6,8 @@ import Img from "gatsby-image";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
+import getPermalink from "../util/permalink";
+
 const IndexPage = ( { data } ) => (
   <Layout>
     <SEO title="Hugh Guiney – UX Designer, Web Developer" />
@@ -16,17 +18,10 @@ const IndexPage = ( { data } ) => (
 
         return <article key={ post.id }>
           <h2>
-            <Link to={ `/${
-              post.createdAt
-                .split( "T" )[0]
-                .replace( /-/g, "/" )}/${
-              encodeURIComponent(
-                post.title
-                  .toLowerCase()
-                  .replace( /\s/g, "-" )
-                  .replace( /[.,;:?!]/g, "" ),
-              )
-            }` }>{ post.title }</Link>
+            <Link to={ `/${getPermalink( {
+              "timestamp": post.createdAt,
+              "title": post.title,
+            } )}` }>{ post.title }</Link>
           </h2>
           <Img
             fluid={ post.coverArt[0].localFile.childImageSharp.fluid }
