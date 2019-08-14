@@ -2,11 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
+import styled from "styled-components";
 
+import renderMarkdown from "../util/renderMarkdown";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 import getPermalink from "../util/permalink";
+
+const Excerpt = styled.div`
+  & > p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`;
 
 const IndexPage = ( { data } ) => (
   <Layout>
@@ -15,6 +25,7 @@ const IndexPage = ( { data } ) => (
       <h2>Recent Blog Posts</h2>
       { data.posts.edges.map( ( edge ) => {
         const post = edge.node;
+        const excerpt = post.body.split( "\n\n" )[0];
 
         return <article key={ post.id }>
           <h2>
@@ -27,7 +38,7 @@ const IndexPage = ( { data } ) => (
             fluid={ post.coverArt[0].localFile.childImageSharp.fluid }
             alt={ post.coverArtAltText }
           />
-          <p>{ post.body.split( "\n\n" )[0] }</p>
+          <Excerpt className="excerpt">{ renderMarkdown( excerpt ) }</Excerpt>
         </article>;
       } ) }
     </article>
