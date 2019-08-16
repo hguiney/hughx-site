@@ -6,8 +6,8 @@
 
 // You can delete this file if you're not using it
 
-// https://blog.strapi.io/building-a-static-website-using-gatsby-and-strapi/#articleview
 const path = require( "path" );
+const { createRemoteFileNode } = require( "gatsby-source-filesystem" );
 const { getPermalink } = require( "./src/util/permalink.node.js" );
 
 const makeRequest = ( graphql, request ) => new Promise( ( resolve, reject ) => {
@@ -23,6 +23,7 @@ const makeRequest = ( graphql, request ) => new Promise( ( resolve, reject ) => 
   );
 } );
 
+// https://blog.strapi.io/building-a-static-website-using-gatsby-and-strapi/#articleview
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
 exports.createPages = ( { actions, graphql } ) => {
@@ -40,7 +41,7 @@ exports.createPages = ( { actions, graphql } ) => {
         }
       }
     }
-    ` ).then( ( result ) => {
+  ` ).then( ( result ) => {
     // Create pages for each article.
     result.data.allStrapiPost.edges.forEach( ( { node } ) => {
       createPage( {
@@ -88,7 +89,6 @@ exports.createPages = ( { actions, graphql } ) => {
 };
 
 // https://github.com/strapi/gatsby-source-strapi/issues/8#issuecomment-434269925
-const { createRemoteFileNode } = require( "gatsby-source-filesystem" );
 
 exports.onCreateNode = async ( {
   node, actions, store, cache,
