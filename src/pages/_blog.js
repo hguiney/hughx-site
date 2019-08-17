@@ -103,6 +103,7 @@ export const pageQuery = graphql`
 query BlogQuery(
   $gte: Date,
   $lt: Date,
+  $now: Date!
 ) {
   posts: allStrapiPost(
     sort: {
@@ -113,6 +114,7 @@ query BlogQuery(
       publishedAt: {
         gte: $gte,
         lt: $lt,
+        lte: $now
       }
     }
   ) {

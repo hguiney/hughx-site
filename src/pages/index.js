@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
+import moment from "moment";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -21,11 +22,18 @@ IndexPage.propTypes = {
 export default IndexPage;
 
 export const pageQuery = graphql`
-query IndexQuery {
+query IndexQuery(
+  $now: Date!
+) {
   posts: allStrapiPost(
     sort: {
       fields: [publishedAt],
       order: DESC
+    },
+    filter: {
+      publishedAt: {
+        lte: $now
+      }
     },
     limit: 4
   ) {
