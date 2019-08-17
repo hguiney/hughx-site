@@ -13,6 +13,8 @@ export function getDateDirectoryFromTimestamp( timestamp ) {
     .replace( /-/g, "/" );
 }
 
-export default function getPermalink( { timestamp, title } ) {
+export function getPermalink( { timestamp, title } ) {
   return `${getDateDirectoryFromTimestamp( timestamp )}/${getSlugFromTitle( title )}`;
 }
+
+export default getPermalink;

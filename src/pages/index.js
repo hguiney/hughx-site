@@ -1,48 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
-import Img from "gatsby-image";
-import styled from "styled-components";
 
-import renderMarkdown from "../util/renderMarkdown";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-
-import getPermalink from "../util/permalink";
-
-const Excerpt = styled.div`
-  & > p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-`;
+import PostPreview from "../components/post-preview";
 
 const IndexPage = ( { data } ) => (
   <Layout>
     <SEO title="Hugh Guiney – UX Designer, Web Developer" />
-    <article>
-      <h2>Recent Blog Posts</h2>
-      { data.posts.edges.map( ( edge ) => {
-        const post = edge.node;
-        const excerpt = post.body.split( "\n\n" )[0];
-
-        return <article key={ post.id }>
-          <h2>
-            <Link to={ `/${getPermalink( {
-              "timestamp": post.createdAt,
-              "title": post.title,
-            } )}` }>{ post.title }</Link>
-          </h2>
-          <Img
-            fluid={ post.coverArt[0].localFile.childImageSharp.fluid }
-            alt={ post.coverArtAltText }
-          />
-          <Excerpt className="excerpt">{ renderMarkdown( excerpt ) }</Excerpt>
-        </article>;
-      } ) }
-    </article>
-    <Link to="/page-2/">Go to page 2</Link>
+    <h2>From the <Link to="/blog/">Blog</Link>:</h2>
+    { data.posts.edges.map( edge => <PostPreview key={ edge.node.id } post={ edge.node } /> ) }
   </Layout>
 );
 
@@ -56,7 +24,7 @@ export const pageQuery = graphql`
 query IndexQuery {
   posts: allStrapiPost(
     sort: {
-      fields: [createdAt],
+      fields: [publishedAt],
       order: DESC
     },
     limit: 4
@@ -65,7 +33,7 @@ query IndexQuery {
       node {
         id
         title
-        createdAt
+        publishedAt
         updatedAt
         coverArt {
           mime

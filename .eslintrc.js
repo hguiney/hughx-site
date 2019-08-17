@@ -13,6 +13,7 @@ module.exports = {
   },
   "rules": {
     "quotes": ["error", "double"],
-    "react/jsx-curly-spacing": ["error", {"when": "always", "children": true}]
+    "react/jsx-curly-spacing": ["error", {"when": "always", "children": true}],
+    "consistent-return": 0
   }
 };

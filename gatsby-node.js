@@ -10,6 +10,7 @@ const path = require( "path" );
 const { createRemoteFileNode } = require( "gatsby-source-filesystem" );
 const moment = require( "moment" );
 const { getPermalink } = require( "./src/util/permalink.node.js" );
+const { hasOwnProperty } = require( "./src/util/hasOwnProperty.node.js" );
 
 const makeRequest = ( graphql, request ) => new Promise( ( resolve, reject ) => {
   // Query for nodes to use in creating pages.
@@ -37,17 +38,19 @@ exports.createPages = ( { actions, graphql } ) => {
           node {
             id
             title
-            createdAt
+            publishedAt
           }
         }
       }
     }
   ` ).then( ( result ) => {
+    const archives = {};
+
     // Create pages for each article.
     result.data.allStrapiPost.edges.forEach( ( { node } ) => {
       createPage( {
         "path": `/${getPermalink( {
-          "timestamp": node.createdAt,
+          "timestamp": node.publishedAt,
           "title": node.title,
         } )}`,
         "component": path.resolve( "src/components/post.js" ),
@@ -56,7 +59,7 @@ exports.createPages = ( { actions, graphql } ) => {
         },
       } );
 
-      const datePieces = node.createdAt.split( "T" )[0].split( "-" );
+      const datePieces = node.publishedAt.split( "T" )[0].split( "-" );
       const [year, month, day] = datePieces;
       const [, monthInt, dayInt] = datePieces.map( datePiece => parseInt( datePiece, 10 ) );
 
@@ -71,6 +74,14 @@ exports.createPages = ( { actions, graphql } ) => {
         },
       } );
 
+      if ( !hasOwnProperty( archives, year ) ) {
+        archives[year] = {
+          "posts": [],
+        };
+      }
+
+      archives[year].posts.push( node );
+
       // Month Archives:
       createPage( {
         "path": `/${year}/${month}`,
@@ -81,6 +92,14 @@ exports.createPages = ( { actions, graphql } ) => {
           "title": `${moment( `${year}-${month}` ).format( "MMMM YYYY" )} Archives`,
         },
       } );
+
+      if ( !hasOwnProperty( archives[year], month ) ) {
+        archives[year][month] = {
+          "posts": [],
+        };
+      }
+
+      archives[year][month].posts.push( node );
 
       // Day Archives:
       let nextDay = dayInt + 1;
@@ -98,6 +117,26 @@ exports.createPages = ( { actions, graphql } ) => {
           "title": `${moment( `${year}-${month}-${day}` ).format( "MMMM Do, YYYY" )} Archives`,
         },
       } );
+
+      if ( !hasOwnProperty( archives[year][month], day ) ) {
+        archives[year][month][day] = {
+          "posts": [],
+        };
+      }
+
+      archives[year][month][day].posts.push( node );
+    } );
+
+    // deletePage( {
+    //   "path": "/blog/",
+    //   "component": path.resolve( "src/pages/blog.js" ),
+    // } );
+    createPage( {
+      "path": "/blog/",
+      "component": path.resolve( "src/pages/_blog.js" ),
+      "context": {
+        archives,
+      },
     } );
   } );
 
@@ -147,7 +186,7 @@ exports.onCreateNode = async ( {
           store,
           cache,
           createNode,
-          "createNodeId": id => image.id,
+          "createNodeId": id => image.id, // eslint-disable-line no-unused-vars
         } );
 
         if ( fileNode ) {
@@ -161,7 +200,7 @@ exports.onCreateNode = async ( {
           store,
           cache,
           createNode,
-          "createNodeId": id => image.id,
+          "createNodeId": id => image.id, // eslint-disable-line no-unused-vars
         } );
 
         if ( fileNode ) {

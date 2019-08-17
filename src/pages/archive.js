@@ -29,7 +29,7 @@ const ArchivePage = ( { data, pageContext } ) => (
       return <article key={ post.id }>
         <h2>
           <Link to={ `/${getPermalink( {
-            "timestamp": post.createdAt,
+            "timestamp": post.publishedAt,
             "title": post.title,
           } )}` }>{ post.title }</Link>
         </h2>
@@ -62,11 +62,11 @@ query ArchiveQuery(
 ) {
   posts: allStrapiPost(
     sort: {
-      fields: [createdAt],
+      fields: [publishedAt],
       order: DESC
     },
     filter: {
-      createdAt: {
+      publishedAt: {
         gte: $gte,
         lt: $lt,
       }
@@ -76,7 +76,7 @@ query ArchiveQuery(
       node {
         id
         title
-        createdAt
+        publishedAt
         updatedAt
         coverArt {
           mime
