@@ -8,6 +8,7 @@
 
 const path = require( "path" );
 const { createRemoteFileNode } = require( "gatsby-source-filesystem" );
+const moment = require( "moment" );
 const { getPermalink } = require( "./src/util/permalink.node.js" );
 
 const makeRequest = ( graphql, request ) => new Promise( ( resolve, reject ) => {
@@ -52,6 +53,49 @@ exports.createPages = ( { actions, graphql } ) => {
         "component": path.resolve( "src/components/post.js" ),
         "context": {
           "id": node.id,
+        },
+      } );
+
+      const datePieces = node.createdAt.split( "T" )[0].split( "-" );
+      const [year, month, day] = datePieces;
+      const [, monthInt, dayInt] = datePieces.map( datePiece => parseInt( datePiece, 10 ) );
+
+      // Year Archives:
+      createPage( {
+        "path": `/${year}`,
+        "component": path.resolve( "src/pages/archive.js" ),
+        "context": {
+          "gte": `${year}-01-01`,
+          "lt": `${year}-12-31`,
+          "title": `${year} Archives`,
+        },
+      } );
+
+      // Month Archives:
+      createPage( {
+        "path": `/${year}/${month}`,
+        "component": path.resolve( "src/pages/archive.js" ),
+        "context": {
+          "gte": `${year}-${month}-01`,
+          "lt": `${year}-${monthInt + 1}-01`,
+          "title": `${moment( `${year}-${month}` ).format( "MMMM YYYY" )} Archives`,
+        },
+      } );
+
+      // Day Archives:
+      let nextDay = dayInt + 1;
+
+      if ( nextDay < 10 ) {
+        nextDay = `0${nextDay}`;
+      }
+
+      createPage( {
+        "path": `/${year}/${month}/${day}`,
+        "component": path.resolve( "src/pages/archive.js" ),
+        "context": {
+          "gte": `${year}-${month}-${day}`,
+          "lt": `${year}-${month}-${nextDay}`,
+          "title": `${moment( `${year}-${month}-${day}` ).format( "MMMM Do, YYYY" )} Archives`,
         },
       } );
     } );
