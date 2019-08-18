@@ -7,6 +7,7 @@ import moment from "moment";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import PostPreview from "../components/post-preview";
+import Archives from "../components/archives";
 
 import layout from "../util/layout";
 import { getPermalink } from "../util/permalink";
@@ -41,7 +42,7 @@ const Articles = styled.article`
   }
 `;
 
-const Archives = styled.aside`
+const Sidebar = styled.aside`
   padding: 1rem;
   max-width: 100%;
   background-color: #eee;
@@ -50,11 +51,6 @@ const Archives = styled.aside`
     width: 25%;
     margin-left: 1rem;
   }
-`;
-
-const ArchiveList = styled.ol`
-  margin-left: 0;
-  list-style: none;
 `;
 
 const PaginationNav = styled.nav``;
@@ -100,7 +96,7 @@ const PaginationLink = styled( Link )`
 
 const BlogPage = ( { data, pageContext, path } ) => {
   const rootPath = path.match( /(^\/[^/]+)\// )[1];
-  const { currentPage, numberOfPages } = pageContext;
+  const { currentPage, numberOfPages, archives } = pageContext;
   const previousPage = ( currentPage - 1 );
   const nextPage = ( currentPage + 1 );
 
@@ -122,53 +118,24 @@ const BlogPage = ( { data, pageContext, path } ) => {
           <PaginationLinks>
             { ( currentPage > 1 )
               && <PaginationLink
-                  className="previous"
-                  rel="prev"
-                  to={ `${rootPath}/${previousPage <= 1 ? "" : previousPage}` }
-                >Previous Page</PaginationLink>
+                   className="previous"
+                   rel="prev"
+                   to={ `${rootPath}/${previousPage <= 1 ? "" : previousPage}` }
+                 >Previous Page</PaginationLink>
             }
             { ( currentPage < numberOfPages )
               && <PaginationLink
-                  className="next"
-                  rel="next"
-                  to={ `${rootPath}/${nextPage}` }
-                >Next Page</PaginationLink>
+                   className="next"
+                   rel="next"
+                   to={ `${rootPath}/${nextPage}` }
+                 >Next Page</PaginationLink>
             }
           </PaginationLinks>
         </PaginationNav>
       </Articles>
-      <Archives>
-        <h3>Archives</h3>
-        { Object.keys( pageContext.archives ).map( year => (
-            <React.Fragment key={ year }>
-              <h4>{ year }</h4>
-              { Object.keys( pageContext.archives[year] ).reverse().map( ( month ) => {
-                if ( month === "posts" ) {
-                  return;
-                }
-
-                return (
-                  <React.Fragment key={ `${year}-${month}` }>
-                    <h5>{ moment( `${year}-${month}` ).format( "MMMM" ) }</h5>
-                    <ArchiveList reversed>
-                    { pageContext.archives[year][month].posts.reverse().map( post => (
-                      <li key={ post.id }>
-                        <Link
-                          to={ `/${getPermalink( {
-                            "timestamp": post.publishedAt,
-                            "title": post.title,
-                          } )}` }>
-                            { post.title }
-                          </Link>
-                        </li>
-                    ) ) }
-                    </ArchiveList>
-                  </React.Fragment>
-                );
-              } ) }
-            </React.Fragment>
-        ) ) }
-      </Archives>
+      <Sidebar>
+        <Archives archives={ archives } />
+      </Sidebar>
     </TwoColumns>
   </Layout>;
 };
