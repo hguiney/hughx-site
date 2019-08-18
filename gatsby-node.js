@@ -45,101 +45,110 @@ exports.createPages = ( { actions, graphql } ) => {
     }
   ` ).then( ( result ) => {
     const archives = {};
+    const posts = result.data.allStrapiPost.edges;
+    const publishedPosts = posts.filter( ( { node } ) => node.publishedAt <= moment().toISOString() );
 
     // Create pages for each article.
-    result.data.allStrapiPost.edges
-      .filter( ( { node } ) => node.publishedAt <= moment().toISOString() )
-      .forEach( ( { node } ) => {
-        createPage( {
-          "path": `/${getPermalink( {
-            "timestamp": node.publishedAt,
-            "title": node.title,
-          } )}`,
-          "component": path.resolve( "src/components/post.js" ),
-          "context": {
-            "id": node.id,
-          },
-        } );
-
-        const datePieces = node.publishedAt.split( "T" )[0].split( "-" );
-        const [year, month, day] = datePieces;
-        const [, monthInt, dayInt] = datePieces.map( datePiece => parseInt( datePiece, 10 ) );
-
-        // Year Archives:
-        createPage( {
-          "path": `/${year}`,
-          "component": path.resolve( "src/pages/archive.js" ),
-          "context": {
-            "gte": `${year}-01-01`,
-            "lt": `${year}-12-31`,
-            "title": `${year} Archives`,
-          },
-        } );
-
-        if ( !hasOwnProperty( archives, year ) ) {
-          archives[year] = {
-            "posts": [],
-          };
-        }
-
-        archives[year].posts.push( node );
-
-        // Month Archives:
-        createPage( {
-          "path": `/${year}/${month}`,
-          "component": path.resolve( "src/pages/archive.js" ),
-          "context": {
-            "gte": `${year}-${month}-01`,
-            "lt": `${year}-${monthInt + 1}-01`,
-            "title": `${moment( `${year}-${month}` ).format( "MMMM YYYY" )} Archives`,
-          },
-        } );
-
-        if ( !hasOwnProperty( archives[year], month ) ) {
-          archives[year][month] = {
-            "posts": [],
-          };
-        }
-
-        archives[year][month].posts.push( node );
-
-        // Day Archives:
-        let nextDay = dayInt + 1;
-
-        if ( nextDay < 10 ) {
-          nextDay = `0${nextDay}`;
-        }
-
-        createPage( {
-          "path": `/${year}/${month}/${day}`,
-          "component": path.resolve( "src/pages/archive.js" ),
-          "context": {
-            "gte": `${year}-${month}-${day}`,
-            "lt": `${year}-${month}-${nextDay}`,
-            "title": `${moment( `${year}-${month}-${day}` ).format( "MMMM Do, YYYY" )} Archives`,
-          },
-        } );
-
-        if ( !hasOwnProperty( archives[year][month], day ) ) {
-          archives[year][month][day] = {
-            "posts": [],
-          };
-        }
-
-        archives[year][month][day].posts.push( node );
+    publishedPosts.forEach( ( { node } ) => {
+      createPage( {
+        "path": `/${getPermalink( {
+          "timestamp": node.publishedAt,
+          "title": node.title,
+        } )}`,
+        "component": path.resolve( "src/components/post.js" ),
+        "context": {
+          "id": node.id,
+        },
       } );
 
-    // deletePage( {
-    //   "path": "/blog/",
-    //   "component": path.resolve( "src/pages/blog.js" ),
-    // } );
-    createPage( {
-      "path": "/blog/",
-      "component": path.resolve( "src/pages/_blog.js" ),
-      "context": {
-        archives,
-        "now": moment().toISOString(),
-      },
+      const datePieces = node.publishedAt.split( "T" )[0].split( "-" );
+      const [year, month, day] = datePieces;
+      const [, monthInt, dayInt] = datePieces.map( datePiece => parseInt( datePiece, 10 ) );
+
+      // Year Archives:
+      createPage( {
+        "path": `/${year}`,
+        "component": path.resolve( "src/pages/archive.js" ),
+        "context": {
+          "gte": `${year}-01-01`,
+          "lt": `${year}-12-31`,
+          "title": `${year} Archives`,
+        },
+      } );
+
+      if ( !hasOwnProperty( archives, year ) ) {
+        archives[year] = {
+          "posts": [],
+        };
+      }
+
+      archives[year].posts.push( node );
+
+      // Month Archives:
+      createPage( {
+        "path": `/${year}/${month}`,
+        "component": path.resolve( "src/pages/archive.js" ),
+        "context": {
+          "gte": `${year}-${month}-01`,
+          "lt": `${year}-${monthInt + 1}-01`,
+          "title": `${moment( `${year}-${month}` ).format( "MMMM YYYY" )} Archives`,
+        },
+      } );
+
+      if ( !hasOwnProperty( archives[year], month ) ) {
+        archives[year][month] = {
+          "posts": [],
+        };
+      }
+
+      archives[year][month].posts.push( node );
+
+      // Day Archives:
+      let nextDay = dayInt + 1;
+
+      if ( nextDay < 10 ) {
+        nextDay = `0${nextDay}`;
+      }
+
+      createPage( {
+        "path": `/${year}/${month}/${day}`,
+        "component": path.resolve( "src/pages/archive.js" ),
+        "context": {
+          "gte": `${year}-${month}-${day}`,
+          "lt": `${year}-${month}-${nextDay}`,
+          "title": `${moment( `${year}-${month}-${day}` ).format( "MMMM Do, YYYY" )} Archives`,
+        },
+      } );
+
+      if ( !hasOwnProperty( archives[year][month], day ) ) {
+        archives[year][month][day] = {
+          "posts": [],
+        };
+      }
+
+      archives[year][month][day].posts.push( node );
+    } );
+
+    // Pagination
+    // https://www.gatsbyjs.org/docs/adding-pagination/
+    const postsPerPage = 1; // 10;
+    const numberOfPages = Math.ceil( publishedPosts.length / postsPerPage );
+
+    Array.from( { "length": numberOfPages } ).forEach( ( _, i ) => {
+      const currentPageNumber = i + 1;
+
+      createPage( {
+        "path": ( i === 0 ? "/blog/" : `/blog/${currentPageNumber}` ),
+        "component": path.resolve( "src/pages/_blog.js" ),
+        "context": {
+          "limit": postsPerPage,
+          "skip": i * postsPerPage,
+          numberOfPages,
+          "currentPage": currentPageNumber,
+          archives,
+          "now": moment().toISOString(),
+        },
+      } );
     } );
   } );
 
