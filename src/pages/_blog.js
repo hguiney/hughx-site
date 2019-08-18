@@ -11,6 +11,11 @@ import PostPreview from "../components/post-preview";
 import layout from "../util/layout";
 import { getPermalink } from "../util/permalink";
 
+const mq = breakpoint => `@media only screen and (min-width: ${breakpoint})`;
+// const small = mq( "10em" );
+const medium = mq( "32em" );
+const large = mq( "60em" );
+
 const Heading = styled.h2`
   padding: 0 ${layout.pageGutter};
   text-align: center;
@@ -18,22 +23,33 @@ const Heading = styled.h2`
 
 const TwoColumns = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  ${large} {
+    flex-direction: row;
+  }
 `;
 
 const Articles = styled.article`
   flex: 1;
-  width: 75%;
   max-width: 100%;
-  padding: 0 0 ${layout.pageGutter} ${layout.pageGutter};
+  padding: 0 ${layout.pageGutter} ${layout.pageGutter};
+
+  ${large} {
+    width: 75%;
+    padding: 0 0 ${layout.pageGutter} ${layout.pageGutter};
+  }
 `;
 
 const Archives = styled.aside`
   padding: 1rem;
-  margin-left: 1rem;
-  width: 25%;
   max-width: 100%;
   background-color: #eee;
+
+  ${large} {
+    width: 25%;
+    margin-left: 1rem;
+  }
 `;
 
 const ArchiveList = styled.ol`
@@ -42,11 +58,6 @@ const ArchiveList = styled.ol`
 `;
 
 const PaginationNav = styled.nav``;
-
-const mq = breakpoint => `@media only screen and (min-width: ${breakpoint})`;
-// const small = mq( "10em" );
-const medium = mq( "32em" );
-// const large = mq( "40em" );
 
 const PaginationLinks = styled.div`
   display: flex;
