@@ -215,8 +215,10 @@ class IndexPage extends React.PureComponent {
                 <ul>
                   <li>HTML5</li>
                   <li>CSS3 — <Incl /> SASS &amp; Less</li>
-                  <li>JavaScript — <Incl /> ES6+, Node.js, &amp; React</li>
+                  <li>JavaScript ≥ ES6 — <Incl /> Node.js &amp; React</li>
                   <li>PHP — <Incl /> WordPress themes &amp; plugins</li>
+                  { /* <li>SEO<sup>1</sup></li>
+                  <li>Performance</li> */ }
                   <li>SEO<sup>1</sup> &amp; Performance</li>
                 </ul>
               </section>
@@ -227,7 +229,8 @@ class IndexPage extends React.PureComponent {
                   <li>Information Architecture</li>
                   <li>Usability/Accessibility<sup>2</sup></li>
                   <li>Copywriting</li>
-                  <li>Branding</li>
+                  { /* <li>Branding</li> */ }
+                  <li>Responsive Design</li>
                 </ul>
               </section>
             </TwoColumns>
