@@ -22,6 +22,16 @@ section,
 summary {
   display: block;
 }
+footer p {
+  margin-bottom: 0;
+}
+
+article + article,
+article + section,
+section + article,
+section + section {
+  margin-top: 3rem;
+}
 audio,
 canvas,
 progress,
@@ -64,6 +74,9 @@ h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
+/* h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+} */
 mark {
   background-color: #ff0;
   color: #000;
@@ -119,6 +132,9 @@ optgroup {
 button,
 input {
   overflow: visible;
+}
+.disabled {
+  opacity: 0.5;
 }
 button,
 select {
@@ -385,6 +401,7 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
+  max-width: 39rem;
 }
 figure {
   margin-left: 0;
@@ -453,6 +470,10 @@ form {
   padding-top: 0;
   margin-bottom: 1.45rem;
 }
+form > p {
+  margin-bottom: 0;
+}
+
 noscript {
   margin-left: 0;
   margin-right: 0;
