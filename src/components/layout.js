@@ -8,6 +8,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
+import SEO from "./seo";
 
 import Header from "./header";
 import "./layout.css";
@@ -20,14 +21,19 @@ const Layout = ( { children } ) => {
       site {
         siteMetadata {
           title
+          author
+          description
         }
       }
     }
   ` );
+  const site = data.site.siteMetadata;
+  const description = `${site.author}, ${site.description}`;
 
   return (
     <>
-      <Header siteTitle={ data.site.siteMetadata.title } />
+      <SEO title={ `${site.author}, ${site.description}` } />
+      <Header siteTitle={ site.title } siteDescription={ description } />
       { children }
       <footer style={ {
         "textAlign": "center",

@@ -20,8 +20,22 @@ const Container = styled.div`
 `;
 
 const Product = styled.article`
-  margin: 1rem auto 1rem 0;
+  // margin: 1rem auto 1rem 0;
   text-align: left;
+  display: inline-block;
+  display: grid !important;
+  grid-template-areas:
+    "heading"
+    "description"
+    "pricing"
+    "cta"
+  ;
+  grid-template-rows: min-content auto auto min-content;
+
+  & > :last-child {
+    margin-bottom: 0;
+    align-self: end;
+  }
 `;
 
 const TwoColumns = styled.div`
@@ -30,15 +44,19 @@ const TwoColumns = styled.div`
   flex-direction: column;
   max-width: 100%;
 
-  & > section {
+  & > section,
+  & > article {
     display: inline-block;
     background-color: #eee;
-    padding: 1rem;
+    padding: 1.5rem 1rem;
     flex: .5;
     text-align: left;
   }
 
-  & > section + section {
+  & > section + section,
+  & > article + article,
+  & > section + article,
+  & > article + section {
     margin-top: 1rem;
   }
 
@@ -48,17 +66,69 @@ const TwoColumns = styled.div`
       // max-width: 75%;
     }
 
-    & > section + section {
+    & > section + section,
+    & > article + article,
+    & > section + article,
+    & > article + section {
       margin-top: 0;
       margin-left: 1rem;
     }
   }
 `;
 
-const OrderForm = styled.div`
+const OrderForm = styled.form`
+  margin-bottom: 0;
+
+  & > dl {
+    margin-bottom: 0;
+  }
+
   [role="presentation"] {
     margin-bottom: .75rem;
   }
+`;
+
+const ProductName = styled.h3`
+  grid-area: heading;
+  align-self: start;
+`;
+
+const ProductPricing = styled.div`
+  grid-area: pricing;
+  align-self: start;
+  // border-top: 1px solid rgba(0,0,0,0.25);
+  // padding-top: 1rem;
+`;
+
+const ProductDescription = styled.div`
+  grid-area: description;
+  align-self: start;
+`;
+
+const ProductCTA = styled.p`
+  grid-area: cta;
+  align-self: end;
+  margin-top: 1rem;
+`;
+
+const FinePrint = styled.footer`
+  margin-top: .75rem;
+  line-height: 1.5;
+`;
+
+const formControlStyles = `
+  width: 100%;
+  padding: .25rem .5rem;
+  font-family: monospace;
+  border: 1px solid #aaa;
+`;
+
+const TextArea = styled.textarea`
+  ${formControlStyles}
+`;
+
+const Input = styled.input`
+  ${formControlStyles}
 `;
 
 // const Section = styled.section``;
@@ -211,7 +281,7 @@ class IndexPage extends React.PureComponent {
             <p>I offer experise in the following areas:</p>
             <TwoColumns>
               <section>
-                <h4>Development</h4>
+                <h3>Development</h3>
                 <ul>
                   <li>HTML5</li>
                   <li>CSS3 — <Incl /> SASS &amp; Less</li>
@@ -223,90 +293,130 @@ class IndexPage extends React.PureComponent {
                 </ul>
               </section>
               <section>
-                <h4>Design</h4>
+                <h3>Design</h3>
                 <ul>
                   <li><abbr title="User Interface">UI</abbr>/<abbr title="User Experience">UX</abbr> (Look &amp; Feel)</li>
                   <li>Information Architecture</li>
                   <li>Usability/Accessibility<sup>2</sup></li>
-                  <li>Copywriting</li>
+                  <li>Copyediting</li>
                   { /* <li>Branding</li> */ }
                   <li>Responsive Design</li>
                 </ul>
               </section>
             </TwoColumns>
-            <footer style={ { "marginTop": ".75rem" } }>
+            <FinePrint>
               <small>
                 <p><sup>1</sup> Best practices only. I do not guarantee search engine ranking.</p>
                 <p><sup>2</sup> Best practices only. I do not guarantee compliance with government regulations.</p>
               </small>
-            </footer>
+            </FinePrint>
           </article>
           <article>
             <h2>Packages</h2>
-            <Product>
-              <h3>Audit</h3>
-              <p>I test-drive your existing app or site. You will get a list of actionable feedback from me on ways to improve the product.</p>
-              <p>For an additional fee, I’ll send you a screencast of me using your product with real-time first impressions. If you allow me to post the video publicly to promote my services however, you get it for free.</p>
-              <OrderForm>
-                <form onSubmit={ this.onSubmit }>
-                  <dl>
-                    <ProductPrice product="audit" renderText={ price => <dt>{ price }</dt> } />
-                    <dd>
-                      <label>
-                        <input
-                          type="checkbox"
-                          name="auditVideo.inCart"
-                          checked={ this.state.products.auditVideo.inCart }
-                          onChange={ this.handleChange }
-                        />
-                        { " " }
-                        Add screencast: {
+            <TwoColumns>
+              <Product>
+                <ProductName>Audit</ProductName>
+                <ProductDescription>
+                  <p>You’ll get a list of actionable feedback from me on ways to improve your app or site. For an additional fee, I’ll send you a screencast of me using your product with real-time commentary. (Fee waived if you give me permission to share it publicly.)</p>
+                </ProductDescription>
+                <ProductPricing>
+                  <OrderForm id="audit-order-form" onSubmit={ this.onSubmit }>
+                    <dl>
+                      <ProductPrice product="audit" renderText={ price => <dt>{ price }</dt> } />
+                      <dd>
+                        <label>
+                          <input
+                            type="checkbox"
+                            name="auditVideo.inCart"
+                            checked={ this.state.products.auditVideo.inCart }
+                            onChange={ this.handleChange }
+                          />
+                          <span>
+                            { " " }
+                            Add screencast: {
+                              (
+                                this.state.products.auditVideo.inCart
+                                && this.state.products.auditVideo.waiveFee
+                              )
+                                ? <><del><ProductPrice product="auditVideo" /></del> $0</>
+                                : <ProductPrice product="auditVideo" />
+                            }
+                          </span>
+                        </label>
+                      </dd>
+                      <dd>
+                        <label className={ this.state.products.auditVideo.inCart ? "" : "disabled" }>
+                          <input
+                            type="checkbox"
+                            name="auditVideo.waiveFee"
+                            checked={
+                              this.state.products.auditVideo.inCart
+                              && this.state.products.auditVideo.waiveFee
+                            }
+                            onChange={ this.handleChange }
+                            disabled={ !this.state.products.auditVideo.inCart }
+                          />
+                          <span>
+                            { " " }
+                            Waive fee — I agree to let my video be made public.
+                          </span>
+                        </label>
+                      </dd>
+                      <dt className="inline"><label>Total:</label></dt>
+                      <dd className="inline"><output>{
+                        <Price value={
                           (
                             this.state.products.auditVideo.inCart
-                            && this.state.products.auditVideo.waiveFee
+                            && !this.state.products.auditVideo.waiveFee
                           )
-                            ? <><del><ProductPrice product="auditVideo" /></del> $0</>
-                            : <ProductPrice product="auditVideo" />
-                        }
-                      </label>
-                    </dd>
-                    <dd>
-                      <label className={ this.state.products.auditVideo.inCart ? "" : "disabled" }>
-                        <input
-                          type="checkbox"
-                          name="auditVideo.waiveFee"
-                          checked={
-                            this.state.products.auditVideo.inCart
-                            && this.state.products.auditVideo.waiveFee
-                          }
-                          onChange={ this.handleChange }
-                          disabled={ !this.state.products.auditVideo.inCart }
-                        />
-                        { " " }
-                        Waive fee — I agree to let my video be made public.
-                    </label>
-                    </dd>
-                    <dt><label>Total:</label></dt>
-                    <dd><output>{
-                      <Price value={
-                        (
-                          this.state.products.auditVideo.inCart
-                          && !this.state.products.auditVideo.waiveFee
-                        )
-                          ? ( this.state.products.audit.value.price + this.state.products.auditVideo.value.price )
-                          : this.state.products.audit.value.price
-                      } />
-                    }</output></dd>
+                            ? ( this.state.products.audit.value.price + this.state.products.auditVideo.value.price )
+                            : this.state.products.audit.value.price
+                        } />
+                      }</output></dd>
+                    </dl>
+                  </OrderForm>
+                </ProductPricing>
+                <ProductCTA>
+                  <button type="submit" form="audit-order-form">Order</button> — 4 spots left in { moment().format( "MMMM" ) }
+                </ProductCTA>
+              </Product>
+              <Product>
+                <ProductName>Iterate</ProductName>
+                <ProductDescription>
+                  <p>I’ll work hands-on with your team to improve your app or site, one week at a time. Add a new feature, fix bugs, give your <abbr>UI</abbr> a facelift, improve your process… If it can be done in a week, we’ll make it happen.</p>
+                </ProductDescription>
+                <ProductPricing>
+                  <dl>
+                    <dt><ProductPrice product="iterate" />/week</dt>
+                    <dd>10% bulk discount available for every four weeks purchased upfront.</dd>
                   </dl>
-                  <p><button type="submit">Order Now</button> — 4 spots left in { moment().format( "MMMM" ) }</p>
-                </form>
-              </OrderForm>
-            </Product>
-            <Product>
-              <h3>Iterate</h3>
-              <p>We join forces to launch the next phase of your app or site. Go from idea to prototype, MVP to v1, or buggy to stable.</p>
-              <p>Weekly rate: <ProductPrice product="iterate" /> (one-week minimum)</p>
-            </Product>
+                  { /* <Modal>
+                  <dl>
+                    <dt style={ { "fontWeight": "normal" } }>
+                      <label htmlFor="email">E-mail</label>
+                    </dt>
+                    <dd>
+                      <Input id="email" type="email" name="email" />
+                    </dd>
+                    <dt style={ { "fontWeight": "normal" } }>
+                      <label htmlFor="project-description">What do you need help with?</label>
+                    </dt>
+                    <dd>
+                      <TextArea id="project-description" rows="5"></TextArea>
+                    </dd></dl>
+                  </Modal> */ }
+                </ProductPricing>
+                <ProductCTA>
+                  <button>Get in touch</button>
+                </ProductCTA>
+              </Product>
+            </TwoColumns>
+            <FinePrint>
+              <small>
+                { /* <p><sup>†</sup> I offer weekly pricing instead of hourly as it aligns incentives: I don’t make less by working quickly, and you don’t pay more for unexpected obstacles. You also become my top priority for the week instead of being one of many hourly clients.</p>
+                <p>One week is good for </p> */ }
+              </small>
+            </FinePrint>
           </article>
           <article>
             <h2>From the <Link to="/blog/">Blog</Link>:</h2>

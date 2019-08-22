@@ -126,6 +126,19 @@ textarea {
   font: inherit;
   margin: 0;
 }
+
+label > [type="checkbox"] {
+  margin-right: .3333rem;
+  height: 14px;
+  width: 14px;
+}
+
+label > [type="checkbox"],
+label > [type="checkbox"] + span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 optgroup {
   font-weight: 700;
 }
@@ -144,7 +157,13 @@ select {
 [type="submit"],
 button,
 html [type="button"] {
-  -webkit-appearance: button;
+  /* -webkit-appearance: button; */
+  border-radius: 3rem;
+  padding: .5rem 1rem;
+  background-color: white;
+  border-width: 1px;
+  /* border-bottom-color: #eee; */
+  border-style: solid;
 }
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
@@ -390,7 +409,8 @@ dd {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  /* margin-bottom: 1.45rem; */
+  margin-bottom: 0;
 }
 p {
   margin-left: 0;
@@ -525,7 +545,35 @@ strong {
 }
 dt {
   font-weight: bold;
+  margin-bottom: .5rem;
 }
+
+dd {
+  margin-bottom: .25rem;
+}
+
+dd + dt {
+  margin-top: .25rem;
+}
+
+dl.inline > dt,
+dl.inline > dd,
+dt.inline,
+dd.inline {
+  display: inline-block;
+}
+
+dl.inline > dd::after,
+dd.inline::after {
+	content: '\A';
+	white-space: pre;
+}
+
+dl.inline > dt::after,
+dt.inline::after {
+  content: '\a0';
+}
+
 th {
   font-weight: bold;
 }
@@ -572,14 +620,14 @@ samp {
   font-size: 0.85rem;
   line-height: 1.45rem;
 }
-abbr {
+/* abbr {
   border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
   cursor: help;
-}
-acronym {
+} */
+/* acronym {
   border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
   cursor: help;
-}
+} */
 abbr[title] {
   border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
   cursor: help;
