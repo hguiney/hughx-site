@@ -4,7 +4,7 @@ import React from "react";
 
 import layout from "../util/layout";
 
-const Header = ( { siteTitle } ) => (
+const Header = ( { siteTitle, siteDescription } ) => (
   <header
     style={ {
       "background": "rebeccapurple",
@@ -24,15 +24,18 @@ const Header = ( { siteTitle } ) => (
         { siteTitle }
       </Link>
     </h1>
+    <p>{ siteDescription }</p>
   </header>
 );
 
 Header.propTypes = {
   "siteTitle": PropTypes.string,
+  "siteDescription": PropTypes.string,
 };
 
 Header.defaultProps = {
   "siteTitle": "",
+  "siteDescription": "",
 };
 
 export default Header;

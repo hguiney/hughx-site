@@ -274,7 +274,6 @@ class IndexPage extends React.PureComponent {
 
     return (
       <Layout>
-        <SEO title="Hugh Guiney – UX Designer, Web Developer" />
         <Container>
           <article>
             <h2>Services</h2>

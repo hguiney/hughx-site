@@ -1,7 +1,7 @@
 module.exports = {
   "siteMetadata": {
     "title": "hughx",
-    "description": "Gatsby blog with Strapi",
+    "description": "UX Developer",
     "author": "Hugh Guiney",
   },
   "plugins": [
