@@ -1,7 +1,8 @@
 module.exports = {
   "siteMetadata": {
     "title": "hughx",
-    "description": "UX Developer",
+    "description": "On-Demand UI/UX for Web Apps",
+    "jobTitle": "UX Developer",
     "author": "Hugh Guiney",
   },
   "plugins": [

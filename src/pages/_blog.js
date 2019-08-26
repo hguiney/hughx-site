@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { graphql, Link } from "gatsby";
 import styled from "styled-components";
-import moment from "moment";
+// import moment from "moment";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -10,12 +10,7 @@ import PostPreview from "../components/post-preview";
 import Archives from "../components/archives";
 
 import layout from "../util/layout";
-import { getPermalink } from "../util/permalink";
-
-const mq = breakpoint => `@media only screen and (min-width: ${breakpoint})`;
-// const small = mq( "10em" );
-const medium = mq( "32em" );
-const large = mq( "60em" );
+// import { getPermalink } from "../util/permalink";
 
 const Heading = styled.h2`
   padding: 0 ${layout.pageGutter};
@@ -26,7 +21,7 @@ const TwoColumns = styled.div`
   display: flex;
   flex-direction: column;
 
-  ${large} {
+  ${layout.large} {
     flex-direction: row;
   }
 `;
@@ -36,7 +31,7 @@ const Articles = styled.article`
   max-width: 100%;
   padding: 0 ${layout.pageGutter} ${layout.pageGutter};
 
-  ${large} {
+  ${layout.large} {
     width: 75%;
     padding: 0 0 ${layout.pageGutter} ${layout.pageGutter};
   }
@@ -47,7 +42,7 @@ const Sidebar = styled.aside`
   max-width: 100%;
   background-color: #eee;
 
-  ${large} {
+  ${layout.large} {
     width: 25%;
     margin-left: 1rem;
   }
@@ -60,7 +55,7 @@ const PaginationLinks = styled.div`
   justify-content: space-between;
   flex-direction: column;
 
-  ${medium} {
+  ${layout.medium} {
     flex-direction: row;
   }
 `;
@@ -82,7 +77,7 @@ const PaginationLink = styled( Link )`
     margin-top: 1rem;
   }
 
-  ${medium} {
+  ${layout.medium} {
     & + & {
       margin-top: 0;
       margin-left: 1rem;
@@ -95,6 +90,8 @@ const PaginationLink = styled( Link )`
 `;
 
 const BlogPage = ( { data, pageContext, path } ) => {
+  console.log( layout );
+
   const rootPath = path.match( /(^\/[^/]+)\// )[1];
   const { currentPage, numberOfPages, archives } = pageContext;
   const previousPage = ( currentPage - 1 );

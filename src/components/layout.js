@@ -7,7 +7,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { useStaticQuery, graphql } from "gatsby";
+// import { useStaticQuery, graphql } from "gatsby";
 import SEO from "./seo";
 
 import Header from "./header";
@@ -15,25 +15,19 @@ import "./layout.css";
 
 import layout from "../util/layout";
 
-const Layout = ( { children } ) => {
-  const data = useStaticQuery( graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-          author
-          description
-        }
-      }
-    }
-  ` );
-  const site = data.site.siteMetadata;
-  const description = `${site.author}, ${site.description}`;
+const Layout = ( { children, siteMetadata } ) => {
+  const site = siteMetadata;
+  // const description = `${site.author}, ${site.description}`;
 
   return (
     <>
-      <SEO title={ `${site.author}, ${site.description}` } />
-      <Header siteTitle={ site.title } siteDescription={ description } />
+      <SEO title={ site.description } />
+      <Header
+        siteTitle={ site.title }
+        siteDescription={ site.description }
+        author={ site.author }
+        jobTitle={ site.jobTitle }
+      />
       { children }
       <footer style={ {
         "textAlign": "center",
@@ -51,6 +45,7 @@ const Layout = ( { children } ) => {
 
 Layout.propTypes = {
   "children": PropTypes.node.isRequired,
+  "siteMetadata": PropTypes.object,
 };
 
 export default Layout;

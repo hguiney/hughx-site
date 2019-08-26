@@ -7,16 +7,55 @@ import styled from "styled-components";
 import NumberFormat from "react-number-format";
 import moment from "moment";
 import Layout from "../components/layout";
-import SEO from "../components/seo";
+// import SEO from "../components/seo";
 import PostPreview from "../components/post-preview";
 // import PricingTable from "../components/pricing-table";
 
 import layout from "../util/layout";
+import introImage from "../images/helloquence-5fNmWej4tAA-unsplash.jpg";
+import techBackground from "../images/use_your_illusion_@2X.png";
+import deskImage from "../images/apple-desk-desktop-38568.jpg";
+import forkImage from "../images/code-branch-solid.svg";
 
 const Container = styled.div`
   padding: 0 ${layout.pageGutter} ${layout.pageGutter};
   max-width: 80vw;
   margin: 0 auto;
+`;
+
+const Intro = styled.article`
+  // max-width: 39rem;
+  margin-left: auto;
+  margin-right: auto;
+  // background-image: linear-gradient(rgba(0,0,0,0.6666), rgba(0,0,0,0.6666)), url(${introImage});
+  // background-image: url(${techBackground});
+  // background-image: linear-gradient(rgba(0,0,0,0.6666), rgba(0,0,0,0.6666)), url(${deskImage});
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: calc(80vh - 89px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  // color: white;
+  // text-shadow: 2px 2px 1px rgba(0,0,0,.5);
+  padding: 3rem 1.5rem;
+  margin-bottom: 1.45rem;
+  font-family: sans-serif;
+  line-height: 1.5;
+  font-size: 1.25rem;
+  margin-top: -1.5rem;
+
+  // img {
+  //   // max-height: 75vh;
+  //   display: block;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
+
+  & > p {
+    margin-bottom: 0;
+  }
 `;
 
 const Product = styled.article`
@@ -119,7 +158,7 @@ const FinePrint = styled.footer`
 const formControlStyles = `
   width: 100%;
   padding: .25rem .5rem;
-  font-family: monospace;
+  fontFamily: monospace;
   border: 1px solid #aaa;
 `;
 
@@ -259,6 +298,7 @@ class IndexPage extends React.PureComponent {
 
   render() {
     const { data } = this.props;
+
     const ProductPrice = ( props ) => {
       const { value, discount, isDiscounted } = this.state.products[props.product];
       return <>
@@ -273,9 +313,14 @@ class IndexPage extends React.PureComponent {
     };
 
     return (
-      <Layout>
+      <Layout siteMetadata={ data.site.siteMetadata }>
+        <Intro id="intro">
+          { /* <img src={ deskImage } /> */ }
+          <h2>{ data.site.siteMetadata.description }</h2>
+          <p>Hi, my name’s Hugh Guiney (<abbr style={ { "borderBottom": 0 } } title="pronounced">🗣 </abbr>GUY-knee). I’m a UX Developer, which means I design and develop delightful user interfaces. I’ve worked with organizations of all shapes and sizes, from startups to <abbr>SMBs</abbr> to household names. In my spare time I hack on open-source software and study Japanese. </p>
+        </Intro>
         <Container>
-          <article>
+          <article id="services">
             <h2>Services</h2>
             <p>I offer experise in the following areas:</p>
             <TwoColumns>
@@ -310,7 +355,7 @@ class IndexPage extends React.PureComponent {
               </small>
             </FinePrint>
           </article>
-          <article>
+          <article id="packages">
             <h2>Packages</h2>
             <TwoColumns>
               <Product>
@@ -417,7 +462,31 @@ class IndexPage extends React.PureComponent {
               </small>
             </FinePrint>
           </article>
-          <article>
+          <article id="software">
+            <h2>Software</h2>
+            <p>I maintain a number of different software products.</p>
+            { /* <h3>Open Source</h3> */ }
+            <article style={ { "backgroundColor": "#eee" } }>
+              <h4>RedBlue</h4>
+              <p>Open-source hypervideo player</p>
+              <dl className="inline">
+                <dt><abbr title="GitHub Stars">★</abbr></dt>
+                <dd>4</dd>
+                <dt><abbr title="GitHub Forks"><img src={ forkImage } width="15" style={ { "marginBottom": 0 } } /></abbr></dt>
+                <dd>2</dd>
+                <dt>NPM Downloads</dt>
+                <dd>10/month</dd>
+              </dl>
+            </article>
+
+            { /* <h3>Commercial</h3>
+            <h4>Vlogmaster</h4>
+            <p>Lorem ipsum dolor sit amet</p> */ }
+          </article>
+          { /* <article id="resume">
+            <h2>Résumé</h2>
+          </article> */ }
+          <article id="blog">
             <h2>From the <Link to="/blog/">Blog</Link>:</h2>
             { data.posts.edges.map( edge => <PostPreview key={ edge.node.id } post={ edge.node } /> ) }
           </article>
@@ -437,6 +506,14 @@ export const pageQuery = graphql`
 query IndexQuery(
   $now: Date!
 ) {
+  site {
+    siteMetadata {
+      title
+      author
+      jobTitle
+      description
+    }
+  }
   posts: allStrapiPost(
     sort: {
       fields: [publishedAt],
