@@ -29,7 +29,8 @@
     "remark-parse": "^7.0.1",
     "remark-react": "^6.0.0",
     "styled-components": "^4.3.2",
-    "unified": "^8.3.2"
+    "unified": "^8.3.2",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^6.1.0",

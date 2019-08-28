@@ -3,6 +3,10 @@ module.exports = {
     "plugin:react/recommended",
     "hughx"
   ],
+  "env": {
+    "browser": true,
+    "node": true,
+  },
   "plugins": [
     "react"
   ],

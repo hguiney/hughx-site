@@ -254,7 +254,7 @@ img {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  /* margin-bottom: 1.45rem; */
 }
 h1 {
   margin-left: 0;
@@ -562,6 +562,17 @@ dl.inline > dd,
 dt.inline,
 dd.inline {
   display: inline-block;
+  vertical-align: middle;
+}
+
+dl.inline > dt,
+dl.inline > dd,
+dt.inline,
+dd.inline {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 dl.inline > dd::after,
@@ -570,7 +581,7 @@ dd.inline::after {
 	white-space: pre;
 }
 
-dl.inline > dt::after,
+/* dl.inline > dt::after, */
 dt.inline::after {
   content: '\a0';
 }

@@ -7,7 +7,7 @@ import layout from "../util/layout";
 
 const Header = styled.header`
   background: rebeccapurple;
-  margin-bottom: 1.45rem;
+  // margin-bottom: 1.45rem;
   padding: 1.125rem ${layout.pageGutter};
   text-align: center;
   color: white;
