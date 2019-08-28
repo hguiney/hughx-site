@@ -138,7 +138,7 @@ class SoftwareCard extends React.PureComponent {
 
     const endpoint = `https://api.github.com/repos/${packageName}`;
 
-    fetch( endpoint )
+    fetch( endpoint, { "cache": "force-cache" } )
       .then( response => response.json() )
       .then( ( response ) => {
         console.log( response );
