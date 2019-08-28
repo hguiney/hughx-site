@@ -1,21 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 
 import layout from "../util/layout";
 import isNumeric from "../util/isNumeric";
 
-import citizensLogo from "../images/logos/citizens-financial-group.svg";
-import oxfamLogo from "../images/logos/oxfam-horizontal.svg";
-import sapientLogo from "../images/logos/publicis-sapient.svg";
-import runkeeperLogo from "../images/logos/runkeeper-asics.svg";
-import reebokLogo from "../images/logos/reebok.svg";
-import bostonGlobeLogo from "../images/logos/the-boston-globe.svg";
-import wbGamesLogo from "../images/logos/wb-games-color.svg";
+const citizensLogo = "/images/logos/citizens-financial-group.svg";
+const oxfamLogo = "/images/logos/oxfam-horizontal.svg";
+const sapientLogo = "/images/logos/publicis-sapient.svg";
+const runkeeperLogo = "/images/logos/runkeeper-asics.svg";
+const reebokLogo = "/images/logos/reebok.svg";
+const bostonGlobeLogo = "/images/logos/the-boston-globe.svg";
+const wbGamesLogo = "/images/logos/wb-games-color.svg";
 
-const logoSpacingX = "1rem";
-const logoSpacingY = ".5rem";
+const logoSpacing = ".5rem";
 
 const Section = styled.section`
   text-align: left;
@@ -25,8 +23,8 @@ const Section = styled.section`
 `;
 
 const Logos = styled.div`
-  margin-left: -${logoSpacingY};
-  margin-right: -${logoSpacingY};
+  margin-left: -${logoSpacing};
+  margin-right: -${logoSpacing};
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -34,9 +32,7 @@ const Logos = styled.div`
 
   ${layout.medium} {
     display: grid;
-    // grid-gap: ${logoSpacingY};
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-    // margin: 0;
   }
 `;
 
@@ -47,28 +43,16 @@ const Logo = styled.span`
   align-items: center;
   text-align: center;
   vertical-align: middle;
-  // padding: ${logoSpacingY} ${logoSpacingX};
-  // margin: ${logoSpacingY} ${logoSpacingX};
-  // margin: .5rem;
   padding: .5rem;
-  // background-color: #eee;
-  // border: 1px solid black;
   transition: background-color .25s linear;
-  // height: 150px;
-
-  // ${layout.large} {
-  //   margin: 0;
-  // }
 
   &:hover, &:focus {
     background-color: white;
   }
 
-  img {
+  .media {
     display: inline-block;
     margin: 0 auto;
-    // max-width: 80%;
-    // max-height: 80%;
     filter: grayscale(100%) contrast(0%) brightness(75%);
     transition: filter .25s ease;
 
@@ -77,7 +61,7 @@ const Logo = styled.span`
     }
   }
 
-  &:hover > img, &:focus > img {
+  &:hover > .media, &:focus > .media {
     filter: none !important;
   }
 `;
@@ -90,39 +74,60 @@ const getHeading = ( mode ) => {
   return <h3>Companies I’ve Worked With</h3>;
 };
 
+const getSrc = logo => (
+  logo.src
+    .replace( "logos/", "logos/rasterized/" )
+    .replace( ".svg", ".png" )
+);
 
-const Companies = ( props ) => {
-  const data = useStaticQuery( graphql`
-    query {
-      allFile(filter: { relativePath: { in: "logos" } }) {
-        edges {
-          node {
-            extension
-            dir
-            modifiedTime
-          }
-        }
-      }
+const getSrcSet = ( logo ) => {
+  const base = logo.width;
+  const twoTimes = ( base * 2 );
+  const threeTimes = ( base * 3 );
+
+  let srcset = [];
+
+  [base, twoTimes, threeTimes].forEach( ( width, index ) => {
+    let density = "";
+
+    if ( width > base ) {
+      density = `@${index + 1}x`;
     }
-  ` );
 
-  console.log( data );
+    srcset.push( `${
+      logo.src
+        .replace( "logos/", "logos/rasterized/" )
+        .replace( ".svg", `${density}.png` )
+    } ${index + 1}x` );
+  } );
 
-  return (
-    <Section>
-      { getHeading( props.mode ) }
-      <Logos>
-        { props.logos.map( ( logo, index ) => (
-          <Logo key={ logo.id } style={ {
-            "gridColumnEnd": ( index === ( props.logos.length - 1 ) ? "span 3" : "auto" ),
-          } }>
-            <img { ...logo } />
-          </Logo>
-        ) ) }
-      </Logos>
-    </Section>
-  );
+  srcset = srcset.join( ", " );
+
+  return srcset;
 };
+
+const Companies = props => (
+  <Section>
+    { getHeading( props.mode ) }
+    <Logos>
+      { props.logos.map( ( logo, index ) => (
+        <Logo key={ logo.id } style={ {
+          "gridColumnEnd": ( index === ( props.logos.length - 1 ) ? "span 3" : null ),
+        } }>
+          <picture className="media" style={ logo.style }>
+            <source type="image/svg+xml" srcSet={ logo.src } />
+            <img
+              width={ logo.width }
+              src={ getSrc( logo ) }
+              srcSet={ getSrcSet( logo ) }
+              alt={ logo.alt }
+            />
+          </picture>
+        </Logo>
+      ) ) }
+    </Logos>
+  </Section>
+);
 
 Companies.propTypes = {
   "mode": PropTypes.oneOf( ["casual", "formal"] ),
