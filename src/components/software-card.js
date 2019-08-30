@@ -3,13 +3,26 @@ import PropTypes from "prop-types";
 // import Img from "gatsby-image";
 import styled from "styled-components";
 import "whatwg-fetch";
-
 import NumberFormat from "react-number-format";
+
+import ProgressiveImage from "./progressive-image";
 
 import isNumeric from "../util/isNumeric";
 
 import starIcon from "../images/octicons/star.svg";
 import forkIcon from "../images/octicons/repo-forked.svg";
+import downloadIcon from "../images/npm/download.svg";
+
+const Article = styled.article`
+  background-color: #eee;
+  padding: 1rem;
+  display: flex !important;
+  max-width: 39rem !important;
+`;
+
+const Column = styled.div`
+  // 
+`;
 
 const AccessibleIcon = ( props ) => {
   const imgProps = {
@@ -69,7 +82,7 @@ const Stat = ( props ) => {
 
   const sharedStyles = `
     height: ${props.height}px;
-    width: ${props.containerWidth}px;
+    min-width: ${props.containerWidth}px;
     // border: 1px solid black;
     margin-bottom: 0;
     text-align: center;
@@ -84,21 +97,23 @@ const Stat = ( props ) => {
     ${sharedStyles}
     text-align: left;
     font-family: sans-serif;
-    font-size: 1.125rem
+    font-size: 1rem
   `;
 
   return (
     <>
       <DT><Icon { ...iconProps } /></DT>
-      <DD>
-        <NumberFormat
-          value={ props.value }
-          displayType={ "text" }
-          thousandSeparator={ true }
-          decimalScale={ 0 }
-          renderText={ value => <div>{ value }</div> }
-        />
-      </DD>
+      <DD>{
+        ( isNumeric( props.value ) )
+          ? <NumberFormat
+            value={ props.value }
+            displayType={ "text" }
+            thousandSeparator={ true }
+            decimalScale={ 0 }
+            renderText={ value => <div>{ value }</div> }
+          />
+          : props.value
+      }</DD>
     </>
   );
 };
@@ -121,12 +136,38 @@ class SoftwareCard extends React.PureComponent {
         "forks": 0,
         "watchers": 0,
       },
+      "npm": {
+        ...props.npm,
+        "downloads": 0,
+      },
       ...props,
     };
 
     this.state.github.showStars = ( ( typeof props.github.showStars !== "undefined" ) ? props.github.showStars : true );
     this.state.github.showForks = ( ( typeof props.github.showForks !== "undefined" ) ? props.github.showForks : false );
     this.state.github.showWatchers = ( ( typeof props.github.showWatchers !== "undefined" ) ? props.github.showWatchers : false );
+
+    if ( typeof props.npm.package !== "undefined" ) {
+      if ( typeof props.npm.showDownloads !== "undefined" ) {
+        this.state.npm.showDownloads = props.npm.showDownloads;
+      } else {
+        this.state.npm.showDownloads = true;
+      }
+    } else {
+      this.state.npm.showDownloads = false;
+    }
+
+    if ( typeof props.npm.downloadScale !== "undefined" ) {
+      this.state.npm.downloadScale = props.npm.downloadScale;
+    } else {
+      this.state.npm.downloadScale = "monthly";
+    }
+
+    if ( typeof props.iconSize !== "undefined" ) {
+      this.state.iconSize = props.iconSize;
+    } else {
+      this.state.iconSize = 30;
+    }
   }
 
   populateGithubDetails() {
@@ -141,8 +182,6 @@ class SoftwareCard extends React.PureComponent {
     fetch( endpoint, { "cache": "force-cache" } )
       .then( response => response.json() )
       .then( ( response ) => {
-        console.log( response );
-
         this.setState( {
           ...this.state,
           "github": {
@@ -156,64 +195,160 @@ class SoftwareCard extends React.PureComponent {
       } );
   }
 
-  populateNpmDetails() {}
+  populateNpmDetails() {
+    const packageName = this.state.npm.package;
+
+    if ( packageName === "" ) {
+      return;
+    }
+
+    const endpoint = `https://api.npmjs.org/downloads/range/1000-01-01:3000-01-01/${packageName}`;
+
+    fetch( endpoint, { "cache": "force-cache" } )
+      .then( response => response.json() )
+      .then( ( response ) => {
+        const months = ( ( this.state.npm.downloadScale === "monthly" ) ? new Set() : null );
+        const years = ( ( this.state.npm.downloadScale === "weekly" ) ? new Set() : null );
+        let downloads;
+
+        const totalDownloads = response.downloads.reduce( ( total, currentStat ) => {
+          switch ( this.state.npm.downloadScale ) {
+            case "daily":
+              break;
+
+            case "weekly":
+              years.add( currentStat.day.slice( 0, -6 ) );
+              break;
+
+            case "monthly":
+            default:
+              months.add( currentStat.day.slice( 0, -3 ) );
+          }
+
+          total += currentStat.downloads;
+
+          return total;
+        }, 0 );
+
+        switch ( this.state.npm.downloadScale ) {
+          case "daily":
+            downloads = ( totalDownloads / response.downloads.length );
+            break;
+
+          case "weekly":
+            downloads = ( totalDownloads / ( years.size * ( 365 / 7 ) ) );
+            break;
+
+          case "monthly":
+          default:
+            downloads = ( totalDownloads / months.size );
+            break;
+        }
+
+        if ( ( downloads > 0 ) && ( downloads < 1 ) ) {
+          downloads = Math.ceil( downloads );
+        } else {
+          downloads = Math.round( downloads );
+        }
+
+        this.setState( {
+          ...this.state,
+          "npm": {
+            ...this.state.npm,
+            downloads,
+          },
+        } );
+      } );
+  }
+
+  getScaleNounFromAdverb( scale ) {
+    if ( scale === "daily" ) {
+      return "day";
+    }
+
+    return scale.replace( "ly", "" );
+  }
 
   componentDidMount() {
     this.populateGithubDetails();
+    this.populateNpmDetails();
   }
 
   render() {
     const {
-      _id, name, description, headingLevel, github, npm,
+      _id, name, tagline, description, headingLevel, github, npm, iconSize,
     } = this.state;
     const Heading = `h${headingLevel || 2}`;
+    const Subheading = `h${( parseInt( headingLevel, 10 ) + 1 ) || 3}`;
 
     return (
-      <article id={ _id }>
-        <Heading>{ name }</Heading>
-        <p>{ description || github.description }</p>
-        <dl className="inline">
-          {
-            github
-            && <>
-              {
-                github.showStars
-                && <Stat
-                     title="GitHub Stars"
-                     src={ starIcon }
-                     containerWidth="30"
-                     height="30"
-                     value={ github.stars }
-                     alt="★"
-                   />
-              }
-              {
-                github.showForks
-                && <>
-                  <dt>
-                    <Icon
+      <Article id={ _id }>
+        {
+          this.state.logo
+          && <ProgressiveImage
+              img={ {
+                "src": this.state.logo,
+                "width": "150",
+                "alt": "Logo",
+                "style": {
+                  //  "border": "1px solid black",
+                  // "float": "left",
+                  "marginRight": "1rem",
+                  "background-color": "#fff",
+                  "display": "inline-block",
+                },
+              } }
+            />
+        }
+        <Column>
+          <hgroup style={ { "marginBottom": ".5rem" } }>
+            <Heading style={ { "marginBottom": ".5rem" } }>{ name }</Heading>
+            <Subheading style={ { "marginBottom": 0, "fontWeight": "normal" } }>{ tagline || github.description }</Subheading>
+          </hgroup>
+          <dl className="inline" style={ { "marginBottom": ".5rem" } }>
+            {
+              github
+              && <>
+                {
+                  github.showStars
+                  && <Stat
+                      title="GitHub Stars"
+                      src={ starIcon }
+                      containerWidth={ iconSize }
+                      height={ iconSize }
+                      value={ github.stars }
+                      alt="★"
+                    />
+                }
+                {
+                  github.showForks
+                  && <Stat
                       title="GitHub Forks"
                       src={ forkIcon }
-                      containerWidth="30"
-                      height="30"
+                      containerWidth={ iconSize }
+                      height={ iconSize }
+                      value={ github.forks }
                       alt=" "
                     />
-                  </dt>
-                  <dd>{ github.forks }</dd>
-                </>
-              }
-            </>
-          }
-          {
-            npm
-            && npm.showDownloads
-            && <>
-              <dt>NPM Downloads</dt>
-              <dd>10/month</dd>
-            </>
-          }
-        </dl>
-      </article>
+                }
+              </>
+            }
+            {
+              npm
+              && npm.showDownloads
+              && <Stat
+                  title="NPM Downloads"
+                  src={ downloadIcon }
+                  containerWidth={ iconSize }
+                  height={ iconSize * 0.833333333333333 }
+                  value={ `${npm.downloads}/${this.getScaleNounFromAdverb( npm.downloadScale )}` }
+                  alt="⭳" // \u2B73
+                />
+            }
+          </dl>
+          { description && <div style={ { "marginBottom": 0 } } dangerouslySetInnerHTML={ { "__html": description } } /> }
+        </Column>
+      </Article>
     );
   } // render
 }
@@ -235,6 +370,7 @@ SoftwareCard.propTypes = {
     "package": PropTypes.string,
   } ),
   "url": PropTypes.string,
+  "iconSize": isNumeric,
 };
 
 export default SoftwareCard;

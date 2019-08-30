@@ -4,7 +4,7 @@ import styled from "styled-components";
 import TwoColumns from "./two-columns";
 import FinePrint from "./fine-print";
 
-const Incl = () => <abbr title="including">incl.</abbr>;
+const Incl = () => <abbr title="including" style={ { "borderBottom": 0 } }>incl.</abbr>;
 
 const Services = () => (
   <article id="services">

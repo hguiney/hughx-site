@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import ProgressiveImage from "./progressive-image";
+
 import layout from "../util/layout";
 import isNumeric from "../util/isNumeric";
 
@@ -74,38 +76,6 @@ const getHeading = ( mode ) => {
   return <h3>Companies I’ve Worked With</h3>;
 };
 
-const getSrc = logo => (
-  logo.src
-    .replace( "logos/", "logos/rasterized/" )
-    .replace( ".svg", ".png" )
-);
-
-const getSrcSet = ( logo ) => {
-  const base = logo.width;
-  const twoTimes = ( base * 2 );
-  const threeTimes = ( base * 3 );
-
-  let srcset = [];
-
-  [base, twoTimes, threeTimes].forEach( ( width, index ) => {
-    let density = "";
-
-    if ( width > base ) {
-      density = `@${index + 1}x`;
-    }
-
-    srcset.push( `${
-      logo.src
-        .replace( "logos/", "logos/rasterized/" )
-        .replace( ".svg", `${density}.png` )
-    } ${index + 1}x` );
-  } );
-
-  srcset = srcset.join( ", " );
-
-  return srcset;
-};
-
 const Companies = props => (
   <Section>
     { getHeading( props.mode ) }
@@ -114,15 +84,7 @@ const Companies = props => (
         <Logo key={ logo.id } style={ {
           "gridColumnEnd": ( index === ( props.logos.length - 1 ) ? "span 3" : null ),
         } }>
-          <picture className="media" style={ logo.style }>
-            <source type="image/svg+xml" srcSet={ logo.src } />
-            <img
-              width={ logo.width }
-              src={ getSrc( logo ) }
-              srcSet={ getSrcSet( logo ) }
-              alt={ logo.alt }
-            />
-          </picture>
+          <ProgressiveImage className="media" img={ logo } />
         </Logo>
       ) ) }
     </Logos>
