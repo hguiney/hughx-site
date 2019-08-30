@@ -7,6 +7,7 @@ import SoftwareCard from "./software-card";
 import githubLogo from "../images/octicons/mark-github.svg";
 
 const redblueLogo = "/images/logos/redblue.svg";
+const hvmlLogo = "/images/logos/hvml.png";
 
 const Software = () => (
   <article id="software">
@@ -16,22 +17,34 @@ const Software = () => (
     <TwoColumns>
       <SoftwareCard
         name="RedBlue"
-        logo={ redblueLogo }
+        logo={ {
+          "src": redblueLogo,
+          "width": 150,
+          "height": 150,
+          "style": {
+            "padding": "1rem",
+            "backgroundColor": "#fff",
+          },
+        } }
         url="https://redblue.video"
         description={ "Free interactive video player. Add links and forms; build <span style=\"white-space: nowrap;\">choose-your-own-story</span> films." }
         headingLevel="3"
         github={ { "package": "RedBlueVideo/redblue", "showForks": false } }
         npm={ { "package": "redblue" } }
-        iconSize="25"
+        // iconSize="25"
       />
       <SoftwareCard
         name="hvml"
-        logo={ githubLogo }
+        logo={ {
+          "src": hvmlLogo,
+          "width": 150,
+          "height": 150,
+        } }
         // url="https://hvml.redblue.video"
         headingLevel="3"
         github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
         npm={ { "package": "hvml" } }
-        iconSize="25"
+        // iconSize="25"
       />
       { /* <SoftwareCard
         name="Hypervideo Markup Language"

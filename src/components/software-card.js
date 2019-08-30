@@ -30,22 +30,24 @@ const Article = styled.article`
   picture {
     // border: 1px solid black;
     // float: left;
-    background-color: #fff;
+    // background-color: #fff;
     display: inline-block;
     text-align: center;
     margin-bottom: 1rem;
+    max-height: 150px;
   }
 
   picture > img {
     margin: 0 auto;
   }
 
-  ${layout.xlarge} {
+  @media only screen and (min-width: 80em) {
     flex-direction: row;
     
     picture {
       margin-right: 1rem;
       margin-bottom: 0;
+      max-height: 100%;
     }
   }
 `;
@@ -182,6 +184,8 @@ class SoftwareCard extends React.PureComponent {
 
     this.state = {
       "github": {
+        "showStars": false,
+        "showForks": false,
         ...props.github,
         "stars": 0,
         "forks": 0,
@@ -193,6 +197,17 @@ class SoftwareCard extends React.PureComponent {
       },
       ...props,
     };
+
+    if ( typeof props.github === "undefined" ) {
+      this.state.github = {
+        "package": "",
+        "showStars": false,
+        "showForks": false,
+        "stars": 0,
+        "forks": 0,
+        "watchers": 0,
+      };
+    }
 
     this.state.github.showStars = ( ( typeof props.github.showStars !== "undefined" ) ? props.github.showStars : true );
     this.state.github.showForks = ( ( typeof props.github.showForks !== "undefined" ) ? props.github.showForks : false );
@@ -327,7 +342,16 @@ class SoftwareCard extends React.PureComponent {
 
   render() {
     const {
-      _id, name, tagline, description, headingLevel, github, npm, iconSize, url,
+      _id,
+      name,
+      tagline,
+      description,
+      headingLevel,
+      github,
+      npm,
+      iconSize,
+      url,
+      logo,
     } = this.state;
     const Heading = `h${headingLevel || 2}`;
     const Subheading = `h${( parseInt( headingLevel, 10 ) + 1 ) || 3}`;
@@ -351,18 +375,20 @@ class SoftwareCard extends React.PureComponent {
     return (
       <Article id={ _id }>
         {
-          this.state.logo
+          logo
           && <ProgressiveImage
               style={ {
-                "minWidth": "30%",
+                "minWidth": "150px",
                 "minHeight": "150px",
-                "alignItems": "center",
+                // "alignItems": "center",
                 // "padding": "1rem",
               } }
               img={ {
-                "src": this.state.logo,
-                "width": "150",
+                "src": logo.src || logo,
+                "width": logo.width || 100,
+                "height": logo.height || 100,
                 "alt": "Logo",
+                "style": logo.style,
               } }
             />
         }

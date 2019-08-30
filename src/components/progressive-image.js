@@ -4,11 +4,27 @@ import PropTypes from "prop-types";
 
 import isNumeric from "../util/isNumeric";
 
-const getSrc = logo => (
-  logo.src
-    .replace( "logos/", "logos/rasterized/" )
-    .replace( ".svg", ".png" )
-);
+const isSvg = ( src ) => {
+  const dataUriMatch = src.match( /^data:image\/([^;]+);base64,/ );
+  const fileUriMatch = src.match( /\.svgz?$/ );
+
+  return (
+    ( ( dataUriMatch !== null ) && ( dataUriMatch[1] === "svg+xml" ) )
+    || ( fileUriMatch !== null )
+  );
+};
+
+const getSrc = ( logo ) => {
+  if ( isSvg( logo.src ) ) {
+    return (
+      logo.src
+        .replace( "logos/", "logos/rasterized/" )
+        .replace( ".svg", ".png" )
+    );
+  }
+
+  return logo.src;
+};
 
 const isBase64 = src => ( /^data:image\/[^;]+;base64,/.test( src ) );
 
@@ -32,8 +48,8 @@ const getSrcSet = ( logo ) => {
 
     srcset.push( `${
       logo.src
-        .replace( "logos/", "logos/rasterized/" )
-        .replace( ".svg", `${density}.png` )
+        .replace( "logos/", ( isSvg( logo.src ) ? "logos/rasterized/" : "logos/" ) )
+        .replace( /\.(?:svgz?|png)/, `${density}.png` )
     } ${index + 1}x` );
   } );
 
@@ -44,14 +60,23 @@ const getSrcSet = ( logo ) => {
 
 const ProgressiveImage = ( { className, img, style } ) => (
   <picture className={ className } style={ {
-    ...img.style, ...style, "lineHeight": 0, "display": "inline-flex",
+    ...style,
+    "lineHeight": 0,
+    "display": "inline-flex",
+    "justifyContent": "flex-start",
   } }>
-    { !isBase64( img.src ) ? <source type="image/svg+xml" srcSet={ img.src } /> : null }
+    {
+      ( !isBase64( img.src ) && isSvg( img.src ) )
+        ? <source type="image/svg+xml" srcSet={ img.src } />
+        : null
+    }
     <img
       width={ img.width }
+      height={ img.height }
       src={ getSrc( img ) }
       srcSet={ getSrcSet( img ) }
       alt={ img.alt }
+      style={ img.style }
     />
   </picture>
 );
@@ -61,6 +86,7 @@ ProgressiveImage.propTypes = {
   "img": PropTypes.shape( {
     "id": PropTypes.string,
     "width": isNumeric,
+    "height": isNumeric,
     "src": PropTypes.string,
     "alt": PropTypes.string.isRequired,
     "style": PropTypes.object,
