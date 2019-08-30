@@ -336,14 +336,14 @@ class SoftwareCard extends React.PureComponent {
       let Anchor;
 
       if ( !href ) {
-        Anchor = React.Fragment;
+        Anchor = <>{ name }</>;
       } else {
-        Anchor = "a";
+        Anchor = React.createElement( "a", { href }, name );
       }
 
       return (
         <Heading style={ { "marginBottom": ".5rem" } }>
-          <Anchor href={ href }>{ name }</Anchor>
+          { Anchor }
         </Heading>
       );
     };
