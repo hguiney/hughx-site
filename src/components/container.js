@@ -4,8 +4,11 @@ import layout from "../util/layout";
 
 const Container = styled.div`
   padding: 0 ${layout.pageGutter} ${layout.pageGutter};
-  max-width: 80vw;
   margin: 0 auto;
+
+  ${layout.large} {
+    max-width: 80vw;
+  }
 `;
 
 export default Container;

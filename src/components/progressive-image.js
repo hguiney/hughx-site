@@ -10,7 +10,13 @@ const getSrc = logo => (
     .replace( ".svg", ".png" )
 );
 
+const isBase64 = src => ( /^data:image\/[^;]+;base64,/.test( src ) );
+
 const getSrcSet = ( logo ) => {
+  if ( isBase64( logo.src ) ) {
+    return null;
+  }
+
   const base = logo.width;
   const twoTimes = ( base * 2 );
   const threeTimes = ( base * 3 );
@@ -36,9 +42,11 @@ const getSrcSet = ( logo ) => {
   return srcset;
 };
 
-const ProgressiveImage = ( { className, img } ) => (
-  <picture className={ className } style={ { ...img.style, "lineHeight": 0, "display": "inline-flex" } }>
-    <source type="image/svg+xml" srcSet={ img.src } />
+const ProgressiveImage = ( { className, img, style } ) => (
+  <picture className={ className } style={ {
+    ...img.style, ...style, "lineHeight": 0, "display": "inline-flex",
+  } }>
+    { !isBase64( img.src ) ? <source type="image/svg+xml" srcSet={ img.src } /> : null }
     <img
       width={ img.width }
       src={ getSrc( img ) }

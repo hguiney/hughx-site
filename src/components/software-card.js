@@ -8,16 +8,46 @@ import NumberFormat from "react-number-format";
 import ProgressiveImage from "./progressive-image";
 
 import isNumeric from "../util/isNumeric";
+import layout from "../util/layout";
 
 import starIcon from "../images/octicons/star.svg";
 import forkIcon from "../images/octicons/repo-forked.svg";
 import downloadIcon from "../images/npm/download.svg";
+// import globeIcon from "../images/globe.svg";
+import websiteIcon from "../images/website.svg";
+import githubLogo from "../images/octicons/mark-github.svg";
 
 const Article = styled.article`
   background-color: #eee;
-  padding: 1rem;
+  padding: 1rem !important;
   display: flex !important;
-  max-width: 39rem !important;
+  flex: 1 !important;
+  width: 100%;
+  max-width: 100% !important;
+  flex-direction: column;
+  // max-width: 39rem !important;
+
+  picture {
+    // border: 1px solid black;
+    // float: left;
+    background-color: #fff;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  picture > img {
+    margin: 0 auto;
+  }
+
+  ${layout.xlarge} {
+    flex-direction: row;
+    
+    picture {
+      margin-right: 1rem;
+      margin-bottom: 0;
+    }
+  }
 `;
 
 const Column = styled.div`
@@ -97,13 +127,34 @@ const Stat = ( props ) => {
     ${sharedStyles}
     text-align: left;
     font-family: sans-serif;
-    font-size: 1rem
+    font-size: 1rem;
   `;
+
+  const A = styled.a`
+    ${sharedStyles}
+    cursor: pointer;
+
+    abbr[title] {
+      cursor: inherit;
+    }
+  `;
+
+  const isLink = /^(https?|s?ftp|gopher|tel|skype):\/\//.test( props.value );
+
+  if ( isLink ) {
+    return (
+      <DT className={ props.className } style={ { "marginLeft": "1rem" } }>
+        <A href={ props.value }>
+          <Icon { ...iconProps } />
+        </A>
+      </DT>
+    );
+  }
 
   return (
     <>
-      <DT><Icon { ...iconProps } /></DT>
-      <DD>{
+      <DT className={ props.className }><Icon { ...iconProps } /></DT>
+      <DD className={ props.valueClassName }>{
         ( isNumeric( props.value ) )
           ? <NumberFormat
             value={ props.value }
@@ -276,39 +327,60 @@ class SoftwareCard extends React.PureComponent {
 
   render() {
     const {
-      _id, name, tagline, description, headingLevel, github, npm, iconSize,
+      _id, name, tagline, description, headingLevel, github, npm, iconSize, url,
     } = this.state;
     const Heading = `h${headingLevel || 2}`;
     const Subheading = `h${( parseInt( headingLevel, 10 ) + 1 ) || 3}`;
+
+    const title = ( href ) => {
+      let Anchor;
+
+      if ( !href ) {
+        Anchor = React.Fragment;
+      } else {
+        Anchor = "a";
+      }
+
+      return (
+        <Heading style={ { "marginBottom": ".5rem" } }>
+          <Anchor href={ href }>{ name }</Anchor>
+        </Heading>
+      );
+    };
 
     return (
       <Article id={ _id }>
         {
           this.state.logo
           && <ProgressiveImage
+              style={ {
+                "minWidth": "30%",
+                "minHeight": "150px",
+                "alignItems": "center",
+                // "padding": "1rem",
+              } }
               img={ {
                 "src": this.state.logo,
                 "width": "150",
                 "alt": "Logo",
-                "style": {
-                  //  "border": "1px solid black",
-                  // "float": "left",
-                  "marginRight": "1rem",
-                  "background-color": "#fff",
-                  "display": "inline-block",
-                },
               } }
             />
         }
         <Column>
           <hgroup style={ { "marginBottom": ".5rem" } }>
-            <Heading style={ { "marginBottom": ".5rem" } }>{ name }</Heading>
+            { url ? title( url ) : title() }
             <Subheading style={ { "marginBottom": 0, "fontWeight": "normal" } }>{ tagline || github.description }</Subheading>
           </hgroup>
           <dl className="inline" style={ { "marginBottom": ".5rem" } }>
             {
               github
               && <>
+                { /* <dt
+                  // className="pill-cap-left"
+                  style={ { "margin": "0 .5rem 0 0" } }
+                >
+                  <Icon width={ iconSize } height={ iconSize } src={ githubLogo } />
+                </dt> */ }
                 {
                   github.showStars
                   && <Stat
@@ -318,6 +390,8 @@ class SoftwareCard extends React.PureComponent {
                       height={ iconSize }
                       value={ github.stars }
                       alt="★"
+                      // className="pill-middle"
+                      // valueClassName="pill-middle pill-middle--value"
                     />
                 }
                 {
@@ -329,6 +403,8 @@ class SoftwareCard extends React.PureComponent {
                       height={ iconSize }
                       value={ github.forks }
                       alt=" "
+                      // className="pill-middle"
+                      // valueClassName="pill-cap-right"
                     />
                 }
               </>
@@ -340,11 +416,23 @@ class SoftwareCard extends React.PureComponent {
                   title="NPM Downloads"
                   src={ downloadIcon }
                   containerWidth={ iconSize }
-                  height={ iconSize * 0.833333333333333 }
+                  height={ iconSize * 0.9 }
                   value={ `${npm.downloads}/${this.getScaleNounFromAdverb( npm.downloadScale )}` }
                   alt="⭳" // \u2B73
                 />
             }
+            { /*
+              url
+              && <Stat
+                   title="Website"
+                   src={ websiteIcon }
+                   containerWidth={ iconSize }
+                   width={ iconSize }
+                   height={ iconSize }
+                   value={ url }
+                   alt=" "
+                 />
+            */ }
           </dl>
           { description && <div style={ { "marginBottom": 0 } } dangerouslySetInnerHTML={ { "__html": description } } /> }
         </Column>

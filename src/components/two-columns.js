@@ -4,14 +4,13 @@ const TwoColumns = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  flex-wrap: wrap;
   max-width: 100%;
   margin-left: -.5rem;
   margin-right: -.5rem;
 
   & > section,
   & > article {
-    max-width: 50%;
-    max-width: calc(50% - 1rem);
     display: inline-block;
     background-color: #eee;
     padding: 1.5rem 1rem;
@@ -44,6 +43,12 @@ const TwoColumns = styled.div`
     //   margin-top: 0;
     //   margin-left: 1rem;
     // }
+
+    & > section,
+    & > article {
+      max-width: 50%;
+      max-width: calc(50% - 1rem);
+    }
   }
 `;
 
