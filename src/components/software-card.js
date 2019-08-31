@@ -408,7 +408,8 @@ class SoftwareCard extends React.PureComponent {
                   <Icon width={ iconSize } height={ iconSize } src={ githubLogo } />
                 </dt> */ }
                 {
-                  github.showStars
+                  github.stars
+                  && github.showStars
                   && <Stat
                       title="GitHub Stars"
                       src={ starIcon }
@@ -437,6 +438,7 @@ class SoftwareCard extends React.PureComponent {
             }
             {
               npm
+              && npm.downloads
               && npm.showDownloads
               && <Stat
                   title="NPM Downloads"
