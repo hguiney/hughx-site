@@ -1,5 +1,6 @@
 import React from "react";
 // import PropTypes from "prop-types";
+import styled from "styled-components";
 
 import TwoColumns from "./two-columns";
 import SoftwareCard from "./software-card";
@@ -9,12 +10,39 @@ import githubLogo from "../images/octicons/mark-github.svg";
 const redblueLogo = "/images/logos/redblue.svg";
 const hvmlLogo = "/images/logos/hvml.png";
 
+const SoftwareCards = styled( TwoColumns )`
+  @media only screen and (min-width: 40em) {
+    & {
+      flex-direction: column;
+
+      & > section,
+      & > article {
+        flex: unset;
+        max-width: unset;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 65em) {
+    & {
+      flex-direction: row;
+    }
+
+    & > section,
+    & > article {
+      flex: .5;
+      max-width: 47.8%;
+      max-width: calc( 50% - 1rem );
+    }
+  }
+`;
+
 const Software = () => (
   <article id="software">
     <h2>Software</h2>
     <p>I currently maintain the following software products:</p>
     { /* <h3>Open Source</h3> */ }
-    <TwoColumns>
+    <SoftwareCards>
       <SoftwareCard
         name="RedBlue"
         logo={ {
@@ -46,6 +74,19 @@ const Software = () => (
         npm={ { "package": "hvml" } }
         // iconSize="25"
       />
+      <SoftwareCard
+        name="hvml"
+        logo={ {
+          "src": hvmlLogo,
+          "width": 150,
+          "height": 150,
+        } }
+        // url="https://hvml.redblue.video"
+        headingLevel="3"
+        github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
+        npm={ { "package": "hvml" } }
+        // iconSize="25"
+      />
       { /* <SoftwareCard
         name="Hypervideo Markup Language"
         logo={ githubLogo }
@@ -56,7 +97,7 @@ const Software = () => (
         npm={ {} }
         // iconSize="25"
       /> */ }
-    </TwoColumns>
+    </SoftwareCards>
 
     { /* <h3>Commercial</h3>
     <h4>Vlogmaster</h4>

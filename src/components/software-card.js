@@ -21,9 +21,9 @@ const Article = styled.article`
   background-color: #eee;
   padding: 1rem !important;
   display: flex !important;
-  flex: 1 !important;
+  flex: auto !important;
   width: 100%;
-  max-width: 100% !important;
+  // max-width: 100% !important;
   flex-direction: column;
   // max-width: 39rem !important;
 
@@ -41,7 +41,7 @@ const Article = styled.article`
     margin: 0 auto;
   }
 
-  @media only screen and (min-width: 80em) {
+  @media only screen and (min-width: 60em) {
     flex-direction: row;
     
     picture {
