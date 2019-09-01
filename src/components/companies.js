@@ -55,16 +55,15 @@ const Logo = styled.span`
   .media {
     display: inline-block;
     margin: 0 auto;
-    filter: grayscale(100%) contrast(0%) brightness(75%);
-    transition: filter .25s ease;
 
-    &:hover, &:focus {
-      filter: none !important;
+    img {
+      filter: grayscale(100%) contrast(0%) brightness(75%);
+      transition: filter .25s ease;
+
+      &:hover, &:focus {
+        filter: none !important;
+      }
     }
-  }
-
-  &:hover > .media, &:focus > .media {
-    filter: none !important;
   }
 `;
 
