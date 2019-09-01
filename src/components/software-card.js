@@ -422,9 +422,9 @@ class SoftwareCard extends React.PureComponent {
             />
         }
         <Column>
-          <hgroup style={ { "marginBottom": ".5rem" } }>
+          <hgroup style={ { "marginTop": "-.25rem", "marginBottom": ".5rem" } }>
             { url ? title( url ) : title() }
-            <Subheading style={ { "marginBottom": 0, "fontWeight": "normal" } }>{ tagline || github.description }</Subheading>
+            { ( tagline !== "" ) && <Subheading style={ { "marginBottom": 0, "fontWeight": "normal" } }>{ tagline || github.description }</Subheading> }
           </hgroup>
           <dl className="inline" style={ { "marginBottom": ".5rem" } }>
             {

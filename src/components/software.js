@@ -9,6 +9,10 @@ import githubLogo from "../images/octicons/mark-github.svg";
 
 const redblueLogo = "/images/logos/redblue.svg";
 const hvmlLogo = "/images/logos/hvml.png";
+const npmMinifyLogo = "/images/logos/npm-minify.svg";
+const npmMinifyLogoAlt = "/images/logos/alt/npm-minify.jpg";
+
+const npmLogo = "/images/logos/npm.svg";
 
 const SoftwareCards = styled( TwoColumns )`
   @media only screen and (min-width: 40em) {
@@ -74,6 +78,24 @@ const Software = () => (
         headingLevel="3"
         github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
         npm={ { "package": "hvml" } }
+      />
+      <SoftwareCard
+        name="npm-minify"
+        logo={ {
+          "src": npmMinifyLogoAlt,
+          "width": 150,
+          // "height": 150,
+          // "style": {
+          //   "padding": "1rem",
+          //   "backgroundColor": "#fff",
+          // },
+        } }
+        tagline="CLI Tool for Library Authors"
+        description="Minifies NPM packages to reduce dependency bloat."
+        url="https://github.com/hguiney/npm-minify"
+        headingLevel="3"
+        github={ { "package": "hguiney/npm-minify", "showStars": false } }
+        npm={ { "package": "npm-minify" } }
       />
     </SoftwareCards>
     { /* <h3>Commercial</h3>
