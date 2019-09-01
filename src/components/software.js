@@ -62,43 +62,20 @@ const Software = () => (
         // iconSize="25"
       />
       <SoftwareCard
-        name="hvml"
+        name="HVML"
         logo={ {
           "src": hvmlLogo,
           "width": 150,
           "height": 150,
         } }
-        // url="https://hvml.redblue.video"
+        tagline="Metadata Format + Parser"
+        description="Stores various details about videos, including interactive UI instructions."
+        url="https://hvml.redblue.video"
         headingLevel="3"
         github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
         npm={ { "package": "hvml" } }
-        // iconSize="25"
       />
-      <SoftwareCard
-        name="hvml"
-        logo={ {
-          "src": hvmlLogo,
-          "width": 150,
-          "height": 150,
-        } }
-        // url="https://hvml.redblue.video"
-        headingLevel="3"
-        // github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
-        // npm={ { "package": "hvml" } }
-        // iconSize="25"
-      />
-      { /* <SoftwareCard
-        name="Hypervideo Markup Language"
-        logo={ githubLogo }
-        description="Video metadata syntax"
-        // url="https://hvml.redblue.video"
-        headingLevel="3"
-        github={ {} }
-        npm={ {} }
-        // iconSize="25"
-      /> */ }
     </SoftwareCards>
-
     { /* <h3>Commercial</h3>
     <h4>Vlogmaster</h4>
     <p>Lorem ipsum dolor sit amet</p> */ }
