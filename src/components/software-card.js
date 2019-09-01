@@ -209,11 +209,37 @@ class SoftwareCard extends React.PureComponent {
       };
     }
 
-    this.state.github.showStars = ( ( typeof props.github.showStars !== "undefined" ) ? props.github.showStars : true );
-    this.state.github.showForks = ( ( typeof props.github.showForks !== "undefined" ) ? props.github.showForks : false );
-    this.state.github.showWatchers = ( ( typeof props.github.showWatchers !== "undefined" ) ? props.github.showWatchers : false );
+    const hasGithub = ( typeof props.github !== "undefined" );
+    const hasNpm = ( typeof props.npm !== "undefined" );
 
-    if ( typeof props.npm.package !== "undefined" ) {
+    this.state.github.showStars = (
+      (
+        hasGithub
+        && ( typeof props.github.showStars !== "undefined" )
+      )
+        ? props.github.showStars
+        : true
+    );
+
+    this.state.github.showForks = (
+      (
+        hasGithub
+        && ( typeof props.github.showForks !== "undefined" )
+      )
+        ? props.github.showForks
+        : false
+    );
+
+    this.state.github.showWatchers = (
+      (
+        hasGithub
+        && ( typeof props.github.showWatchers !== "undefined" )
+      )
+        ? props.github.showWatchers
+        : false
+    );
+
+    if ( hasNpm && ( typeof props.npm.package !== "undefined" ) ) {
       if ( typeof props.npm.showDownloads !== "undefined" ) {
         this.state.npm.showDownloads = props.npm.showDownloads;
       } else {
@@ -223,17 +249,20 @@ class SoftwareCard extends React.PureComponent {
       this.state.npm.showDownloads = false;
     }
 
-    if ( typeof props.npm.downloadScale !== "undefined" ) {
-      this.state.npm.downloadScale = props.npm.downloadScale;
-    } else {
-      this.state.npm.downloadScale = "monthly";
-    }
+    this.state.npm.downloadScale = (
+      (
+        hasNpm
+        && ( typeof props.npm.downloadScale !== "undefined" )
+      )
+        ? props.npm.downloadScale
+        : "monthly"
+    );
 
-    if ( typeof props.iconSize !== "undefined" ) {
-      this.state.iconSize = props.iconSize;
-    } else {
-      this.state.iconSize = 30;
-    }
+    this.state.iconSize = (
+      ( typeof props.iconSize !== "undefined" )
+        ? props.iconSize
+        : 30
+    );
   }
 
   populateGithubDetails() {
@@ -407,9 +436,8 @@ class SoftwareCard extends React.PureComponent {
                 >
                   <Icon width={ iconSize } height={ iconSize } src={ githubLogo } />
                 </dt> */ }
-                {
-                  github.stars
-                  && github.showStars
+                { /*
+                  github.showStars
                   && <Stat
                       title="GitHub Stars"
                       src={ starIcon }
@@ -420,7 +448,7 @@ class SoftwareCard extends React.PureComponent {
                       // className="pill-middle"
                       // valueClassName="pill-middle pill-middle--value"
                     />
-                }
+                */ }
                 {
                   github.showForks
                   && <Stat

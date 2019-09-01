@@ -83,8 +83,8 @@ const Software = () => (
         } }
         // url="https://hvml.redblue.video"
         headingLevel="3"
-        github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
-        npm={ { "package": "hvml" } }
+        // github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
+        // npm={ { "package": "hvml" } }
         // iconSize="25"
       />
       { /* <SoftwareCard
