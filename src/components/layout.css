@@ -134,11 +134,15 @@ label > [type="checkbox"] {
   width: 14px;
 }
 
-label > [type="checkbox"],
+/* label > [type="checkbox"]::after {
+  content: "\00a0";
+} */
+
+/* label > [type="checkbox"],
 label > [type="checkbox"] + span {
   display: inline-block;
   vertical-align: middle;
-}
+} */
 
 optgroup {
   font-weight: 700;
@@ -627,6 +631,10 @@ dd.inline::after {
 /* dl.inline > dt::after, */
 dt.inline::after {
   content: '\a0';
+}
+
+.price {
+  font-weight: bold;
 }
 
 th {

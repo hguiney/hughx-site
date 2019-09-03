@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import NumberFormat from "react-number-format";
 import moment from "moment";
 
 import TwoColumns from "./two-columns";
 import FinePrint from "./fine-print";
+import Price from "./price";
 
 const Product = styled.article`
   // margin: 1rem auto 1rem 0;
@@ -16,9 +16,9 @@ const Product = styled.article`
     "heading"
     "description"
     "pricing"
-    "cta"
+    // "cta"
   ;
-  grid-template-rows: min-content auto auto min-content;
+  grid-template-rows: min-content 1fr min-content;
 
   & > :last-child {
     margin-bottom: 0;
@@ -36,6 +36,10 @@ const ProductPricing = styled.div`
   align-self: start;
   // border-top: 1px solid rgba(0,0,0,0.25);
   // padding-top: 1rem;
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const ProductDescription = styled.div`
@@ -44,7 +48,7 @@ const ProductDescription = styled.div`
 `;
 
 const ProductCTA = styled.p`
-  grid-area: cta;
+  grid-area: pricing;
   align-self: end;
   margin-top: 1rem;
 `;
@@ -77,21 +81,6 @@ const Input = styled.input`
 `;
 
 // const Section = styled.section``;
-
-const Price = props => (
-  <NumberFormat
-    value={ props.value }
-    displayType={ "text" }
-    thousandSeparator={ true }
-    decimalScale={ 0 }
-    prefix={ "$" }
-    { ...props }
-  />
-);
-
-Price.propTypes = {
-  "value": PropTypes.number,
-};
 
 class Packages extends React.PureComponent {
   constructor() {
@@ -225,65 +214,18 @@ class Packages extends React.PureComponent {
               <p>You’ll get a list of actionable feedback from me on ways to improve your app or site. For an additional fee, I’ll send you a screencast of me using your product with real-time commentary. (Fee waived if you give me permission to share it publicly.)</p>
             </ProductDescription>
             <ProductPricing>
-              <OrderForm id="audit-order-form" onSubmit={ this.onSubmit }>
-                <dl>
-                  <ProductPrice product="audit" renderText={ price => <dt>{ price }</dt> } />
-                  <dd>
-                    <label>
-                      <input
-                        type="checkbox"
-                        name="auditVideo.inCart"
-                        checked={ this.state.products.auditVideo.inCart }
-                        onChange={ this.handleChange }
-                      />
-                      <span>
-                        { " " }
-                        Add screencast: {
-                          (
-                            this.state.products.auditVideo.inCart
-                            && this.state.products.auditVideo.waiveFee
-                          )
-                            ? <><del><ProductPrice product="auditVideo" /></del> $0</>
-                            : <ProductPrice product="auditVideo" />
-                        }
-                      </span>
-                    </label>
-                  </dd>
-                  <dd>
-                    <label className={ this.state.products.auditVideo.inCart ? "" : "disabled" }>
-                      <input
-                        type="checkbox"
-                        name="auditVideo.waiveFee"
-                        checked={
-                          this.state.products.auditVideo.inCart
-                          && this.state.products.auditVideo.waiveFee
-                        }
-                        onChange={ this.handleChange }
-                        disabled={ !this.state.products.auditVideo.inCart }
-                      />
-                      <span>
-                        { " " }
-                        Waive fee — I agree to let my video be made public.
-                      </span>
-                    </label>
-                  </dd>
-                  <dt className="inline"><label>Total:</label></dt>
-                  <dd className="inline"><output>{
-                    <Price value={
-                      (
-                        this.state.products.auditVideo.inCart
-                        && !this.state.products.auditVideo.waiveFee
-                      )
-                        ? ( this.state.products.audit.value.price + this.state.products.auditVideo.value.price )
-                        : this.state.products.audit.value.price
-                    } />
-                  }</output></dd>
-                </dl>
-              </OrderForm>
+              <dl>
+                <dt hidden>Price</dt>
+                <ProductPrice
+                  product="audit"
+                  renderText={ price => <dd className="price">{ price }</dd> }
+                />
+              </dl>
+              <ProductCTA>
+                <button type="submit" form="audit-order-form">Order</button> — 4 spots left in { moment().format( "MMMM" ) }
+              </ProductCTA>
+              { /* <OrderForm id="audit-order-form" onSubmit={ this.onSubmit }></OrderForm> */ }
             </ProductPricing>
-            <ProductCTA>
-              <button type="submit" form="audit-order-form">Order</button> — 4 spots left in { moment().format( "MMMM" ) }
-            </ProductCTA>
           </Product>
           <Product>
             <ProductName>Iterate</ProductName>
@@ -292,8 +234,11 @@ class Packages extends React.PureComponent {
             </ProductDescription>
             <ProductPricing>
               <dl>
-                <dt><ProductPrice product="iterate" />/week</dt>
-                <dd>10% bulk discount available for every four weeks purchased upfront.</dd>
+                <dt hidden>Price</dt>
+                <ProductPrice
+                  product="iterate"
+                  renderText={ price => <dd className="price">{ price }/week</dd> }
+                />
               </dl>
               { /* <Modal>
               <dl>
@@ -310,10 +255,10 @@ class Packages extends React.PureComponent {
                   <TextArea id="project-description" rows="5"></TextArea>
                 </dd></dl>
               </Modal> */ }
+              <ProductCTA>
+                <button>Get in touch</button>
+              </ProductCTA>
             </ProductPricing>
-            <ProductCTA>
-              <button>Get in touch</button>
-            </ProductCTA>
           </Product>
         </TwoColumns>
         <FinePrint>
