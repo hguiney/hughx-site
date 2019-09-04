@@ -111,6 +111,7 @@ const Stat = ( props ) => {
   // return Icon
   const iconProps = { ...props };
   delete iconProps.value;
+  delete iconProps.style;
 
   const sharedStyles = `
     height: ${props.height}px;
@@ -155,7 +156,7 @@ const Stat = ( props ) => {
 
   return (
     <>
-      <DT className={ props.className }><Icon { ...iconProps } /></DT>
+      <DT className={ props.className } style={ props.style }><Icon { ...iconProps } /></DT>
       <DD className={ props.valueClassName }>{
         ( isNumeric( props.value ) )
           ? <NumberFormat
@@ -426,7 +427,7 @@ class SoftwareCard extends React.PureComponent {
             { url ? title( url ) : title() }
             { ( tagline !== "" ) && <Subheading style={ { "marginBottom": 0, "fontWeight": "normal" } }>{ tagline || github.description }</Subheading> }
           </hgroup>
-          <dl className="inline" style={ { "marginBottom": ".5rem" } }>
+          <dl className="inline" style={ { "marginLeft": "-0.125rem", "marginBottom": ".5rem" } }>
             {
               github
               && <>
@@ -436,7 +437,7 @@ class SoftwareCard extends React.PureComponent {
                 >
                   <Icon width={ iconSize } height={ iconSize } src={ githubLogo } />
                 </dt> */ }
-                { /*
+                {
                   github.showStars
                   && <Stat
                       title="GitHub Stars"
@@ -448,7 +449,7 @@ class SoftwareCard extends React.PureComponent {
                       // className="pill-middle"
                       // valueClassName="pill-middle pill-middle--value"
                     />
-                */ }
+                }
                 {
                   github.showForks
                   && <Stat
@@ -472,9 +473,14 @@ class SoftwareCard extends React.PureComponent {
                   title="NPM Downloads"
                   src={ downloadIcon }
                   containerWidth={ iconSize }
-                  height={ iconSize * 0.9 }
+                  height={ iconSize * 0.95 }
                   value={ `${npm.downloads}/${this.getScaleNounFromAdverb( npm.downloadScale )}` }
                   alt="⭳" // \u2B73
+                  style={ {
+                    "marginLeft": "-0.2rem",
+                    "position": "relative",
+                    "top": "0.125rem",
+                  } }
                 />
             }
             { /*
