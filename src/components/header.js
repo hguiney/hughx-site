@@ -6,27 +6,29 @@ import styled from "styled-components";
 import layout from "../util/layout";
 
 const Header = styled.header`
-  background: rebeccapurple;
+  // background: rebeccapurple;
   // margin-bottom: 1.45rem;
   padding: 1.125rem ${layout.pageGutter};
   text-align: center;
-  color: white;
+  // color: white;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 5rem;
 
-  ${layout.large} {
-    flex-direction: row;
-  }
+  // ${layout.large} {
+  //   flex-direction: row;
+  // }
 `;
 
 const Heading = styled.h1`
   margin-bottom: 1rem;
+  font-size: 2em;
 
-  ${layout.large} {
-    margin-bottom: 0;
-  }
+  // ${layout.large} {
+  //   margin-bottom: 0;
+  // }
 `;
 
 const Nav = styled.nav`
@@ -44,30 +46,36 @@ const NavLink = styled.a`
   height: 100%;
   display: inline-flex;
   align-items: center;
+  background-color: transparent;
   text-decoration: none;
-  background-color: rgba(255,255,255,0.3333);
   padding: .5rem 1rem;
   margin: .125rem;
   flex-grow: 1;
   flex-basis: 0;
   border-radius: 3rem;
+  transition: .25s ease background-color;
+
+  &:hover,
+  &:focus {
+    background-color: #ddd; //rgba(128,128,128,0.3333);
+  }
 `;
 
 const SiteHeader = ( { siteTitle } ) => (
   <Header>
-    <hgroup style={ { "marginBottom": 0 } }>
+    <hgroup hidden style={ { "marginBottom": 0 } }>
       <Heading>
         <Link
           to="/"
           style={ {
-            "color": "white",
+            "color": "inherit",
             "textDecoration": "none",
           } }
         >
           { siteTitle }
         </Link>
       </Heading>
-      { /* <h2 style={ {
+      { /* 2 style={ {
         "textAlign": "center",
         "margin": "1rem auto 1rem",
         "fontSize": "1.5rem",

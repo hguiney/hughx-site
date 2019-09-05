@@ -65,6 +65,10 @@ const Logo = styled.span`
       }
     }
   }
+
+  &:hover .media img, &:focus .media img {
+    filter: none !important;
+  }
 `;
 
 const getHeading = ( mode ) => {

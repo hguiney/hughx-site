@@ -54,7 +54,8 @@ const Software = () => (
           "width": 150,
           "height": 150,
           "style": {
-            "padding": "1rem",
+            // "padding": "1rem",
+            "padding": "1.25rem",
             "backgroundColor": "#fff",
           },
         } }

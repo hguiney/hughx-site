@@ -15,8 +15,8 @@ const Services = () => (
         <h3>Development</h3>
         <ul>
           <li>HTML5</li>
-          <li>CSS3 — <Incl /> SASS &amp; Less</li>
-          <li>JavaScript ≥ ES6 — <Incl /> Node.js &amp; React</li>
+          <li>CSS3 — <Incl /> SASS, Less, styled-components</li>
+          <li>JavaScript — <Incl /> ES6+, Node.js, React</li>
           <li>PHP — <Incl /> WordPress themes &amp; plugins</li>
           { /* <li>SEO<sup>1</sup></li>
           <li>Performance</li> */ }
@@ -28,7 +28,7 @@ const Services = () => (
         <ul>
           <li><abbr title="User Interface">UI</abbr>/<abbr title="User Experience">UX</abbr> (Look &amp; Feel)</li>
           <li>Information Architecture</li>
-          <li>Usability/Accessibility<sup>2</sup></li>
+          <li>Usability/Accessibility</li>
           <li>Copyediting</li>
           { /* <li>Branding</li> */ }
           <li>Responsive Design</li>
@@ -38,7 +38,6 @@ const Services = () => (
     <FinePrint>
       <small>
         <p><sup>1</sup> Best practices only. I do not guarantee search engine ranking.</p>
-        <p><sup>2</sup> Best practices only. I do not guarantee compliance with government regulations.</p>
       </small>
     </FinePrint>
   </article>
