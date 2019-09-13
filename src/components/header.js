@@ -12,26 +12,44 @@ const Header = styled.header`
   text-align: center;
   // color: white;
   font-family: sans-serif;
-  display: flex;
   flex-direction: column;
+  display: flex;
   justify-content: space-between;
-  height: 5rem;
+  align-items: center;
+  // height: 5rem;
 
-  // ${layout.large} {
-  //   flex-direction: row;
-  // }
+  ${layout.medium} {
+    flex-direction: row;
+  }
 `;
 
-const Heading = styled.h1`
+const Heading = styled.h2`
   margin-bottom: 1rem;
-  font-size: 2em;
+  text-align: center;
+  // font-size: 2em;
+  font-weight: normal;
 
-  // ${layout.large} {
-  //   margin-bottom: 0;
-  // }
+  .author {
+    font-weight: 600;
+  }
+
+  ${layout.medium} {
+    margin-bottom: 0;
+    text-align: left;
+
+    span {
+      display: block;
+    }
+
+    .comma {
+      display: none;
+    }
+  }
 `;
 
 const Nav = styled.nav`
+  // display: inline-block;
+
   & > a,
   & > a:visited {
     color: inherit;
@@ -46,7 +64,7 @@ const NavLink = styled.a`
   height: 100%;
   display: inline-flex;
   align-items: center;
-  background-color: transparent;
+  background-color: #eee;
   text-decoration: none;
   padding: .5rem 1rem;
   margin: .125rem;
@@ -61,9 +79,9 @@ const NavLink = styled.a`
   }
 `;
 
-const SiteHeader = ( { siteTitle } ) => (
+const SiteHeader = ( { siteTitle, author, jobTitle } ) => (
   <Header>
-    <hgroup hidden style={ { "marginBottom": 0 } }>
+    { /* <hgroup style={ { "marginBottom": 0 } }>
       <Heading>
         <Link
           to="/"
@@ -75,22 +93,19 @@ const SiteHeader = ( { siteTitle } ) => (
           { siteTitle }
         </Link>
       </Heading>
-      { /* 2 style={ {
-        "textAlign": "center",
-        "margin": "1rem auto 1rem",
-        "fontSize": "1.5rem",
-        "fontWeight": "normal",
-      } }>{ `${author}, ${jobTitle}` }</h2> */ }
-    </hgroup>
+    </hgroup> */ }
+    <Heading>
+      <span className="author">{ author }</span><span className="comma">, </span><span className="job-title">{ jobTitle }</span>
+    </Heading>
     <Nav>
       <h2 hidden>Main Navigation</h2>
       { /* <a href="#portfolio">Portfolio</a>&nbsp; */ }
-      { /* <NavLink href="#about">About</NavLink>&nbsp; */ }
+      { /* <NavLink href="/about/">About</NavLink>&nbsp; */ }
       { /* <NavLink href="#services">Services</NavLink>&nbsp; */ }
-      <NavLink href="#packages">Packages</NavLink>&nbsp;
+      { /* <NavLink href="#packages">Packages</NavLink>&nbsp; */ }
       { /* <a href="#manifesto">Manifesto</a>&nbsp; */ }
-      <NavLink href="#software">Software</NavLink>&nbsp;
-      <NavLink href="/resume/">Résumé</NavLink>&nbsp;
+      { /* <NavLink href="#software">Software</NavLink>&nbsp; */ }
+      { /* <NavLink href="/resume/">Résumé</NavLink>&nbsp; */ }
       <NavLink href="/blog/">Blog</NavLink>&nbsp;
       <NavLink href="#contact">Contact</NavLink>
     </Nav>

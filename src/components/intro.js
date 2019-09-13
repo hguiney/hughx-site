@@ -18,7 +18,7 @@ const Article = styled.article`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1rem;
+  padding: 0 1rem;
   margin-bottom: 1.45rem;
   font-family: sans-serif;
   line-height: 1.5;
@@ -29,8 +29,8 @@ const Article = styled.article`
   // background-image: url(${iPhone});
   // background-size: contain;
   // background-position: bottom left;
-  margin-top: -5rem;
-  padding-top: 5rem;
+  // margin-top: -5rem;
+  // padding-top: 5rem;
   // background-color: #aaa;
 
   & > p {
@@ -82,17 +82,18 @@ const Devices = styled.div`
 
 const Hero = styled.div`
   height: 100vh;
-  height: calc(100vh - 5rem);
+  height: calc(100vh - 6rem);
   // margin-top: -8rem;
   text-align: center;
   // border: 1px solid black;
   width: 100%;
-  padding-top: 1.5rem;
+  // padding-top: 1.5rem;
   margin-bottom: 1rem;
+  padding: 1rem 0;
 
   h2 {
     font-size: 2.5rem;
-    width: 40rem;
+    max-width: 40rem;
     margin-left: auto;
     margin-right: auto;
   }
@@ -117,7 +118,7 @@ const Intro = props => (
         />
       </Devices>
     </Hero>
-    <p>Hi, my name’s Hugh Guiney (<abbr style={ { "borderBottom": 0 } } title="pronounced">🗣 </abbr>GUY-knee). I’m a UX Developer, which means I design and develop delightful user interfaces. I’ve worked with organizations of all shapes and sizes, from startups to <abbr>SMBs</abbr> to household names. In my spare time I hack on open-source software and study Japanese. </p>
+    <p>Hi, my name’s Hugh Guiney (<abbr style={ { "borderBottom": 0 } } title="pronounced">🗣 </abbr>GUY-knee). I’m a UX Developer, which means I design &amp; code thoughtful digital products. I’ve worked with organizations of all sizes, from startups to <abbr>SMBs</abbr> to household names. In my spare time I build open-source software, make movies, and teach myself Japanese.</p>
     <Companies mode="casual" />
   </Article>
 );

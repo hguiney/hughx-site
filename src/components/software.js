@@ -6,6 +6,7 @@ import TwoColumns from "./two-columns";
 import SoftwareCard from "./software-card";
 // const githubLogo = ""
 import githubLogo from "../images/octicons/mark-github.svg";
+import layout from "../util/layout";
 
 const redblueLogo = "/images/logos/redblue.svg";
 const hvmlLogo = "/images/logos/hvml.png";
@@ -27,7 +28,7 @@ const SoftwareCards = styled( TwoColumns )`
     }
   }
 
-  @media only screen and (min-width: 65em) {
+  @media only screen and (min-width: 75em) {
     & {
       flex-direction: row;
     }
@@ -73,7 +74,7 @@ const Software = () => (
           "width": 150,
           "height": 150,
         } }
-        tagline="Metadata Format + Parser"
+        tagline="Hypervideo Markup Language • Format &amp; Parser"
         description="Stores various details about videos, including interactive UI instructions."
         url="https://hvml.redblue.video"
         headingLevel="3"
@@ -83,13 +84,13 @@ const Software = () => (
       <SoftwareCard
         name="npm-minify"
         logo={ {
-          "src": npmMinifyLogoAlt,
+          "src": npmMinifyLogo,
           "width": 150,
-          // "height": 150,
-          // "style": {
-          //   "padding": "1rem",
-          //   "backgroundColor": "#fff",
-          // },
+          "height": 150,
+          "style": {
+            "padding": "1rem",
+            "backgroundColor": "#fff",
+          },
         } }
         tagline="CLI Tool for Library Authors"
         description="Minifies NPM packages to reduce dependency bloat."

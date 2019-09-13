@@ -8,12 +8,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 // import { useStaticQuery, graphql } from "gatsby";
+import styled from "styled-components";
 import SEO from "./seo";
 
-import Header from "./header";
+import SiteHeader from "./header";
 import "./layout.css";
 
 import layout from "../util/layout";
+
+const Footer = styled.footer`
+  text-align: center;
+  margin-top: 3rem;
+  padding: 1.5rem ${layout.pageGutter};
+  background-color: #aaa;
+  // position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+`;
 
 const Layout = ( { children, siteMetadata } ) => {
   const site = siteMetadata;
@@ -22,23 +34,16 @@ const Layout = ( { children, siteMetadata } ) => {
   return (
     <>
       <SEO title={ site.description } />
-      <Header
+      <SiteHeader
         siteTitle={ site.title }
         siteDescription={ site.description }
         author={ site.author }
         jobTitle={ site.jobTitle }
       />
       { children }
-      <footer style={ {
-        "textAlign": "center",
-        // "marginTop": "3rem",
-        "padding": `1.5rem ${layout.pageGutter}`,
-        "backgroundColor": "#aaa",
-      } }>
-        © { new Date().getFullYear() }, Built with
-        { " " }
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer>
+      <Footer>
+        &copy; { ( new Date() ).getFullYear() } Hugh Guiney
+      </Footer>
     </>
   );
 };

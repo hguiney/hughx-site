@@ -24,7 +24,8 @@ const Article = styled.article`
   flex: auto !important;
   width: 100%;
   // max-width: 100% !important;
-  flex-direction: column;
+  flex-direction: row;
+
   // max-width: 39rem !important;
 
   picture {
@@ -35,20 +36,13 @@ const Article = styled.article`
     text-align: center;
     margin-bottom: 1rem;
     max-height: 150px;
+    margin-right: 1rem;
+    margin-bottom: 0;
+    max-height: 100%;
   }
 
   picture > img {
     margin: 0 auto;
-  }
-
-  @media only screen and (min-width: 60em) {
-    flex-direction: row;
-    
-    picture {
-      margin-right: 1rem;
-      margin-bottom: 0;
-      max-height: 100%;
-    }
   }
 `;
 
@@ -411,6 +405,7 @@ class SoftwareCard extends React.PureComponent {
                 "minWidth": "150px",
                 "minHeight": "150px",
                 // "alignItems": "center",
+                // "backgroundColor": "rgb(40,40,40)",
                 // "padding": "1rem",
               } }
               img={ {
