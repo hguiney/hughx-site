@@ -29,8 +29,6 @@ const Logos = styled.div`
   margin-right: -${logoSpacing};
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  justify-content: space-between;
 
   ${layout.medium} {
     display: grid;
@@ -69,6 +67,19 @@ const Logo = styled.span`
   &:hover .media img, &:focus .media img {
     filter: none !important;
   }
+
+  ${layout.medium} {
+    flex-basis: 33.3333%;
+
+    &:last-child {
+      flex-basis: 100%;
+      grid-column-end: span 3;
+    }
+
+    &#citizens img {
+      width: 250px;
+    }
+  }
 `;
 
 const getHeading = ( mode ) => {
@@ -84,9 +95,7 @@ const Companies = props => (
     { getHeading( props.mode ) }
     <Logos>
       { props.logos.map( ( logo, index ) => (
-        <Logo key={ logo.id } style={ {
-          "gridColumnEnd": ( index === ( props.logos.length - 1 ) ? "span 3" : null ),
-        } }>
+        <Logo id={ logo.id } key={ logo.id }>
           <ProgressiveImage className="media" img={ logo } />
         </Logo>
       ) ) }
