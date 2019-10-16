@@ -43,6 +43,7 @@ const Layout = ( { children, siteMetadata } ) => {
       { children }
       <Footer>
         &copy; { ( new Date() ).getFullYear() } Hugh Guiney
+        <a href="https://www.youtube.com/channel/UCOldDDJyK_oyDkVJLCuaorw">YouTube</a>
       </Footer>
     </>
   );
