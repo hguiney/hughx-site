@@ -30,7 +30,7 @@ const TwoColumns = styled.div`
   //   margin-top: 1rem;
   // }
 
-  @media only screen and (min-width: 40em) {
+  @media only screen and (min-width: 60em) {
     & {
       flex-direction: row;
       // max-width: 75%;
