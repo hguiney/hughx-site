@@ -58,17 +58,19 @@ const Devices = styled.div`
 
   .iphone {
     z-index: 1;
-    max-height: 44.4444vh;
+    // max-height: 44.4444vh;
+    width: 22%;
   }
 
   .imac {
     top: 0.25rem;
-    max-height: 66.6667vh;
-    max-height: calc(66.6667vh - 1.5rem);
+    // max-height: 66.6667vh;
+    // max-height: calc(66.6667vh - 1.5rem);
     display: none;
+    width: 78%;
   }
 
-  ${layout.medium} {
+  ${layout.large} {
     .iphone {
       left: 1.5rem;
     }
@@ -81,8 +83,8 @@ const Devices = styled.div`
 `;
 
 const Hero = styled.div`
-  height: 100vh;
-  height: calc(100vh - 6rem);
+  // height: 66.6666vh;
+  // height: calc(66.6666vh - 6rem);
   // margin-top: -8rem;
   text-align: center;
   // border: 1px solid black;
