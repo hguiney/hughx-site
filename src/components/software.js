@@ -14,6 +14,7 @@ const npmMinifyLogo = "/images/logos/npm-minify.svg";
 const npmMinifyLogoAlt = "/images/logos/alt/npm-minify.jpg";
 
 const npmLogo = "/images/logos/npm.svg";
+const eslintConfigHughxLogo = "/images/logos/eslint-config-hughx.svg";
 
 const SoftwareCards = styled( TwoColumns )`
   @media only screen and (min-width: 40em) {
@@ -98,6 +99,20 @@ const Software = () => (
         headingLevel="3"
         github={ { "package": "hguiney/npm-minify", "showStars": false } }
         npm={ { "package": "npm-minify" } }
+      />
+      <SoftwareCard
+        name="eslint-config-hughx"
+        logo={ {
+          "src": eslintConfigHughxLogo,
+          "width": 150,
+          "height": 150,
+        } }
+        tagline="Hughx ESLint Configuration"
+        description="Sensible defaults for JavaScript coding style."
+        url="https://github.com/hguiney/eslint-config-hughx"
+        headingLevel="3"
+        github={ { "package": "hguiney/eslint-config-hughx", "showStars": false } }
+        npm={ { "package": "eslint-config-hughx" } }
       />
     </SoftwareCards>
     { /* <h3>Commercial</h3>
