@@ -14,6 +14,7 @@ import Packages from "../components/packages";
 import Software from "../components/software";
 import Résumé from "./resume";
 import BlogPreview from "../components/blog-preview";
+import Advantages from "../components/advantages";
 
 class IndexPage extends React.PureComponent {
   render() {
@@ -25,6 +26,7 @@ class IndexPage extends React.PureComponent {
         <Container>
           { /* <Companies /> */ }
           <Services />
+          <Advantages />
           <Packages />
           <Software />
           <Résumé />
