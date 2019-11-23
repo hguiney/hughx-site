@@ -51,7 +51,12 @@ const Layout = ( { children, siteMetadata } ) => {
 
 Layout.propTypes = {
   "children": PropTypes.node.isRequired,
-  "siteMetadata": PropTypes.object,
+  "siteMetadata": PropTypes.shape( {
+    "title": PropTypes.string,
+    "description": PropTypes.string,
+    "author": PropTypes.string,
+    "jobTitle": PropTypes.string,
+  } ).isRequired,
 };
 
 export default Layout;
