@@ -8,8 +8,18 @@ const Citations = styled.footer`
   font-size: .75rem;
 `;
 
+const Article = styled.article`
+  & > section {
+    max-width: 39rem;
+
+    &:nth-child(even) {
+      margin-left: auto;
+    }
+  }
+`;
+
 const Advantages = () => (
-  <article id="advantages">
+  <Article id="advantages">
     <h2>The hughx Advantage</h2>
     <section>
       <h3>Economical.</h3>
@@ -34,7 +44,7 @@ const Advantages = () => (
         <p id="footnote-1"><sup>1</sup> Source: <a href="https://www.itu.int/en/ITU-D/Statistics/Pages/stat/default.aspx"><cite>Statistics</cite> on ITU</a> <a href="#citation-1" title="Back to citation marker">↩</a></p>
       </small>
     </FinePrint>
-  </article>
+  </Article>
 );
 
 export default Advantages;
