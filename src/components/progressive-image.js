@@ -18,7 +18,7 @@ const getSrc = ( logo ) => {
   if ( isSvg( logo.src ) ) {
     return (
       logo.src
-        .replace( "logos/", "logos/rasterized/" )
+        .replace( "images/", "images/rasterized/" )
         .replace( ".svg", ".png" )
     );
   }
@@ -48,7 +48,7 @@ const getSrcSet = ( logo ) => {
 
     srcset.push( `${
       logo.src
-        .replace( "logos/", ( isSvg( logo.src ) ? "logos/rasterized/" : "logos/" ) )
+        .replace( "images/", ( isSvg( logo.src ) ? "images/rasterized/" : "images/" ) )
         .replace( /\.(?:svgz?|png)/, `${density}.png` )
     } ${index + 1}x` );
   } );
@@ -60,10 +60,10 @@ const getSrcSet = ( logo ) => {
 
 const ProgressiveImage = ( { className, img, style } ) => (
   <picture className={ className } style={ {
-    ...style,
     "lineHeight": 0,
     "display": "inline-flex",
     "justifyContent": "flex-start",
+    ...style,
   } }>
     {
       ( !isBase64( img.src ) && isSvg( img.src ) )
