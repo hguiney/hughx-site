@@ -14,6 +14,10 @@ const Citations = styled.footer`
 `;
 
 const Article = styled.article`
+  // max-width: 43rem;
+  // margin-left: auto;
+  // margin-right: auto;
+
   & > section {
     // max-width: 39rem;
 
@@ -35,17 +39,23 @@ const Section = styled.section`
 
   & > picture {
     margin-right: 1.5rem;
-    flex: 1;
+    width: 50%;
   }
 
   & > div {
-    // flex: 1;
+    width: 50%;
 
     & > p:last-child {
       margin-bottom: 0;
     }
   }
 `;
+
+const advantageImageWidth = 200;
+const advantageImageStyle = {
+  "justifyContent": "center",
+  "alignItems": "center",
+};
 
 const Advantages = () => (
   <Article id="advantages">
@@ -54,13 +64,10 @@ const Advantages = () => (
       <ProgressiveImage
         img={ {
           "src": piggyBankImage,
-          "width": 150,
+          "width": advantageImageWidth,
           "alt": "icon: piggy bank with coins entering",
         } }
-        style={ {
-          "justifyContent": "center",
-          // "alignItems": "flex-start",
-        } }
+        style={ advantageImageStyle }
       />
       <div>
         <h3>Economical.</h3>
@@ -74,13 +81,10 @@ const Advantages = () => (
       <ProgressiveImage
         img={ {
           "src": empathyImage,
-          "width": 150,
+          "width": advantageImageWidth,
           "alt": "icon: face with human figure inside",
         } }
-        style={ {
-          "justifyContent": "center",
-          // "alignItems": "flex-start",
-        } }
+        style={ advantageImageStyle }
       />
       <div>
         <h3>Empathetic.</h3>
@@ -93,13 +97,10 @@ const Advantages = () => (
       <ProgressiveImage
         img={ {
           "src": blueprintsImage,
-          "width": 150,
+          "width": advantageImageWidth,
           "alt": "icon: blueprints",
         } }
-        style={ {
-          "justifyContent": "center",
-          // "alignItems": "flex-start",
-        } }
+        style={ advantageImageStyle }
       />
       <div>
         <h3>Engineered.</h3>

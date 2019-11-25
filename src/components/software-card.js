@@ -491,7 +491,7 @@ class SoftwareCard extends React.PureComponent {
                  />
             */ }
           </dl>
-          { description && <div style={ { "marginBottom": 0 } } dangerouslySetInnerHTML={ { "__html": description } } /> }
+          { description && <div style={ { "marginBottom": 0, "maxWidth": "29rem" } } dangerouslySetInnerHTML={ { "__html": description } } /> }
         </Column>
       </Article>
     );

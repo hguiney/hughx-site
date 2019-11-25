@@ -15,7 +15,7 @@ const BlogPreview = ( props ) => {
 
   return (
     <Article id="blog">
-      <h2>From the <Link to="/blog/">Blog</Link>:</h2>
+      <h2 style={ { "textAlign": "center" } }>From the <Link to="/blog/">Blog</Link>:</h2>
       { posts.edges.map( edge => <PostPreview key={ edge.node.id } post={ edge.node } /> ) }
     </Article>
   );

@@ -12,9 +12,12 @@ import styled from "styled-components";
 import SEO from "./seo";
 
 import SiteHeader from "./header";
+import ProgressiveImage from "./progressive-image";
 import "./layout.css";
 
 import layout from "../util/layout";
+
+const reactLogo = "/images/logos/react.svg";
 
 const Footer = styled.footer`
   text-align: center;
@@ -25,6 +28,13 @@ const Footer = styled.footer`
   bottom: 0;
   left: 0;
   width: 100%;
+  line-height: 2;
+`;
+
+const FooterContent = styled.div`
+  max-width: 39rem;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const Layout = ( { children, siteMetadata } ) => {
@@ -42,8 +52,11 @@ const Layout = ( { children, siteMetadata } ) => {
       />
       { children }
       <Footer>
-        &copy; { ( new Date() ).getFullYear() } Hugh Guiney
-        <a href="https://www.youtube.com/channel/UCOldDDJyK_oyDkVJLCuaorw">YouTube</a>
+        <FooterContent>
+          <p>Designed &amp; developed by Hugh Guiney. &copy; { ( new Date() ).getFullYear() }</p>
+          <p>Built in <ProgressiveImage img={ { "src": reactLogo, "width": 33.3333 } } style={ { "verticalAlign": "middle" } } /> React without mockups.</p>
+          <p><a href="https://www.youtube.com/channel/UCOldDDJyK_oyDkVJLCuaorw">YouTube</a></p>
+        </FooterContent>
       </Footer>
     </>
   );

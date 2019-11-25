@@ -29,7 +29,7 @@ class IndexPage extends React.PureComponent {
           <Advantages />
           <Packages />
           <Software />
-          <Résumé />
+          { /* <Résumé /> */ }
           <BlogPreview posts={ data.posts } />
         </Container>
       </Layout>

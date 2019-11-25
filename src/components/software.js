@@ -30,15 +30,28 @@ const SoftwareCards = styled( TwoColumns )`
   }
 
   @media only screen and (min-width: 75em) {
-    & {
-      flex-direction: row;
+    flex-direction: row;
+
+    @supports (display: grid) {
+      display: grid;
+      margin-left: auto;
+      margin-right: auto;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 1fr;
+      grid-gap: 1rem;
+      margin: 0;
     }
 
     & > section,
     & > article {
       flex: .5;
       max-width: 47.8%;
-      max-width: calc( 50% - 1rem );
+      max-width: calc(50% - 1rem);
+      
+      @supports (display: grid) {
+        margin: 0;
+        max-width: 100%;
+      }
     }
   }
 `;

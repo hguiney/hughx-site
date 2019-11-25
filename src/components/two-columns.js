@@ -5,7 +5,7 @@ const TwoColumns = styled.div`
   justify-content: space-between;
   flex-direction: column;
   flex-wrap: wrap;
-  max-width: 100%;
+  // max-width: 100%;
   margin-left: -.5rem;
   margin-right: -.5rem;
 
@@ -17,32 +17,12 @@ const TwoColumns = styled.div`
     flex: .5;
     text-align: left;
     margin: .5rem;
-
-    // &:only-child {
-    //   margin-right: 1rem;
-    // }
   }
-
-  // & > section + section,
-  // & > article + article,
-  // & > section + article,
-  // & > article + section {
-  //   margin-top: 1rem;
-  // }
 
   @media only screen and (min-width: 60em) {
     & {
       flex-direction: row;
-      // max-width: 75%;
     }
-
-    // & > section + section,
-    // & > article + article,
-    // & > section + article,
-    // & > article + section {
-    //   margin-top: 0;
-    //   margin-left: 1rem;
-    // }
 
     & > section,
     & > article {
