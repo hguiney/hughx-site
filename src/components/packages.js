@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import moment from "moment";
 
+import { Elements, StripeProvider } from "react-stripe-elements";
 import TwoColumns from "./two-columns";
 import FinePrint from "./fine-print";
 import Price from "./price";
+import CheckoutForm from "./checkout-form";
 
 const Product = styled.article`
   // margin: 1rem auto 1rem 0;
@@ -47,7 +49,7 @@ const ProductDescription = styled.div`
   align-self: start;
 `;
 
-const ProductCTA = styled.p`
+const ProductCTA = styled.div`
   grid-area: pricing;
   align-self: end;
   margin-top: 1rem;
@@ -87,6 +89,7 @@ class Packages extends React.PureComponent {
     super();
 
     this.state = {
+      // "stripe": null,
       "products": {
         "audit": {
           "inCart": false,
@@ -190,6 +193,17 @@ class Packages extends React.PureComponent {
     event.preventDefault();
   }
 
+  // componentDidMount() {
+  //   if ( window.Stripe ) {
+  //     this.setState( { "stripe": window.Stripe( "pk_test_12345" ) } );
+  //   } else {
+  //     document.querySelector( "#stripe-js" ).addEventListener( "load", () => {
+  //       // Create Stripe instance once Stripe.js loads
+  //       this.setState( { "stripe": window.Stripe( "pk_test_12345" ) } );
+  //     } );
+  //   }
+  // }
+
   render() {
     const ProductPrice = ( props ) => {
       const { value, discount, isDiscounted } = this.state.products[props.product];
@@ -218,10 +232,18 @@ class Packages extends React.PureComponent {
                 <dt hidden>Price</dt>
                 <ProductPrice
                   product="audit"
-                  renderText={ price => <dd className="price">{ price }</dd> }
+                  renderText={ ( price ) => <dd className="price">{ price }</dd> }
                 />
               </dl>
               <ProductCTA>
+                <StripeProvider apiKey="pk_test_SmHNRfEfKcpTJ747ndRSsibc00Kk6u0nqV">
+                  <div className="example">
+                    { /* <h1>React Stripe Elements Example</h1> */ }
+                    <Elements>
+                      <CheckoutForm />
+                    </Elements>
+                  </div>
+                </StripeProvider>
                 <button type="submit" form="audit-order-form">Order</button> — 4 spots left in { moment().format( "MMMM" ) }
               </ProductCTA>
               { /* <OrderForm id="audit-order-form" onSubmit={ this.onSubmit }></OrderForm> */ }
@@ -237,7 +259,7 @@ class Packages extends React.PureComponent {
                 <dt hidden>Price</dt>
                 <ProductPrice
                   product="iterate"
-                  renderText={ price => <dd className="price">{ price }/week</dd> }
+                  renderText={ ( price ) => <dd className="price">{ price }/week</dd> }
                 />
               </dl>
               { /* <Modal>

@@ -5,7 +5,7 @@ import React from "react";
 import Price from "./price";
 
 const OrderForm = () => (
-    <>
+  <>
     <dd>
       <label>
         <input
@@ -56,7 +56,7 @@ const OrderForm = () => (
           : this.state.products.audit.value.price
       } />
     }</output></dd>
-    </>
+  </>
 );
 
 export default OrderForm;

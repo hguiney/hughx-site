@@ -62,6 +62,44 @@
     ERROR: Service 'api' failed to build: The command '/bin/sh -c cp -r /home/api/* /srv/app/api/' returned a non-zero code: 1
     ```
 
+## [Compile MongoDB]()
+
+`yaourt -S mongodb` failing with:
+
+```
+Base<T>::shallowClone() const [with T = mongo::TypeMatchExpression]':
+src/mongo/db/matcher/expression_type.h:69:38:   required from here
+src/mongo/db/matcher/expression_type.h:74:30: warning: redundant move in return statement [-Wredundant-move]
+src/mongo/db/matcher/expression_type.h:74:30: note: remove 'std::move' call
+In file included from src/mongo/db/matcher/expression_parser.h:37,
+                 from src/mongo/db/query/parsed_projection.h:33,
+                 from src/mongo/db/query/canonical_query.h:39,
+                 from src/mongo/db/query/explain.h:34,
+                 from src/mongo/db/commands.h:46,
+                 from src/mongo/db/s/sharding_logging_test.cpp:37:
+src/mongo/db/matcher/expression_type.h: In instantiation of 'std::unique_ptr<mongo::MatchExpression> mongo::TypeMatchExpressionBase<T>::shallowClone() const [with T = mongo::InternalSchemaBinDataEncryptedTypeExpression]':
+src/mongo/db/matcher/expression_type.h:69:38:   required from here
+src/mongo/db/matcher/expression_type.h:74:30: warning: redundant move in return statement [-Wredundant-move]
+   74 |         return std::move(expr);
+      |                              ^
+src/mongo/db/matcher/expression_type.h:74:30: note: remove 'std::move' call
+src/mongo/db/matcher/expression_type.h: In instantiation of 'std::unique_ptr<mongo::MatchExpression> mongo::TypeMatchExpressionBase<T>::shallowClone() const [with T = mongo::InternalSchemaTypeExpression]':
+src/mongo/db/matcher/expression_type.h:69:38:   required from here
+src/mongo/db/matcher/expression_type.h:74:30: warning: redundant move in return statement [-Wredundant-move]
+src/mongo/db/matcher/expression_type.h:74:30: note: remove 'std::move' call
+src/mongo/db/matcher/expression_type.h: In instantiation of 'std::unique_ptr<mongo::MatchExpression> mongo::TypeMatchExpressionBase<T>::shallowClone() const [with T = mongo::TypeMatchExpression]':
+src/mongo/db/matcher/expression_type.h:69:38:   required from here
+src/mongo/db/matcher/expression_type.h:74:30: warning: redundant move in return statement [-Wredundant-move]
+src/mongo/db/matcher/expression_type.h:74:30: note: remove 'std::move' call
+scons: building terminated because of errors.
+build/opt/mongo/db/query/query_planner_test.o failed: Error 1
+==> ERROR: A failure occurred in check().
+    Aborting...
+==> ERROR: Makepkg was unable to build mongodb.
+==> Restart building mongodb ? [y/N]
+==> --------------------------------
+```
+
 ### Resources
 
 - [mongodump and mongorestore with Docker](https://jeromejaglale.com/doc/programming/mongodb_docker_mongodump_mongorestore)

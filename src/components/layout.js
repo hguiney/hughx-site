@@ -54,7 +54,7 @@ const Layout = ( { children, siteMetadata } ) => {
       <Footer>
         <FooterContent>
           <p>Designed &amp; developed by Hugh Guiney. &copy; { ( new Date() ).getFullYear() }</p>
-          <p>Built in <ProgressiveImage img={ { "src": reactLogo, "width": 33.3333 } } style={ { "verticalAlign": "middle" } } /> React without mockups.</p>
+          <p>Built in <ProgressiveImage img={ { "src": reactLogo, "width": 33.3333, "alt": "React logo" } } style={ { "verticalAlign": "middle" } } /> React without mockups.</p>
           <p><a href="https://www.youtube.com/channel/UCOldDDJyK_oyDkVJLCuaorw">YouTube</a></p>
         </FooterContent>
       </Footer>

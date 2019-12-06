@@ -43,5 +43,12 @@ module.exports = {
     },
     "gatsby-plugin-offline",
     "gatsby-plugin-styled-components",
+    "gatsby-plugin-stripe",
+    // {
+    //   "resolve": "gatsby-plugin-stripe",
+    //   "options": {
+    //     "async": true,
+    //   },
+    // },
   ],
 };
