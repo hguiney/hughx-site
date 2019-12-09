@@ -30,7 +30,7 @@ class IndexPage extends React.PureComponent {
           <Packages />
           <Software />
           { /* <Résumé /> */ }
-          <BlogPreview posts={ data.posts } />
+          { /* <BlogPreview posts={ data.posts } /> */ }
         </Container>
       </Layout>
     );
@@ -44,9 +44,7 @@ IndexPage.propTypes = {
 export default IndexPage;
 
 export const pageQuery = graphql`
-query IndexQuery(
-  $now: Date!
-) {
+query IndexQuery { # IndexQuery($now: Date!) {
   site {
     siteMetadata {
       title
@@ -55,37 +53,37 @@ query IndexQuery(
       description
     }
   }
-  posts: allStrapiPost(
-    sort: {
-      fields: [publishedAt],
-      order: DESC
-    },
-    filter: {
-      publishedAt: {
-        lte: $now
-      }
-    },
-    limit: 4
-  ) {
-    edges {
-      node {
-        id
-        title
-        publishedAt
-        updatedAt
-        coverArt {
-          mime
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1200, maxHeight: 630) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-        coverArtAltText
-        body
-      }
-    }
-  }
+  # posts: allStrapiPost(
+  #   sort: {
+  #     fields: [publishedAt],
+  #     order: DESC
+  #   },
+  #   filter: {
+  #     publishedAt: {
+  #       lte: $now
+  #     }
+  #   },
+  #   limit: 4
+  # ) {
+  #   edges {
+  #     node {
+  #       id
+  #       title
+  #       publishedAt
+  #       updatedAt
+  #       coverArt {
+  #         mime
+  #         localFile {
+  #           childImageSharp {
+  #             fluid(maxWidth: 1200, maxHeight: 630) {
+  #               ...GatsbyImageSharpFluid
+  #             }
+  #           }
+  #         }
+  #       }
+  #       coverArtAltText
+  #       body
+  #     }
+  #   }
+  # }
 }`;

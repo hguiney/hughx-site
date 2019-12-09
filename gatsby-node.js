@@ -28,160 +28,160 @@ const makeRequest = ( graphql, request ) => new Promise( ( resolve, reject ) => 
 // https://blog.strapi.io/building-a-static-website-using-gatsby-and-strapi/#articleview
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
-exports.createPages = ( { actions, graphql } ) => {
-  const { createPage } = actions;
+// exports.createPages = ( { actions, graphql } ) => {
+//   const { createPage } = actions;
 
-  const getPosts = makeRequest( graphql, `
-    {
-      allStrapiPost {
-        edges {
-          node {
-            id
-            title
-            publishedAt
-          }
-        }
-      }
-    }
-  ` ).then( ( result ) => {
-    const archives = {};
-    const posts = result.data.allStrapiPost.edges;
-    const publishedPosts = posts.filter( ( { node } ) => node.publishedAt <= moment().toISOString() );
+//   const getPosts = makeRequest( graphql, `
+//     {
+//       allStrapiPost {
+//         edges {
+//           node {
+//             id
+//             title
+//             publishedAt
+//           }
+//         }
+//       }
+//     }
+//   ` ).then( ( result ) => {
+//     const archives = {};
+//     const posts = result.data.allStrapiPost.edges;
+//     const publishedPosts = posts.filter( ( { node } ) => node.publishedAt <= moment().toISOString() );
 
-    // Create pages for each article.
-    publishedPosts.forEach( ( { node } ) => {
-      createPage( {
-        "path": `/${getPermalink( {
-          "timestamp": node.publishedAt,
-          "title": node.title,
-        } )}`,
-        "component": path.resolve( "src/components/post.js" ),
-        "context": {
-          "id": node.id,
-        },
-      } );
+//     // Create pages for each article.
+//     publishedPosts.forEach( ( { node } ) => {
+//       createPage( {
+//         "path": `/${getPermalink( {
+//           "timestamp": node.publishedAt,
+//           "title": node.title,
+//         } )}`,
+//         "component": path.resolve( "src/components/post.js" ),
+//         "context": {
+//           "id": node.id,
+//         },
+//       } );
 
-      const datePieces = node.publishedAt.split( "T" )[0].split( "-" );
-      const [year, month, day] = datePieces;
-      const [, monthInt, dayInt] = datePieces.map( datePiece => parseInt( datePiece, 10 ) );
+//       const datePieces = node.publishedAt.split( "T" )[0].split( "-" );
+//       const [year, month, day] = datePieces;
+//       const [, monthInt, dayInt] = datePieces.map( datePiece => parseInt( datePiece, 10 ) );
 
-      // Year Archives:
-      createPage( {
-        "path": `/${year}`,
-        "component": path.resolve( "src/pages/archive.js" ),
-        "context": {
-          "gte": `${year}-01-01`,
-          "lt": `${year}-12-31`,
-          "title": `${year} Archives`,
-        },
-      } );
+//       // Year Archives:
+//       createPage( {
+//         "path": `/${year}`,
+//         "component": path.resolve( "src/pages/archive.js" ),
+//         "context": {
+//           "gte": `${year}-01-01`,
+//           "lt": `${year}-12-31`,
+//           "title": `${year} Archives`,
+//         },
+//       } );
 
-      if ( !hasOwnProperty( archives, year ) ) {
-        archives[year] = {
-          "posts": [],
-        };
-      }
+//       if ( !hasOwnProperty( archives, year ) ) {
+//         archives[year] = {
+//           "posts": [],
+//         };
+//       }
 
-      archives[year].posts.push( node );
+//       archives[year].posts.push( node );
 
-      // Month Archives:
-      createPage( {
-        "path": `/${year}/${month}`,
-        "component": path.resolve( "src/pages/archive.js" ),
-        "context": {
-          "gte": `${year}-${month}-01`,
-          "lt": `${year}-${monthInt + 1}-01`,
-          "title": `${moment( `${year}-${month}` ).format( "MMMM YYYY" )} Archives`,
-        },
-      } );
+//       // Month Archives:
+//       createPage( {
+//         "path": `/${year}/${month}`,
+//         "component": path.resolve( "src/pages/archive.js" ),
+//         "context": {
+//           "gte": `${year}-${month}-01`,
+//           "lt": `${year}-${monthInt + 1}-01`,
+//           "title": `${moment( `${year}-${month}` ).format( "MMMM YYYY" )} Archives`,
+//         },
+//       } );
 
-      if ( !hasOwnProperty( archives[year], month ) ) {
-        archives[year][month] = {
-          "posts": [],
-        };
-      }
+//       if ( !hasOwnProperty( archives[year], month ) ) {
+//         archives[year][month] = {
+//           "posts": [],
+//         };
+//       }
 
-      archives[year][month].posts.push( node );
+//       archives[year][month].posts.push( node );
 
-      // Day Archives:
-      let nextDay = dayInt + 1;
+//       // Day Archives:
+//       let nextDay = dayInt + 1;
 
-      if ( nextDay < 10 ) {
-        nextDay = `0${nextDay}`;
-      }
+//       if ( nextDay < 10 ) {
+//         nextDay = `0${nextDay}`;
+//       }
 
-      createPage( {
-        "path": `/${year}/${month}/${day}`,
-        "component": path.resolve( "src/pages/archive.js" ),
-        "context": {
-          "gte": `${year}-${month}-${day}`,
-          "lt": `${year}-${month}-${nextDay}`,
-          "title": `${moment( `${year}-${month}-${day}` ).format( "MMMM Do, YYYY" )} Archives`,
-        },
-      } );
+//       createPage( {
+//         "path": `/${year}/${month}/${day}`,
+//         "component": path.resolve( "src/pages/archive.js" ),
+//         "context": {
+//           "gte": `${year}-${month}-${day}`,
+//           "lt": `${year}-${month}-${nextDay}`,
+//           "title": `${moment( `${year}-${month}-${day}` ).format( "MMMM Do, YYYY" )} Archives`,
+//         },
+//       } );
 
-      if ( !hasOwnProperty( archives[year][month], day ) ) {
-        archives[year][month][day] = {
-          "posts": [],
-        };
-      }
+//       if ( !hasOwnProperty( archives[year][month], day ) ) {
+//         archives[year][month][day] = {
+//           "posts": [],
+//         };
+//       }
 
-      archives[year][month][day].posts.push( node );
-    } );
+//       archives[year][month][day].posts.push( node );
+//     } );
 
-    // Pagination
-    // https://www.gatsbyjs.org/docs/adding-pagination/
-    const postsPerPage = 1; // 10;
-    const numberOfPages = Math.ceil( publishedPosts.length / postsPerPage );
+//     // Pagination
+//     // https://www.gatsbyjs.org/docs/adding-pagination/
+//     const postsPerPage = 1; // 10;
+//     const numberOfPages = Math.ceil( publishedPosts.length / postsPerPage );
 
-    Array.from( { "length": numberOfPages } ).forEach( ( _, i ) => {
-      const currentPageNumber = i + 1;
+//     Array.from( { "length": numberOfPages } ).forEach( ( _, i ) => {
+//       const currentPageNumber = i + 1;
 
-      createPage( {
-        "path": ( i === 0 ? "/blog/" : `/blog/${currentPageNumber}` ),
-        "component": path.resolve( "src/pages/_blog.js" ),
-        "context": {
-          "limit": postsPerPage,
-          "skip": i * postsPerPage,
-          numberOfPages,
-          "currentPage": currentPageNumber,
-          archives,
-          "now": moment().toISOString(),
-        },
-      } );
-    } );
-  } );
+//       createPage( {
+//         "path": ( i === 0 ? "/blog/" : `/blog/${currentPageNumber}` ),
+//         "component": path.resolve( "src/pages/_blog.js" ),
+//         "context": {
+//           "limit": postsPerPage,
+//           "skip": i * postsPerPage,
+//           numberOfPages,
+//           "currentPage": currentPageNumber,
+//           archives,
+//           "now": moment().toISOString(),
+//         },
+//       } );
+//     } );
+//   } );
 
-  const getAuthors = makeRequest( graphql, `
-    {
-      allStrapiUser {
-        edges {
-          node {
-            id
-            username
-          }
-        }
-      }
-    }
-    ` ).then( ( result ) => {
-    // Create pages for each user.
-    result.data.allStrapiUser.edges.forEach( ( { node } ) => {
-      createPage( {
-        "path": `/authors/${node.username}`,
-        "component": path.resolve( "src/components/author.js" ),
-        "context": {
-          "id": node.id,
-        },
-      } );
-    } );
-  } );
+//   const getAuthors = makeRequest( graphql, `
+//     {
+//       allStrapiUser {
+//         edges {
+//           node {
+//             id
+//             username
+//           }
+//         }
+//       }
+//     }
+//     ` ).then( ( result ) => {
+//     // Create pages for each user.
+//     result.data.allStrapiUser.edges.forEach( ( { node } ) => {
+//       createPage( {
+//         "path": `/authors/${node.username}`,
+//         "component": path.resolve( "src/components/author.js" ),
+//         "context": {
+//           "id": node.id,
+//         },
+//       } );
+//     } );
+//   } );
 
-  // Queries for articles and authors nodes to use in creating pages.
-  return Promise.all( [
-    getPosts,
-    getAuthors,
-  ] );
-};
+//   // Queries for articles and authors nodes to use in creating pages.
+//   return Promise.all( [
+//     getPosts,
+//     getAuthors,
+//   ] );
+// };
 
 // https://github.com/strapi/gatsby-source-strapi/issues/8#issuecomment-434269925
 
@@ -198,7 +198,7 @@ exports.onCreateNode = async ( {
           store,
           cache,
           createNode,
-          "createNodeId": id => image.id, // eslint-disable-line no-unused-vars
+          "createNodeId": (id) => image.id, // eslint-disable-line no-unused-vars
         } );
 
         if ( fileNode ) {
@@ -212,7 +212,7 @@ exports.onCreateNode = async ( {
           store,
           cache,
           createNode,
-          "createNodeId": id => image.id, // eslint-disable-line no-unused-vars
+          "createNodeId": (id) => image.id, // eslint-disable-line no-unused-vars
         } );
 
         if ( fileNode ) {

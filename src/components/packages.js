@@ -1,13 +1,16 @@
-import React from "react";
+import { Elements, StripeProvider } from "react-stripe-elements";
+import React, { useState } from "react";
+
+import { Modal } from "react-bootstrap";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import moment from "moment";
-
-import { Elements, StripeProvider } from "react-stripe-elements";
-import TwoColumns from "./two-columns";
-import FinePrint from "./fine-print";
-import Price from "./price";
 import CheckoutForm from "./checkout-form";
+import FinePrint from "./fine-print";
+import OrderFormModal from "./order-form-modal";
+import Price from "./price";
+import ProductPrice from "./product-price";
+import TwoColumns from "./two-columns";
+import getPrice from "../util/getPrice";
 
 const Product = styled.article`
   // margin: 1rem auto 1rem 0;
@@ -55,17 +58,17 @@ const ProductCTA = styled.div`
   margin-top: 1rem;
 `;
 
-const OrderForm = styled.form`
-  margin-bottom: 0;
+// const OrderForm = styled.form`
+//   margin-bottom: 0;
 
-  & > dl {
-    margin-bottom: 0;
-  }
+//   & > dl {
+//     margin-bottom: 0;
+//   }
 
-  [role="presentation"] {
-    margin-bottom: .75rem;
-  }
-`;
+//   [role="presentation"] {
+//     margin-bottom: .75rem;
+//   }
+// `;
 
 const formControlStyles = `
   width: 100%;
@@ -85,114 +88,6 @@ const Input = styled.input`
 // const Section = styled.section``;
 
 class Packages extends React.PureComponent {
-  constructor() {
-    super();
-
-    this.state = {
-      // "stripe": null,
-      "products": {
-        "audit": {
-          "inCart": false,
-          "value": Packages.getPrice( "weekendly" ),
-        },
-        "auditVideo": {
-          "inCart": false,
-          "value": Packages.getPrice( "hourly" ),
-          "waiveFee": false,
-        },
-        "iterate": {
-          "inCart": false,
-          "value": Packages.getPrice( "weekly" ),
-        },
-      },
-    };
-
-    this.handleChange = this.handleChange.bind( this );
-    this.onSubmit = this.handleSubmit.bind( this );
-  }
-
-  static getPrice( rate ) {
-    const hourlyRate = 125;
-    let multiplier;
-    let giveDiscount = false;
-    let psychologicalPricingSubtrahend = 50;
-    // psychologicalPricingSubtrahend = 0;
-    const discount = ( 1 / 10 );
-
-    switch ( rate ) {
-      case "hourly":
-        multiplier = 1;
-        psychologicalPricingSubtrahend = 0;
-        break;
-
-      case "daily":
-        multiplier = 8;
-        break;
-
-      case "weekendly":
-        multiplier = 16;
-        // psychologicalPricingSubtrahend = 12.5;
-        break;
-
-      case "weekly":
-        multiplier = 40;
-        // psychologicalPricingSubtrahend = 25;
-        break;
-
-      case "semimonthly":
-        multiplier = 80;
-        break;
-
-      case "monthly":
-        multiplier = 160;
-        // psychologicalPricingSubtrahend = 50;
-        giveDiscount = true;
-        break;
-
-      default:
-    }
-
-    const baseRate = hourlyRate * multiplier;
-    const discountedPrice = baseRate - ( giveDiscount ? ( baseRate * discount ) : 0 ) - psychologicalPricingSubtrahend;
-
-    return {
-      "price": discountedPrice,
-      discount,
-      "isDiscounted": giveDiscount,
-      "originalPrice": baseRate,
-    };
-  } // getPrice
-
-  handleChange( event ) {
-    const { target } = event;
-    const value = ( target.type === "checkbox" ? target.checked : target.value );
-    const path = target.name.split( "." );
-    const newState = {
-      // ...this.state,
-      "products": {
-        ...this.state.products,
-        [path[0]]: {
-          ...this.state.products[path[0]],
-          [path[1]]: value,
-        },
-      },
-    };
-
-    if (
-      ( path[0] === "auditVideo" )
-      && ( path[1] === "inCart" )
-      && ( value === false )
-    ) {
-      newState.products.auditVideo.waiveFee = false;
-    }
-
-    this.setState( newState );
-  } // handleChange
-
-  handleSubmit( event ) {
-    event.preventDefault();
-  }
-
   // componentDidMount() {
   //   if ( window.Stripe ) {
   //     this.setState( { "stripe": window.Stripe( "pk_test_12345" ) } );
@@ -203,21 +98,7 @@ class Packages extends React.PureComponent {
   //     } );
   //   }
   // }
-
   render() {
-    const ProductPrice = ( props ) => {
-      const { value, discount, isDiscounted } = this.state.products[props.product];
-      return <>
-        <Price value={ value.price } { ...props } />
-        { isDiscounted && <span>{ ` (${discount * 100}% off vs. weekly)` }</span> }
-      </>;
-    };
-
-    ProductPrice.propTypes = {
-      "product": PropTypes.string,
-      // "rate": PropTypes.string,
-    };
-
     return (
       <article id="packages">
         <h2>Packages</h2>
@@ -231,20 +112,12 @@ class Packages extends React.PureComponent {
               <dl>
                 <dt hidden>Price</dt>
                 <ProductPrice
-                  product="audit"
+                  product={ getPrice( "weekendly" ) }
                   renderText={ ( price ) => <dd className="price">{ price }</dd> }
                 />
               </dl>
               <ProductCTA>
-                <StripeProvider apiKey="pk_test_SmHNRfEfKcpTJ747ndRSsibc00Kk6u0nqV">
-                  <div className="example">
-                    { /* <h1>React Stripe Elements Example</h1> */ }
-                    <Elements>
-                      <CheckoutForm />
-                    </Elements>
-                  </div>
-                </StripeProvider>
-                <button type="submit" form="audit-order-form">Order</button> — 4 spots left in { moment().format( "MMMM" ) }
+                <OrderFormModal></OrderFormModal>
               </ProductCTA>
               { /* <OrderForm id="audit-order-form" onSubmit={ this.onSubmit }></OrderForm> */ }
             </ProductPricing>
@@ -258,7 +131,7 @@ class Packages extends React.PureComponent {
               <dl>
                 <dt hidden>Price</dt>
                 <ProductPrice
-                  product="iterate"
+                  product={ getPrice( "weekly" ) }
                   renderText={ ( price ) => <dd className="price">{ price }/week</dd> }
                 />
               </dl>
@@ -278,16 +151,18 @@ class Packages extends React.PureComponent {
                 </dd></dl>
               </Modal> */ }
               <ProductCTA>
-                <button>Get in touch</button>
+                { /* <button>Get in touch</button> */ }
+                <p>To order, e-mail <a href="mailto:hugh@hughx.dev">hugh@hughx.dev</a> <button>📋</button> with a description of your project.</p>
               </ProductCTA>
             </ProductPricing>
           </Product>
         </TwoColumns>
         <FinePrint>
-          <small>
-            { /* <p><sup>†</sup> I offer weekly pricing instead of hourly as it aligns incentives: I don’t make less by working quickly, and you don’t pay more for unexpected obstacles. You also become my top priority for the week instead of being one of many hourly clients.</p>
-            <p>One week is good for </p> */ }
-          </small>
+          <p>For general inquiries, </p>
+          { /* <small>
+            <p><sup>†</sup> I offer weekly pricing instead of hourly as it aligns incentives: I don’t make less by working quickly, and you don’t pay more for unexpected obstacles. You also become my top priority for the week instead of being one of many hourly clients.</p>
+            <p>One week is good for </p>
+          </small> */ }
         </FinePrint>
       </article>
     );

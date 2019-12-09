@@ -30,35 +30,35 @@ PostTemplate.propTypes = {
 
 export default PostTemplate;
 
-export const query = graphql`
-  query PostTemplate($id: String!) {
-    site {
-      siteMetadata {
-        title
-        author
-        jobTitle
-        description
-      }
-    }
-    post: strapiPost(id: {eq: $id}) {
-      id
-      title
-      authors {
-        id
-        username
-        name
-      }
-      coverArt {
-        localFile {
-          childImageSharp {
-            fluid(maxWidth: 1200, maxHeight: 630) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-      coverArtAltText
-      body
-    }
-  }
-`;
+// export const query = graphql`
+//   query PostTemplate($id: String!) {
+//     site {
+//       siteMetadata {
+//         title
+//         author
+//         jobTitle
+//         description
+//       }
+//     }
+//     post: strapiPost(id: {eq: $id}) {
+//       id
+//       title
+//       authors {
+//         id
+//         username
+//         name
+//       }
+//       coverArt {
+//         localFile {
+//           childImageSharp {
+//             fluid(maxWidth: 1200, maxHeight: 630) {
+//               ...GatsbyImageSharpFluid
+//             }
+//           }
+//         }
+//       }
+//       coverArtAltText
+//       body
+//     }
+//   }
+// `;
