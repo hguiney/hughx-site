@@ -104,7 +104,7 @@ const BlogPage = ( { data, pageContext, path } ) => {
       <Articles>
         <h3>Latest</h3>
         { data.posts.edges.map(
-          edge => <PostPreview
+          (edge) => <PostPreview
             key={ edge.node.id }
             headingLevel={ 4 }
             post={ edge.node }
@@ -145,49 +145,49 @@ BlogPage.propTypes = {
 
 export default BlogPage;
 
-export const pageQuery = graphql`
-query BlogQuery(
-  $gte: Date,
-  $lt: Date,
-  $now: Date!,
-  $skip: Int!,
-  $limit: Int!
-) {
-  posts: allStrapiPost(
-    sort: {
-      fields: [publishedAt],
-      order: DESC
-    }
-    filter: {
-      publishedAt: {
-        gte: $gte,
-        lt: $lt,
-        lte: $now
-      }
-    }
-    limit: $limit
-    skip: $skip
-  ) {
-    edges {
-      node {
-        id
-        title
-        publishedAt
-        updatedAt
-        coverArt {
-          mime
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1200, maxHeight: 630) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-        coverArtAltText
-        body
-      }
-    }
-  }
-}
-`;
+// export const pageQuery = graphql`
+// query BlogQuery(
+//   $gte: Date,
+//   $lt: Date,
+//   $now: Date!,
+//   $skip: Int!,
+//   $limit: Int!
+// ) {
+//   posts: allStrapiPost(
+//     sort: {
+//       fields: [publishedAt],
+//       order: DESC
+//     }
+//     filter: {
+//       publishedAt: {
+//         gte: $gte,
+//         lt: $lt,
+//         lte: $now
+//       }
+//     }
+//     limit: $limit
+//     skip: $skip
+//   ) {
+//     edges {
+//       node {
+//         id
+//         title
+//         publishedAt
+//         updatedAt
+//         coverArt {
+//           mime
+//           localFile {
+//             childImageSharp {
+//               fluid(maxWidth: 1200, maxHeight: 630) {
+//                 ...GatsbyImageSharpFluid
+//               }
+//             }
+//           }
+//         }
+//         coverArtAltText
+//         body
+//       }
+//     }
+//   }
+// }
+// `;

@@ -55,43 +55,43 @@ ArchivePage.propTypes = {
 
 export default ArchivePage;
 
-export const pageQuery = graphql`
-query ArchiveQuery(
-  $gte: Date,
-  $lt: Date,
-) {
-  posts: allStrapiPost(
-    sort: {
-      fields: [publishedAt],
-      order: DESC
-    },
-    filter: {
-      publishedAt: {
-        gte: $gte,
-        lt: $lt,
-      }
-    }
-  ) {
-    edges {
-      node {
-        id
-        title
-        publishedAt
-        updatedAt
-        coverArt {
-          mime
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1200, maxHeight: 630) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-        coverArtAltText
-        body
-      }
-    }
-  }
-}
-`;
+// export const pageQuery = graphql`
+// query ArchiveQuery(
+//   $gte: Date,
+//   $lt: Date,
+// ) {
+//   posts: allStrapiPost(
+//     sort: {
+//       fields: [publishedAt],
+//       order: DESC
+//     },
+//     filter: {
+//       publishedAt: {
+//         gte: $gte,
+//         lt: $lt,
+//       }
+//     }
+//   ) {
+//     edges {
+//       node {
+//         id
+//         title
+//         publishedAt
+//         updatedAt
+//         coverArt {
+//           mime
+//           localFile {
+//             childImageSharp {
+//               fluid(maxWidth: 1200, maxHeight: 630) {
+//                 ...GatsbyImageSharpFluid
+//               }
+//             }
+//           }
+//         }
+//         coverArtAltText
+//         body
+//       }
+//     }
+//   }
+// }
+// `;

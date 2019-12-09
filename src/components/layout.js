@@ -13,6 +13,8 @@ import SEO from "./seo";
 
 import SiteHeader from "./header";
 import ProgressiveImage from "./progressive-image";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./bootstrap-overrides.css";
 import "./layout.css";
 
 import layout from "../util/layout";
@@ -53,8 +55,8 @@ const Layout = ( { children, siteMetadata } ) => {
       { children }
       <Footer>
         <FooterContent>
-          <p>Designed &amp; developed by Hugh Guiney. &copy; { ( new Date() ).getFullYear() }</p>
-          <p>Built in <ProgressiveImage img={ { "src": reactLogo, "width": 33.3333, "alt": "React logo" } } style={ { "verticalAlign": "middle" } } /> React without mockups.</p>
+          <p>Designed in the browser. Developed in <ProgressiveImage img={ { "src": reactLogo, "width": 33.3333, "alt": "React logo" } } style={ { "verticalAlign": "middle" } } /> React.</p>
+          <p>&copy; { ( new Date() ).getFullYear() } Hugh Guiney unless <a href="#">otherwise specified</a>.</p>
           <p><a href="https://www.youtube.com/channel/UCOldDDJyK_oyDkVJLCuaorw">YouTube</a></p>
         </FooterContent>
       </Footer>

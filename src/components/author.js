@@ -41,22 +41,22 @@ AuthorTemplate.propTypes = {
 
 export default AuthorTemplate;
 
-export const query = graphql`
-  query AuthorTemplate($id: String!) {
-    author: strapiUser(id: {eq: $id}) {
-      id
-      username
-      name
-      profilePhoto {
-        localFile {
-          childImageSharp {
-            fixed(width: 250) {
-              ...GatsbyImageSharpFixed
-            }
-          }
-        }
-      }
-      bio
-    }
-  }
-`;
+// export const query = graphql`
+//   query AuthorTemplate($id: String!) {
+//     author: strapiUser(id: {eq: $id}) {
+//       id
+//       username
+//       name
+//       profilePhoto {
+//         localFile {
+//           childImageSharp {
+//             fixed(width: 250) {
+//               ...GatsbyImageSharpFixed
+//             }
+//           }
+//         }
+//       }
+//       bio
+//     }
+//   }
+// `;

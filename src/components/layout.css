@@ -166,10 +166,14 @@ html [type="button"] {
   border-radius: 3rem;
   padding: .5rem 1rem;
   background-color: white;
+}
+
+.cta {
   border-width: 1px;
   /* border-bottom-color: #eee; */
   border-style: solid;
 }
+
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
 [type="submit"]::-moz-focus-inner,
