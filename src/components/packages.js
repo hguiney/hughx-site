@@ -116,6 +116,31 @@ const CopyToClipboardButton = () => (
 // const Section = styled.section``;
 
 class Packages extends React.PureComponent {
+  constructor() {
+    super();
+
+    this.state = {
+      "contactModalIsVisible": false,
+    };
+
+    this.showContactModal = this.showContactModal.bind( this );
+    this.hideContactModal = this.hideContactModal.bind( this );
+  }
+
+  showContactModal() {
+    this.setState( {
+      ...this.state,
+      "contactModalIsVisible": true,
+    } );
+  }
+
+  hideContactModal() {
+    this.setState( {
+      ...this.state,
+      "contactModalIsVisible": false,
+    } );
+  }
+
   // componentDidMount() {
   //   if ( window.Stripe ) {
   //     this.setState( { "stripe": window.Stripe( "pk_test_12345" ) } );
@@ -185,34 +210,62 @@ class Packages extends React.PureComponent {
           </Product>
         </TwoColumns>
         <FinePrint>
-          <p>To order either package, e-mail <InputGroup
-          as="span"
-          size="sm"
-          style={ {
-            "width": "10em",
-            "margin": "0 .3333em",
-            "display": "inline-flex",
-          } }
-        >
-          <FormControl type="text" value="hugh@hughx.dev" readOnly onFocus={ ( event ) => event.target.select() } />
-          <InputGroup.Append as="span">
-            <CopyToClipboard text="hugh@hughx.dev" onCopy={ () => alert( "Copied!" ) }>
-              <ClipboardButton
-                aria-label="Copy to clipboard"
+          { /* <a href="#" onClick={ ( event ) => { this.showContactModal(); event.preventDefault(); } }>contact me</a> */ }
+          { /* <Modal show={ this.state.contactModalIsVisible }>
+            <Modal.Header>Contact</Modal.Header>
+            <Modal.Body>
+              <a href="mailto:hugh@hughx.dev">hugh@hughx.dev</a>
+            </Modal.Body>
+            <Modal.Footer>
+              <a href="#" onClick={ ( event ) => { this.hideContactModal(); event.preventDefault(); } }>Close</a>
+              <CopyToClipboard text="hugh@hughx.dev" onCopy={ this.hideContactModal }>
+                <Button>Copy to clipboard</Button>
+              </CopyToClipboard>
+            </Modal.Footer>
+          </Modal> */ }
+          { /* <InputGroup
+            as="span"
+            size="sm"
+            style={ {
+              "width": "10em",
+              "margin": "0 .3333em",
+              "display": "inline-flex",
+            } }
+          >
+            <FormControl type="text" value="hugh@hughx.dev" readOnly onFocus={ ( event ) => event.target.select() } />
+            <InputGroup.Append as="span">
+              <CopyToClipboard text="hugh@hughx.dev" onCopy={  }>
+                <ClipboardButton
+                  aria-label="Copy to clipboard"
+                  title="Copy to clipboard"
+                >
+                  <ProgressiveImage
+                    img={ {
+                      "src": clipboardIcon,
+                      "width": 17,
+                      "alt": "icon: clipboard with arrow pointing inward",
+                      // "style": {},
+                    } }
+                  />
+                </ClipboardButton>
+              </CopyToClipboard>
+            </InputGroup.Append>
+          </InputGroup> */ }
+          <p>To order either package, e-mail me at&#20;
+            <CopyToClipboard text="hugh@hughx.dev">
+              <a
+                arial-label="Copy to clipboard"
                 title="Copy to clipboard"
-              >
-                <ProgressiveImage
-                  img={ {
-                    "src": clipboardIcon,
-                    "width": 17,
-                    "alt": "icon: clipboard with arrow pointing inward",
-                    // "style": {},
-                  } }
-                />
-              </ClipboardButton>
-            </CopyToClipboard>
-          </InputGroup.Append>
-        </InputGroup> with a link to your site or app and a description of what you need help with. If your project is a fit for my skill set and availability we’ll get started as soon as possible.</p>
+                href="mailto:hugh@hughx.dev"
+                onClick={ ( event ) => event.preventDefault() }
+              >hugh@hughx.dev <ProgressiveImage
+                img={ {
+                  "src": clipboardIcon,
+                  "width": 17,
+                  "alt": "icon: clipboard with arrow pointing inward",
+                } } />
+              </a>
+            </CopyToClipboard> with a link to your site or app and a description of what you need help with. If your project is a fit for my skill set and availability we’ll get started as soon as possible.</p>
           { /* <small>
             <p><sup>†</sup> I offer weekly pricing instead of hourly as it aligns incentives: I don’t make less by working quickly, and you don’t pay more for unexpected obstacles. You also become my top priority for the week instead of being one of many hourly clients.</p>
             <p>One week is good for </p>
