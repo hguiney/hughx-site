@@ -1,9 +1,12 @@
 import { Elements, StripeProvider } from "react-stripe-elements";
 import React, { useState } from "react";
 
-import { Modal } from "react-bootstrap";
+import {
+  Modal, InputGroup, FormControl, Button,
+} from "react-bootstrap";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import CheckoutForm from "./checkout-form";
 import FinePrint from "./fine-print";
 import OrderFormModal from "./order-form-modal";
@@ -11,6 +14,9 @@ import Price from "./price";
 import ProductPrice from "./product-price";
 import TwoColumns from "./two-columns";
 import getPrice from "../util/getPrice";
+import ProgressiveImage from "./progressive-image";
+
+const clipboardIcon = "/images/octicons/copy-to-clipboard.svg";
 
 const Product = styled.article`
   // margin: 1rem auto 1rem 0;
@@ -85,6 +91,28 @@ const Input = styled.input`
   ${formControlStyles}
 `;
 
+// const CopyToClipboard = () => <button>📋</button>;
+
+const ClipboardButton = styled( Button )`
+  line-height: 1 !important;
+`;
+
+const CopyToClipboardButton = () => (
+  <ClipboardButton
+    aria-label="Copy to clipboard"
+    title="Copy to clipboard"
+  >
+    <ProgressiveImage
+      img={ {
+        "src": clipboardIcon,
+        "width": 17,
+        "alt": "icon: clipboard with arrow pointing inward",
+        // "style": {},
+      } }
+    />
+  </ClipboardButton>
+);
+
 // const Section = styled.section``;
 
 class Packages extends React.PureComponent {
@@ -106,7 +134,7 @@ class Packages extends React.PureComponent {
           <Product>
             <ProductName>Audit</ProductName>
             <ProductDescription>
-              <p>You’ll get a list of actionable feedback from me on ways to improve your app or site. For an additional fee, I’ll send you a screencast of me using your product with real-time commentary. (Fee waived if you give me permission to share it publicly.)</p>
+              <p>You’ll get a list of actionable feedback from me on ways to improve your app or site. For an additional fee of $125, I’ll send you a screencast of me using your product with real-time commentary. (Fee waived if you give me permission to use the video for marketing purposes.)</p>
             </ProductDescription>
             <ProductPricing>
               <dl>
@@ -116,9 +144,9 @@ class Packages extends React.PureComponent {
                   renderText={ ( price ) => <dd className="price">{ price }</dd> }
                 />
               </dl>
-              <ProductCTA>
+              { /* <ProductCTA>
                 <OrderFormModal></OrderFormModal>
-              </ProductCTA>
+              </ProductCTA> */ }
               { /* <OrderForm id="audit-order-form" onSubmit={ this.onSubmit }></OrderForm> */ }
             </ProductPricing>
           </Product>
@@ -150,15 +178,41 @@ class Packages extends React.PureComponent {
                   <TextArea id="project-description" rows="5"></TextArea>
                 </dd></dl>
               </Modal> */ }
-              <ProductCTA>
-                { /* <button>Get in touch</button> */ }
-                <p>To order, e-mail <a href="mailto:hugh@hughx.dev">hugh@hughx.dev</a> <button>📋</button> with a description of your project.</p>
-              </ProductCTA>
+              { /* <ProductCTA>
+                <button>Get in touch</button>
+              </ProductCTA> */ }
             </ProductPricing>
           </Product>
         </TwoColumns>
         <FinePrint>
-          <p>For general inquiries, </p>
+          <p>To order either package, e-mail <InputGroup
+          as="span"
+          size="sm"
+          style={ {
+            "width": "10em",
+            "margin": "0 .3333em",
+            "display": "inline-flex",
+          } }
+        >
+          <FormControl type="text" value="hugh@hughx.dev" readOnly onFocus={ ( event ) => event.target.select() } />
+          <InputGroup.Append as="span">
+            <CopyToClipboard text="hugh@hughx.dev" onCopy={ () => alert( "Copied!" ) }>
+              <ClipboardButton
+                aria-label="Copy to clipboard"
+                title="Copy to clipboard"
+              >
+                <ProgressiveImage
+                  img={ {
+                    "src": clipboardIcon,
+                    "width": 17,
+                    "alt": "icon: clipboard with arrow pointing inward",
+                    // "style": {},
+                  } }
+                />
+              </ClipboardButton>
+            </CopyToClipboard>
+          </InputGroup.Append>
+        </InputGroup> with a link to your site or app and a description of what you need help with. If your project is a fit for my skill set and availability we’ll get started as soon as possible.</p>
           { /* <small>
             <p><sup>†</sup> I offer weekly pricing instead of hourly as it aligns incentives: I don’t make less by working quickly, and you don’t pay more for unexpected obstacles. You also become my top priority for the week instead of being one of many hourly clients.</p>
             <p>One week is good for </p>
