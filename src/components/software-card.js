@@ -22,9 +22,14 @@ const Article = styled.article`
   padding: 1rem !important;
   display: flex !important;
   flex: auto !important;
-  width: 100%;
+  // width: 100%;
   // max-width: 100% !important;
-  flex-direction: row;
+
+  flex-direction: column;
+
+  @media only screen and (min-width: 40em) {
+    flex-direction: row;
+  }
 
   // max-width: 39rem !important;
 
@@ -39,10 +44,28 @@ const Article = styled.article`
     margin-right: 1rem;
     margin-bottom: 0;
     max-height: 100%;
+    justify-content: f
   }
 
-  picture > img {
-    margin: 0 auto;
+  @media only screen and (min-width: 40em) {
+    picture > img {
+      margin: 0 auto;
+    }
+  }
+
+  .software-card__heading {
+    margin-top: .75rem;
+    // font-weight: normal;
+    margin-bottom: .5rem;
+
+    @media only screen and (min-width: 40em) {
+      margin-top: 0;
+    }
+  }
+
+  .software-card__subheading {
+    margin-bottom: 0;
+    font-weight: normal;
   }
 `;
 
@@ -114,6 +137,7 @@ const Stat = ( props ) => {
     margin-bottom: 0;
     text-align: center;
     line-height: 1;
+    // font-family: "Courier Prime Sans", "Courier New", Courier, monospace;
   `;
 
   const DT = styled.dt`
@@ -123,7 +147,7 @@ const Stat = ( props ) => {
   const DD = styled.dd`
     ${sharedStyles}
     text-align: left;
-    font-family: sans-serif;
+    // font-family: sans-serif;
     font-size: 1rem;
   `;
 
@@ -158,7 +182,7 @@ const Stat = ( props ) => {
             displayType={ "text" }
             thousandSeparator={ true }
             decimalScale={ 0 }
-            renderText={ value => <div>{ value }</div> }
+            renderText={ ( value ) => <div>{ value }</div> }
           />
           : props.value
       }</DD>
@@ -270,7 +294,7 @@ class SoftwareCard extends React.PureComponent {
     const endpoint = `https://api.github.com/repos/${packageName}`;
 
     fetch( endpoint, { "cache": "force-cache" } )
-      .then( response => response.json() )
+      .then( ( response ) => response.json() )
       .then( ( response ) => {
         this.setState( {
           ...this.state,
@@ -295,7 +319,7 @@ class SoftwareCard extends React.PureComponent {
     const endpoint = `https://api.npmjs.org/downloads/range/1000-01-01:3000-01-01/${packageName}`;
 
     fetch( endpoint, { "cache": "force-cache" } )
-      .then( response => response.json() )
+      .then( ( response ) => response.json() )
       .then( ( response ) => {
         const months = ( ( this.state.npm.downloadScale === "monthly" ) ? new Set() : null );
         const years = ( ( this.state.npm.downloadScale === "weekly" ) ? new Set() : null );
@@ -390,7 +414,7 @@ class SoftwareCard extends React.PureComponent {
       }
 
       return (
-        <Heading style={ { "marginBottom": ".5rem" } }>
+        <Heading className="software-card__heading">
           { Anchor }
         </Heading>
       );
@@ -420,7 +444,7 @@ class SoftwareCard extends React.PureComponent {
         <Column>
           <hgroup style={ { "marginTop": "-.25rem", "marginBottom": ".5rem" } }>
             { url ? title( url ) : title() }
-            { ( tagline !== "" ) && <Subheading style={ { "marginBottom": 0, "fontWeight": "normal" } }>{ tagline || github.description }</Subheading> }
+            { ( tagline !== "" ) && <Subheading className="software-card__subheading">{ tagline || github.description }</Subheading> }
           </hgroup>
           <dl className="inline" style={ { "marginLeft": "-0.125rem", "marginBottom": ".5rem" } }>
             {

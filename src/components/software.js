@@ -24,7 +24,9 @@ const SoftwareCards = styled( TwoColumns )`
       & > section,
       & > article {
         flex: unset;
-        max-width: unset;
+        // max-width: unset;
+        max-width: 98.24%;
+        max-width: calc(100% - 1rem);
       }
     }
   }

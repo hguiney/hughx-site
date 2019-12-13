@@ -1,0 +1,126 @@
+/* Söhne Breit */
+
+@font-face {
+  font-family: 'Söhne Breit';
+  font-weight: 400;
+  font-style: normal;
+  src: url('Söhne Breit Test/soehne-breit-test-buch.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne Breit';
+  font-weight: 400;
+  font-style: italic;
+  src: url('Söhne Breit Test/soehne-breit-test-buch-kursiv.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne Breit';
+  font-weight: 500;
+  font-style: normal;
+  src: url('Söhne Breit Test/soehne-breit-test-kraftig.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne Breit';
+  font-weight: 600;
+  font-style: normal;
+  src: url('Söhne Breit Test/soehne-breit-test-halbfett.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne Breit';
+  font-weight: 700;
+  font-style: normal;
+  src: url('Söhne Breit Test/soehne-breit-test-dreiviertelfett.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne Breit';
+  font-weight: 800;
+  font-style: normal;
+  src: url('Söhne Breit Test/soehne-breit-test-fett.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne Breit';
+  font-weight: 900;
+  font-style: normal;
+  src: url('Söhne Breit Test/soehne-breit-test-extrafett.woff') format('woff');
+}
+
+/* Söhne Mono */
+
+@font-face {
+  font-family: 'Söhne Mono';
+  font-weight: 400;
+  font-style: normal;
+  src: url('Söhne Mono Test/soehne-mono-test-buch.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne Mono';
+  font-weight: 400;
+  font-style: italic;
+  src: url('Söhne Mono Test/soehne-mono-test-buch-kursiv.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne Mono';
+  font-weight: 800;
+  font-style: normal;
+  src: url('Söhne Mono Test/soehne-mono-test-fett.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne Mono';
+  font-weight: 800;
+  font-style: italic;
+  src: url('Söhne Mono Test/soehne-mono-test-fett-kursiv.woff') format('woff');
+}
+
+/* Söhne */
+
+@font-face {
+  font-family: 'Söhne';
+  font-weight: 400;
+  font-style: normal;
+  src: url('Söhne Test/soehne-test-buch.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne';
+  font-weight: 400;
+  font-style: italic;
+  src: url('Söhne Test/soehne-test-buch-kursiv.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne';
+  font-weight: 500;
+  font-style: normal;
+  src: url('Söhne Test/soehne-test-kraftig.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne';
+  font-weight: 500;
+  font-style: italic;
+  src: url('Söhne Test/soehne-test-kraftig-kursiv.woff') format('woff');
+}
+
+/* Söhne Schmal */
+
+@font-face {
+  font-family: 'Söhne Schmal';
+  font-weight: 400;
+  font-style: normal;
+  src: url('Söhne Schmal Test/soehne-schmal-test-buch.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Söhne';
+  font-weight: 400;
+  font-style: italic;
+  src: url('Söhne Schmal Test/soehne-schmal-test-buch-kursiv.woff') format('woff');
+}

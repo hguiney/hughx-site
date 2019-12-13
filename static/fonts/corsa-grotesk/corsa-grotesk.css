@@ -1,0 +1,32 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3847146, 2019-12-12T16:49:17-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: CorsaGrotesk-Regular by Typedepot
+ * URL: https://www.myfonts.com/fonts/typedepot/corsa-grotesk/regular/
+ * Copyright: Copyright (c) 2019 by typedepot. All rights reserved.
+ * Licensed pageviews: Unlimited
+ * 
+ * 
+ * 
+ * © 2019 MyFonts Inc
+*/
+
+@font-face {
+  font-family: 'Corsa Grotesk';
+  font-weight: normal;
+  src: url('corsa-grotesk.eot');
+  src:
+    url('corsa-grotesk.eot?#iefix') format('embedded-opentype'),
+    url('corsa-grotesk.woff2') format('woff2'),
+    url('corsa-grotesk.woff') format('woff'),
+    url('corsa-grotesk.ttf') format('truetype')
+  ;
+}
+ 

@@ -25,7 +25,8 @@ const Footer = styled.footer`
   text-align: center;
   margin-top: 3rem;
   padding: 1.5rem ${layout.pageGutter};
-  background-color: #aaa;
+  background-color: #222;
+  color: white;
   // position: sticky;
   bottom: 0;
   left: 0;
@@ -57,7 +58,7 @@ const Layout = ( { children, siteMetadata } ) => {
         <FooterContent>
           <p>Designed in the browser. Developed in <ProgressiveImage img={ { "src": reactLogo, "width": 33.3333, "alt": "React logo" } } style={ { "verticalAlign": "middle" } } /> React.</p>
           <p>&copy; { ( new Date() ).getFullYear() } Hugh Guiney unless <a href="#">otherwise specified</a>.</p>
-          <p><a href="https://www.youtube.com/channel/UCOldDDJyK_oyDkVJLCuaorw">YouTube</a></p>
+          { /* <p><a href="https://www.youtube.com/channel/UCOldDDJyK_oyDkVJLCuaorw">YouTube</a></p> */ }
         </FooterContent>
       </Footer>
     </>

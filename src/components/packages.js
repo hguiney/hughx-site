@@ -166,7 +166,7 @@ class Packages extends React.PureComponent {
                 <dt hidden>Price</dt>
                 <ProductPrice
                   product={ getPrice( "weekendly" ) }
-                  renderText={ ( price ) => <dd className="price">{ price }</dd> }
+                  renderText={ ( price ) => <dd className="price hx">{ price }</dd> }
                 />
               </dl>
               { /* <ProductCTA>
@@ -185,7 +185,7 @@ class Packages extends React.PureComponent {
                 <dt hidden>Price</dt>
                 <ProductPrice
                   product={ getPrice( "weekly" ) }
-                  renderText={ ( price ) => <dd className="price">{ price }/week</dd> }
+                  renderText={ ( price ) => <dd className="price hx">{ price }/week</dd> }
                 />
               </dl>
               { /* <Modal>

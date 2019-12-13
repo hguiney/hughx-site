@@ -20,7 +20,7 @@ const Article = styled.article`
   justify-content: center;
   padding: 0 1rem;
   margin-bottom: 1.45rem;
-  font-family: sans-serif;
+  // font-family: sans-serif;
   line-height: 1.5;
   font-size: 1.25rem;
   // margin-top: -1.5rem;
@@ -95,16 +95,18 @@ const Hero = styled.div`
 
   h2 {
     font-size: 2.5rem;
+    // font-size: 2.18rem;
     max-width: 40rem;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
 `;
 
-const Intro = props => (
+const Intro = ( props ) => (
   <Article>
     <Hero>
-      <h2>{ props.heading }</h2>
+      <h2 className="h1">{ props.heading }</h2>
       <Devices>
         <img
           className="iphone"

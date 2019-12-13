@@ -11,7 +11,7 @@ const Header = styled.header`
   padding: 1.125rem ${layout.pageGutter};
   text-align: center;
   // color: white;
-  font-family: sans-serif;
+  // font-family: sans-serif;
   flex-direction: column;
   display: flex;
   justify-content: space-between;
@@ -106,7 +106,7 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => (
       { /* <a href="#manifesto">Manifesto</a>&nbsp; */ }
       { /* <NavLink href="#software">Software</NavLink>&nbsp; */ }
       { /* <NavLink href="/resume/">Résumé</NavLink>&nbsp; */ }
-      <NavLink href="/blog/">Blog</NavLink>&nbsp;
+      { /* <NavLink href="/blog/">Blog</NavLink>&nbsp; */ }
       <NavLink href="#contact">Contact</NavLink>
     </Nav>
   </Header>
