@@ -34,14 +34,22 @@ const Header = styled.header`
   }
 `;
 
-const Heading = styled.h2`
+const Heading = styled.h1`
   margin-bottom: 1rem;
   text-align: center;
   // font-size: 2em;
-  font-weight: normal;
+  // font-weight: normal;
+
+  &, &.hx.hx--modest {
+    margin-bottom: 0;
+  }
 
   .author {
     font-weight: 600;
+  }
+
+  .comma, .job-title {
+    font-weight: normal;
   }
 
   ${layout.medium} {
@@ -182,7 +190,7 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
           </Link>
         </Heading>
       </hgroup> */ }
-      <Heading>
+      <Heading className="h2 hx hx--modest">
         <span className="author">{ author }</span><span className="comma">, </span><span className="job-title">{ jobTitle }</span>
       </Heading>
       <Nav>

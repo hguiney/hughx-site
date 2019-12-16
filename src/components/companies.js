@@ -84,7 +84,7 @@ const Logo = styled.span`
 
 const getHeading = ( mode ) => {
   if ( mode === "casual" ) {
-    return <p>Companies I’ve worked with:</p>;
+    return <h3 className="p">Companies I’ve worked with:</h3>;
   }
 
   return <h3>Companies I’ve Worked With</h3>;

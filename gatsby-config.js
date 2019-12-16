@@ -50,5 +50,6 @@ module.exports = {
     //     "async": true,
     //   },
     // },
+    "gatsby-plugin-sass",
   ],
 };

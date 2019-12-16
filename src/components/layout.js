@@ -11,11 +11,11 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import SEO from "./seo";
 
-import SiteHeader from "./header";
+import Header from "./header";
 import ProgressiveImage from "./progressive-image";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./bootstrap-overrides.css";
-import "./layout.css";
+import "./layout.scss";
 
 import layout from "../util/layout";
 
@@ -50,7 +50,7 @@ const Layout = ( { children, siteMetadata } ) => {
   return (
     <>
       <SEO title={ site.description } />
-      <SiteHeader
+      <Header
         siteTitle={ site.title }
         siteDescription={ site.description }
         author={ site.author }

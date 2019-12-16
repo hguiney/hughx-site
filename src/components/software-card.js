@@ -414,7 +414,7 @@ class SoftwareCard extends React.PureComponent {
       }
 
       return (
-        <Heading className="software-card__heading">
+        <Heading className="software-card__heading hx hx--modest">
           { Anchor }
         </Heading>
       );
@@ -444,7 +444,7 @@ class SoftwareCard extends React.PureComponent {
         <Column>
           <hgroup style={ { "marginTop": "-.25rem", "marginBottom": ".5rem" } }>
             { url ? title( url ) : title() }
-            { ( tagline !== "" ) && <Subheading className="software-card__subheading">{ tagline || github.description }</Subheading> }
+            { ( tagline !== "" ) && <Subheading className="software-card__subheading hx hx--modest">{ tagline || github.description }</Subheading> }
           </hgroup>
           <dl className="inline" style={ { "marginLeft": "-0.125rem", "marginBottom": ".5rem" } }>
             {
