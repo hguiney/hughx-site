@@ -55,7 +55,7 @@ const Article = styled.article`
 
   .software-card__heading {
     margin-top: .75rem;
-    // font-weight: normal;
+    font-weight: normal;
     margin-bottom: .5rem;
 
     @media only screen and (min-width: 40em) {

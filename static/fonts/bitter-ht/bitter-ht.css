@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Bitter ht';
+  font-weight: 400;
+  font-style: normal;
+  src: url('Bitter-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Bitter ht';
+  font-weight: 400;
+  font-style: italic;
+  src: url('Bitter-Italic.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Bitter ht';
+  font-weight: 700;
+  font-style: normal;
+  src: url('Bitter-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Bitter ht';
+  font-weight: 700;
+  font-style: italic;
+  src: url('Bitter-BoldItalic.otf') format('opentype');
+}

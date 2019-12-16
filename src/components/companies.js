@@ -55,7 +55,7 @@ const Logo = styled.span`
     margin: 0 auto;
 
     img {
-      filter: grayscale(100%) contrast(0%) brightness(75%);
+      // filter: grayscale(100%) contrast(0%) brightness(75%);
       transition: filter .25s ease;
 
       &:hover, &:focus {
@@ -84,13 +84,13 @@ const Logo = styled.span`
 
 const getHeading = ( mode ) => {
   if ( mode === "casual" ) {
-    return <h3 style={ { "fontWeight": "normal" } }>Companies I’ve worked with:</h3>;
+    return <p>Companies I’ve worked with:</p>;
   }
 
   return <h3>Companies I’ve Worked With</h3>;
 };
 
-const Companies = props => (
+const Companies = ( props ) => (
   <Section>
     { getHeading( props.mode ) }
     <Logos>
@@ -147,7 +147,7 @@ Companies.defaultProps = {
       "src": wbGamesLogo,
       "alt": "WB Games",
       "style": {
-        "filter": "grayscale(100%) contrast(100%) brightness(100%)",
+        // "filter": "grayscale(100%) contrast(100%) brightness(100%)",
       },
     },
     {

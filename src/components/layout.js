@@ -31,6 +31,9 @@ const Footer = styled.footer`
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 10em;
+  display: flex;
+  align-items: center;
   line-height: 2;
 `;
 

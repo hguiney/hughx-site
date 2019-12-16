@@ -17,6 +17,9 @@ const TwoColumns = styled.div`
     flex: .5;
     text-align: left;
     margin: .5rem;
+
+    // border-radius: 15% 37% 5% 5%;
+    // padding: 3rem 2rem;
   }
 
   @media only screen and (min-width: 60em) {
