@@ -1,4 +1,4 @@
-import { Elements, StripeProvider } from "react-stripe-elements";
+// import { Elements, StripeProvider } from "react-stripe-elements";
 import React, { useState } from "react";
 
 import {
@@ -6,7 +6,6 @@ import {
 } from "react-bootstrap";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import CheckoutForm from "./checkout-form";
 import FinePrint from "./fine-print";
 import OrderFormModal from "./order-form-modal";
@@ -15,8 +14,7 @@ import ProductPrice from "./product-price";
 import TwoColumns from "./two-columns";
 import getPrice from "../util/getPrice";
 import ProgressiveImage from "./progressive-image";
-
-const clipboardIcon = "/images/octicons/copy-to-clipboard.svg";
+import EmailAddress, { CopiedToClipboardToast } from "./email-address";
 
 const Product = styled.article`
   // margin: 1rem auto 1rem 0;
@@ -121,10 +119,13 @@ class Packages extends React.PureComponent {
 
     this.state = {
       "contactModalIsVisible": false,
+      "copiedToClipboardToastIsVisible": false,
     };
 
     this.showContactModal = this.showContactModal.bind( this );
     this.hideContactModal = this.hideContactModal.bind( this );
+    this.showCopiedToClipboardToast = this.showCopiedToClipboardToast.bind( this );
+    this.hideCopiedToClipboardToast = this.hideCopiedToClipboardToast.bind( this );
   }
 
   showContactModal() {
@@ -138,6 +139,20 @@ class Packages extends React.PureComponent {
     this.setState( {
       ...this.state,
       "contactModalIsVisible": false,
+    } );
+  }
+
+  showCopiedToClipboardToast() {
+    this.setState( {
+      ...this.state,
+      "copiedToClipboardToastIsVisible": true,
+    } );
+  }
+
+  hideCopiedToClipboardToast() {
+    this.setState( {
+      ...this.state,
+      "copiedToClipboardToastIsVisible": false,
     } );
   }
 
@@ -209,7 +224,7 @@ class Packages extends React.PureComponent {
             </ProductPricing>
           </Product>
         </TwoColumns>
-        <FinePrint>
+        <FinePrint style={ { "position": "relative" } }>
           { /* <a href="#" onClick={ ( event ) => { this.showContactModal(); event.preventDefault(); } }>contact me</a> */ }
           { /* <Modal show={ this.state.contactModalIsVisible }>
             <Modal.Header>Contact</Modal.Header>
@@ -251,21 +266,12 @@ class Packages extends React.PureComponent {
               </CopyToClipboard>
             </InputGroup.Append>
           </InputGroup> */ }
-          <p>To order either package, e-mail me at&#20;
-            <CopyToClipboard text="hugh@hughx.dev">
-              <a
-                arial-label="Copy to clipboard"
-                title="Copy to clipboard"
-                href="mailto:hugh@hughx.dev"
-                onClick={ ( event ) => event.preventDefault() }
-              >hugh@hughx.dev <ProgressiveImage
-                img={ {
-                  "src": clipboardIcon,
-                  "width": 17,
-                  "alt": "icon: clipboard with arrow pointing inward",
-                } } />
-              </a>
-            </CopyToClipboard> with a link to your site or app and a description of what you need help with. If your project is a fit for my skill set and availability we’ll get started as soon as possible.</p>
+          <p>To order either package, e-mail me at <EmailAddress onCopy={ this.showCopiedToClipboardToast } /> with a link to your site or app and a description of what you need help with. If your project is a fit for my skill set and availability we’ll get started as soon as possible.</p>
+          <CopiedToClipboardToast
+            show={ this.state.copiedToClipboardToastIsVisible }
+            onClose={ this.hideCopiedToClipboardToast }
+            autohide
+          />
           { /* <small>
             <p><sup>†</sup> I offer weekly pricing instead of hourly as it aligns incentives: I don’t make less by working quickly, and you don’t pay more for unexpected obstacles. You also become my top priority for the week instead of being one of many hourly clients.</p>
             <p>One week is good for </p>

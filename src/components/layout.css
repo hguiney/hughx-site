@@ -2,7 +2,20 @@
 @import url('/fonts/corsa-grotesk/corsa-grotesk.css');
 @import url('/fonts/soehne-collection-test/sohne-collection-test.css');
 @import url('/fonts/tiempos-collection-test/tiempos-collection-test.css');
+@import url('/fonts/bitter-ht/bitter-ht.css');
+@import url('/fonts/optician-sans/Optiker-K.css');
 
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -16,48 +29,52 @@ h5, .h5,
 h6, .h6,
 .hx {
   font-family:
+    /* "Optician Sans", */
     /* "Tiempos Headline", */
     "Söhne Breit",
     /* "Söhne Mono", */
     /* "Courier Prime Sans", */
     -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif
   ;
-  margin: 0 0 1.45rem;
+  margin-top: 0 0 1.45rem;
   padding: 0;
   color: inherit;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   line-height: 1.1;
 }
+.h4.modal-title {
+  margin-bottom: 0;
+}
 h1, .h1 {
   font-size: 2.25rem;
-  font-weight: 900;
-  font-weight: 400;
+  /* font-weight: 900; */
+  /* font-weight: 400; */
 }
 h2, .h2 {
   font-size: 1.62671rem;
-  font-weight: 800;
-  font-weight: 500;
+  /* font-weight: 800; */
+  /* font-weight: 500; */
 }
 h3, .h3 {
   font-size: 1.38316rem;
-  font-weight: 700;
-  font-weight: 600;
+  /* font-weight: 700; */
+  /* font-weight: 600; */
 }
 h4, .h4 {
   font-size: 1rem;
-  font-weight: 600;
-  font-weight: 700;
+  /* font-weight: 600; */
+  /* font-weight: 700; */
 }
 h5, .h5 {
   font-size: 0.85028rem;
-  font-weight: 500;
-  font-weight: 800;
+  /* font-weight: 500; */
+  /* font-weight: 800; */
 }
 h6, .h6 {
   font-size: 0.78405rem;
-  font-weight: 400;
-  font-weight: 900;
+  /* font-weight: 400; */
+  /* font-weight: 900; */
 }
 /* hgroup > h1, hgroup > h2, hgroup > h3 {
   font-family: "Courier Prime Code";
@@ -65,7 +82,7 @@ h6, .h6 {
   font-weight: normal;
 } */
 hgroup > h4, hgroup > h5, hgroup > h6 {
-  font-family: "Courier Prime Sans";
+  font-family: inherit; /* "Courier Prime Sans"; */
 }
 body {
   margin: 0;
@@ -74,6 +91,7 @@ body {
   /* background: url('../images/subtle_dots_@2X.png') repeat; */
   /* font-family: "Bitter", Georgia, 'Times New Roman', Times, serif; */
   font-family:
+    /* "Bitter ht" */
     "Tiempos Text",
     /* "Lato", */
     /* "Söhne Mono", */
@@ -128,8 +146,12 @@ a {
   -webkit-text-decoration-skip: objects;
 }
 a:active,
+a:focus,
 a:hover {
+  color: #0056b3;
   outline-width: 0;
+  text-decoration: none;
+  border-bottom: 1px solid #0056b3;
 }
 abbr[title] {
   border-bottom: none;
@@ -213,7 +235,6 @@ label > [type="checkbox"] + span {
   display: inline-block;
   vertical-align: middle;
 } */
-
 optgroup {
   font-weight: 700;
 }
@@ -378,6 +399,17 @@ dl {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
+}
+.dl-inline > dt {
+  display: inline-block;
+  margin-bottom: 0;
+}
+.dl-inline > dd {
+  display: inline;
+}
+.dl-inline > dd:after {
+  content: '\A';
+  white-space: pre;
 }
 dd {
   margin-left: 0;
