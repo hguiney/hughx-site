@@ -117,6 +117,7 @@ const Advantages = () => (
           img={ {
             "src": piggyBankImage,
             "width": advantageImageWidth,
+            "height": advantageImageWidth,
             "viewBox": "0 0 100.0002 100.0004",
             "alt": "icon: piggy bank with coins entering",
             // "style": {
@@ -149,6 +150,7 @@ const Advantages = () => (
           img={ {
             "src": empathyImage,
             "width": advantageImageWidth,
+            "height": ( advantageImageWidth * 1.214954662604164 ),
             "viewBox": "0 0 423.7782 514.8713",
             "alt": "icon: face with human figure inside",
           } }
@@ -167,6 +169,7 @@ const Advantages = () => (
           img={ {
             "src": blueprintsImage,
             "width": advantageImageWidth,
+            "height": advantageImageWidth,
             "viewBox": "0 0 60 60",
             "alt": "icon: blueprints",
           } }
