@@ -31,12 +31,12 @@ const ServiceList = styled.ul`
 `;
 
 const ServiceLogo = ( {
-  src, width, style, containerStyle,
+  src, alt, width, style, containerStyle,
 } ) => (
   <ProgressiveImage
     img={ {
       src,
-      "alt": " ",
+      "alt": ( alt || "" ),
       "width": ( width || 50 ),
       style,
     } }
@@ -188,6 +188,7 @@ const getListOfServices = ( designOrDevelopment ) => (
               "marginRight": ".25rem",
               ...logo.containerStyle,
             } }
+            alt={ logo.alt }
           />&#20;
           <span style={ { "lineHeight": 1.25 } }>
             <span dangerouslySetInnerHTML={ { "__html": logo.name } } />
