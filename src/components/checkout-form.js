@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
+import fetchPonyfill from "fetch-ponyfill";
+
+const { fetch } = fetchPonyfill();
 
 class CheckoutForm extends Component {
   constructor( props ) {
@@ -9,6 +12,8 @@ class CheckoutForm extends Component {
 
   async submit( event ) {
     const { token } = await this.props.stripe.createToken( { "name": "Name" } );
+
+    // if ( typeof window !== "undefined" ) {
     const response = await fetch( "/charge", {
       "method": "POST",
       "headers": { "Content-Type": "text/plain" },
@@ -16,6 +21,7 @@ class CheckoutForm extends Component {
     } );
 
     if ( response.ok ) console.log( "Purchase Complete!" );
+    // }
   }
 
   render() {

@@ -203,7 +203,10 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
         { /* <NavLink href="#software">Software</NavLink>&nbsp; */ }
         { /* <NavLink href="/resume/">Résumé</NavLink>&nbsp; */ }
         { /* <NavLink href="/blog/">Blog</NavLink>&nbsp; */ }
-        <NavLink href="#contact" onClick={ ( event ) => { showContactModal(); event.preventDefault(); } }>Contact</NavLink>
+        <NavLink
+          href="#contact"
+          onClick={ ( event ) => { showContactModal(); event.preventDefault(); } }
+        >Contact</NavLink>
       </Nav>
       <Modal id="contact" show={ contactModalIsVisible } onHide={ hideContactModal }>
         <Modal.Header closeButton>

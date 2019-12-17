@@ -40,7 +40,7 @@ const ArchivePage = ( { data, pageContext } ) => (
         <Excerpt className="excerpt">{ renderMarkdown( excerpt ) }</Excerpt>
       </article>;
     } ) }
-    <Link to="/page-2/">Go to page 2</Link>
+    { /* <Link to="/page-2/">Go to page 2</Link> */ }
   </Layout>
 );
 

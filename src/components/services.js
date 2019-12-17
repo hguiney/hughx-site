@@ -117,10 +117,11 @@ const logos = {
       "name": "Node.js",
       "monochrome": true,
     },
-    // "php": {
-    //   "name": "PHP",
-    //   "frameworks": ["wordpress"],
-    // },
+    "php-alt": {
+      "name": "PHP",
+      // "frameworks": ["wordpress"],
+      "monochrome": true,
+    },
     "wordpress": {
       "name": "WordPress",
       "monochrome": true,
@@ -144,6 +145,9 @@ const logos = {
     "ia": {
       "name": "Information Architecture",
     },
+    "component": {
+      "name": "Components & Design Systems",
+    },
     "u7y-a11y": {
       "name": "Usability/Accessibility",
     },
@@ -159,10 +163,10 @@ const logos = {
   },
 };
 
-const getListOfServices = designOrDevelopment => (
+const getListOfServices = ( designOrDevelopment ) => (
   <ServiceList>{
   Object.keys( logos[designOrDevelopment] )
-    .filter( key => key.indexOf( "_" ) === -1 )
+    .filter( ( key ) => key.indexOf( "_" ) === -1 )
     .map( ( key ) => {
       const logo = logos[designOrDevelopment][key];
       const shouldShowFrameworks = (

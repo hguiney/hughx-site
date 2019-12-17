@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 // import Img from "gatsby-image";
 import styled from "styled-components";
-import "whatwg-fetch";
+import fetchPonyfill from "fetch-ponyfill";
 import NumberFormat from "react-number-format";
 
 import ProgressiveImage from "./progressive-image";
@@ -16,6 +16,8 @@ import downloadIcon from "../images/npm/download.svg";
 // import globeIcon from "../images/globe.svg";
 import websiteIcon from "../images/website.svg";
 import githubLogo from "../images/octicons/mark-github.svg";
+
+const { fetch } = fetchPonyfill();
 
 const Article = styled.article`
   background-color: #eee;
@@ -291,6 +293,7 @@ class SoftwareCard extends React.PureComponent {
       return;
     }
 
+    // if ( typeof window !== "undefined" ) {
     const endpoint = `https://api.github.com/repos/${packageName}`;
 
     fetch( endpoint, { "cache": "force-cache" } )
@@ -307,6 +310,7 @@ class SoftwareCard extends React.PureComponent {
           },
         } );
       } );
+    // }
   }
 
   populateNpmDetails() {
@@ -316,6 +320,7 @@ class SoftwareCard extends React.PureComponent {
       return;
     }
 
+    // if ( typeof window !== "undefined" ) {
     const endpoint = `https://api.npmjs.org/downloads/range/1000-01-01:3000-01-01/${packageName}`;
 
     fetch( endpoint, { "cache": "force-cache" } )
@@ -373,6 +378,7 @@ class SoftwareCard extends React.PureComponent {
           },
         } );
       } );
+    // }
   }
 
   getScaleNounFromAdverb( scale ) {

@@ -13,6 +13,7 @@ const TwoColumns = styled.div`
   & > article {
     display: inline-block;
     background-color: #eee;
+    // background-color: lightgrey;
     padding: 1.5rem 1rem;
     flex: .5;
     text-align: left;
