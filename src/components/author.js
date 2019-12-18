@@ -51,7 +51,7 @@ export default AuthorTemplate;
 //         localFile {
 //           childImageSharp {
 //             fixed(width: 250) {
-//               ...GatsbyImageSharpFixed
+//               ...GatsbyImageSharpFixed_withWebp
 //             }
 //           }
 //         }

@@ -245,9 +245,7 @@ const Services = () => (
       </section>
     </TwoColumns>
     <FinePrint>
-      <small>
-        <p><sup>1</sup> Best practices only. I do not guarantee search engine ranking.</p>
-      </small>
+      <small><sup>1</sup> Best practices only. I do not guarantee search engine ranking.</small>
     </FinePrint>
   </article>
 );

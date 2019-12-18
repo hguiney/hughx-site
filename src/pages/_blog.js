@@ -104,7 +104,7 @@ const BlogPage = ( { data, pageContext, path } ) => {
       <Articles>
         <h3>Latest</h3>
         { data.posts.edges.map(
-          (edge) => <PostPreview
+          ( edge ) => <PostPreview
             key={ edge.node.id }
             headingLevel={ 4 }
             post={ edge.node }
@@ -179,7 +179,7 @@ export default BlogPage;
 //           localFile {
 //             childImageSharp {
 //               fluid(maxWidth: 1200, maxHeight: 630) {
-//                 ...GatsbyImageSharpFluid
+//                 ...GatsbyImageSharpFluid_withWebp
 //               }
 //             }
 //           }

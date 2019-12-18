@@ -224,7 +224,7 @@ class Packages extends React.PureComponent {
             </ProductPricing>
           </Product>
         </TwoColumns>
-        <FinePrint style={ { "position": "relative" } }>
+        <FinePrint style={ { "position": "relative", "marginTop": ".25rem" } }>
           { /* <a href="#" onClick={ ( event ) => { this.showContactModal(); event.preventDefault(); } }>contact me</a> */ }
           { /* <Modal show={ this.state.contactModalIsVisible }>
             <Modal.Header>Contact</Modal.Header>

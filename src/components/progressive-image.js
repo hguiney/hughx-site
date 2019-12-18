@@ -14,6 +14,16 @@ const isSvg = ( src ) => {
   );
 };
 
+const isPng = ( src ) => {
+  const dataUriMatch = src.match( /^data:image\/([^;]+);base64,/ );
+  const fileUriMatch = src.match( /\.png$/ );
+
+  return (
+    ( ( dataUriMatch !== null ) && ( dataUriMatch[1] === "png" ) )
+    || ( fileUriMatch !== null )
+  );
+};
+
 const getSrc = ( logo ) => {
   if ( isSvg( logo.src ) ) {
     return (
@@ -28,7 +38,7 @@ const getSrc = ( logo ) => {
 
 const isBase64 = ( src ) => ( /^data:image\/[^;]+;base64,/.test( src ) );
 
-const getSrcSet = ( logo ) => {
+const getSrcSet = ( logo, webp ) => {
   if ( isBase64( logo.src ) ) {
     return null;
   }
@@ -49,7 +59,7 @@ const getSrcSet = ( logo ) => {
     srcset.push( `${
       logo.src
         .replace( "images/", ( isSvg( logo.src ) ? "images/rasterized/" : "images/" ) )
-        .replace( /\.(?:svgz?|png)/, `${density}.png` )
+        .replace( /\.(?:svgz?|png)/, `${density}.${webp ? "webp" : "png"}` )
     } ${index + 1}x` );
   } );
 
@@ -82,14 +92,17 @@ const ProgressiveImage = ( {
           <switch>
             <use xlinkHref={ `${img.src}#icon` } />
             <foreignObject>
-              <img
-                width={ img.width }
-                height={ img.height }
-                src={ getSrc( img ) }
-                srcSet={ getSrcSet( img ) }
-                alt={ img.alt }
-                style={ img.style }
-              />
+              <picture>
+                <source type="image/webp" srcSet={ getSrcSet( img, true ) } />
+                <img
+                  width={ img.width }
+                  height={ img.height }
+                  src={ getSrc( img ) }
+                  srcSet={ getSrcSet( img ) }
+                  alt={ img.alt }
+                  style={ img.style }
+                />
+              </picture>
             </foreignObject>
           </switch>
         </svg>
@@ -106,7 +119,10 @@ const ProgressiveImage = ( {
     } }>
       {
         ( !isBase64( img.src ) && isSvg( img.src ) )
-          ? <source type="image/svg+xml" srcSet={ img.src } />
+          ? <>
+            <source type="image/svg+xml" srcSet={ img.src } />
+            <source type="image/webp" srcSet={ getSrcSet( img, true ) } />
+          </>
           : null
       }
       <img

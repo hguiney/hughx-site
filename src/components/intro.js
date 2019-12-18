@@ -118,15 +118,15 @@ const Intro = ( props ) => (
             query {
               imac: file(relativePath: { eq: "imac.png" }) {
                 childImageSharp {
-                  fixed(width: 604) {
-                    ...GatsbyImageSharpFixed
+                  fixed(width: 604, webpQuality: 100) {
+                    ...GatsbyImageSharpFixed_withWebp
                   }
                 }
               },
               iphone: file(relativePath: { eq: "iphone-xs.png" }) {
                 childImageSharp {
-                  fixed(width: 171) {
-                    ...GatsbyImageSharpFixed
+                  fixed(width: 171, webpQuality: 100) {
+                    ...GatsbyImageSharpFixed_withWebp
                   }
                 }
               }

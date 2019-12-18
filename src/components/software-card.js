@@ -46,7 +46,7 @@ const Article = styled.article`
     margin-right: 1rem;
     margin-bottom: 0;
     max-height: 100%;
-    justify-content: f
+    // justify-content: f
   }
 
   @media only screen and (min-width: 40em) {
@@ -498,7 +498,7 @@ class SoftwareCard extends React.PureComponent {
                   title="NPM Downloads"
                   src={ downloadIcon }
                   containerWidth={ iconSize }
-                  height={ iconSize * 0.95 }
+                  height={ Math.round( iconSize * 0.95 ) }
                   value={ `${npm.downloads}/${this.getScaleNounFromAdverb( npm.downloadScale )}` }
                   alt="⭳" // \u2B73
                   style={ {

@@ -184,8 +184,8 @@ const Advantages = () => (
       </Section>
     </AdvantagesBody>
     <FinePrint>
-      <small>
-        <p id="footnote-1"><sup>1</sup> Source: <a href="https://www.itu.int/en/ITU-D/Statistics/Pages/stat/default.aspx"><cite>Statistics</cite> on ITU</a> <a href="#citation-1" title="Back to citation marker">↩</a></p>
+      <small id="footnote-1">
+        <sup>1</sup> Source: <a href="https://www.itu.int/en/ITU-D/Statistics/Pages/stat/default.aspx"><cite>Statistics</cite> on ITU</a> <a href="#citation-1" title="Back to citation marker">↩</a>
       </small>
     </FinePrint>
   </Article>

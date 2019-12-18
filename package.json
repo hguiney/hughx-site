@@ -51,7 +51,8 @@
     "glob": "^7.1.4",
     "mkdirp": "^0.5.1",
     "prettier": "^1.18.2",
-    "rimraf": "^3.0.0"
+    "rimraf": "^3.0.0",
+    "webp-converter": "^2.2.3"
   },
   "keywords": [
     "hughx",
@@ -68,7 +69,9 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "svg2png": "node svg2png.js"
+    "svg2png": "node svg2png.js",
+    "png2webp": "node png2webp.js",
+    "build:images": "node svg2png.js && node png2webp.js"
   },
   "repository": {
     "type": "git",

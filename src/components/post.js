@@ -52,7 +52,7 @@ export default PostTemplate;
 //         localFile {
 //           childImageSharp {
 //             fluid(maxWidth: 1200, maxHeight: 630) {
-//               ...GatsbyImageSharpFluid
+//               ...GatsbyImageSharpFluid_withWebp
 //             }
 //           }
 //         }
