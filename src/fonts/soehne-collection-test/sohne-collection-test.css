@@ -5,6 +5,7 @@
   font-weight: 400;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-buch.woff') format('woff');
+  font-display: swap;
 }
 
 /* @font-face {
@@ -19,6 +20,7 @@
   font-weight: 500;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-kraftig.woff') format('woff');
+  font-display: swap;
 }
 
 @font-face {
@@ -26,6 +28,7 @@
   font-weight: 600;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-halbfett.woff') format('woff');
+  font-display: swap;
 }
 
 /* @font-face {
@@ -47,6 +50,7 @@
   font-weight: 900;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-extrafett.woff') format('woff');
+  font-display: swap;
 }
 
 /* Söhne Mono */

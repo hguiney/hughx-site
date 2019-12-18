@@ -58,6 +58,7 @@
   font-weight: 400;
   font-style: normal;
   src: url('Tiempos Text Test/tiempos-text-test-regular.woff') format('woff');
+  font-display: swap;
 }
 
 @font-face {
@@ -65,6 +66,7 @@
   font-weight: 400;
   font-style: italic;
   src: url('Tiempos Text Test/tiempos-text-test-regular-italic.woff') format('woff');
+  font-display: swap;
 }
 
 /* @font-face {
