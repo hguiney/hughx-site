@@ -58,7 +58,7 @@ const getSrcSet = ( logo, webp ) => {
 
     srcset.push( `${
       logo.src
-        .replace( "images/", ( isSvg( logo.src ) ? "images/rasterized/" : "images/" ) )
+        .replace( "images/", ( ( isSvg( logo.src ) || ( webp && isPng( logo.src ) ) ) ? "images/rasterized/" : "images/" ) )
         .replace( /\.(?:svgz?|png)/, `${density}.${webp ? "webp" : "png"}` )
     } ${index + 1}x` );
   } );
@@ -66,6 +66,33 @@ const getSrcSet = ( logo, webp ) => {
   srcset = srcset.join( ", " );
 
   return srcset;
+};
+
+const getSources = ( img ) => {
+  const imgIsBase64 = isBase64( img.src );
+  const imgIsSvg = isSvg( img.src );
+  const imgIsPng = isPng( img.src );
+  const sources = [];
+
+  if ( !imgIsBase64 ) {
+    // Additive:
+    // if ( imgIsSvg ) {
+    //   sources.push( <source type="image/svg+xml" srcSet={ img.src } /> );
+    // }
+    //
+    // if ( imgIsSvg || imgIsPng ) {
+    //   sources.push( <source type="image/webp" srcSet={ getSrcSet( img, true ) } /> );
+    // }
+
+    // Exclusive:
+    if ( imgIsSvg ) {
+      sources.push( <source type="image/svg+xml" srcSet={ img.src } /> );
+    } else if ( imgIsPng ) {
+      sources.push( <source type="image/webp" srcSet={ getSrcSet( img, true ) } /> );
+    }
+  }
+
+  return <>{ sources }</>;
 };
 
 const ProgressiveImage = ( {
@@ -117,14 +144,7 @@ const ProgressiveImage = ( {
       "justifyContent": "flex-start",
       ...style,
     } }>
-      {
-        ( !isBase64( img.src ) && isSvg( img.src ) )
-          ? <>
-            <source type="image/svg+xml" srcSet={ img.src } />
-            <source type="image/webp" srcSet={ getSrcSet( img, true ) } />
-          </>
-          : null
-      }
+      { getSources( img ) }
       <img
         width={ img.width }
         height={ img.height }

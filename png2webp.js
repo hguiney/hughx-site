@@ -7,8 +7,9 @@ const glob = require( "glob" );
 const rimraf = require( "rimraf" );
 const webp = require( "webp-converter" );
 
-const rasterizedDirectory = path.resolve( __dirname, "static/images/rasterized" );
-const imagesSearch = `${rasterizedDirectory}/**/*.png`;
+const imagesDirectory = path.resolve( __dirname, "static/images" );
+const imagesSearch = `${imagesDirectory}/**/*.png`;
+const rasterizedDirectory = `${imagesDirectory}/rasterized`;
 
 rimraf.sync( `${rasterizedDirectory}/**/*.webp` );
 
@@ -19,11 +20,13 @@ glob( imagesSearch, ( error, files ) => {
   }
 
   files.forEach( ( file ) => {
-    const subpath = path.dirname( file ).replace( new RegExp( `^${rasterizedDirectory.replace( "/", "\\/" )}` ), "" );
+    const subpath = path.dirname( file ).replace( new RegExp( `^${imagesDirectory.replace( "/", "\\/" )}` ), "" );
     const outputDirectory = `${rasterizedDirectory}/${subpath}`;
-    const outfile = `${outputDirectory}/${path.basename( file ).replace( ".png", ".webp" )}`; // .replace('/', path.sep);
+    const outfile = `${outputDirectory}/${path.basename( file ).replace( ".png", ".webp" )}`
+      .replace( "/rasterized//rasterized/", "/rasterized/" );
+      // .replace('/', path.sep);
 
-    // https://developers.google.com/speed/webp/docs/cwebp
+    // https:// developers.google.com/speed/webp/docs/cwebp
     webp.cwebp( file, outfile, "-q 100 -lossless", ( webpStatus, webpError ) => {
       if ( webpStatus === "100" ) {
         console.log( `Converted: ${outfile}` );
