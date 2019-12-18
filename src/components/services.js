@@ -39,6 +39,7 @@ const ServiceLogo = ( {
       "alt": ( alt || "" ),
       "width": ( width || 50 ),
       style,
+      "loading": "lazy",
     } }
     style={ {
       "display": "inline-block",

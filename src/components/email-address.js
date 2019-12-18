@@ -40,6 +40,7 @@ const EmailAddress = ( {
             "fill": "#007bff",
             "width": ".9em",
           },
+          "loading": "lazy",
         } }
         style={ iconStyle }
         inlineSvg

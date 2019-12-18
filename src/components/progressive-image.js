@@ -86,9 +86,9 @@ const getSources = ( img ) => {
 
     // Exclusive:
     if ( imgIsSvg ) {
-      sources.push( <source type="image/svg+xml" srcSet={ img.src } /> );
+      sources.push( <source key={ `${img.src}--svg` } type="image/svg+xml" srcSet={ img.src } /> );
     } else if ( imgIsPng ) {
-      sources.push( <source type="image/webp" srcSet={ getSrcSet( img, true ) } /> );
+      sources.push( <source key={ `${img.src}--webp` } type="image/webp" srcSet={ getSrcSet( img, true ) } /> );
     }
   }
 
@@ -136,6 +136,7 @@ const ProgressiveImage = ( {
                   srcSet={ getSrcSet( img ) }
                   alt={ img.alt }
                   style={ img.style }
+                  loading={ img.loading }
                 />
               </picture>
             </foreignObject>
@@ -160,6 +161,7 @@ const ProgressiveImage = ( {
         srcSet={ getSrcSet( img ) }
         alt={ img.alt }
         style={ img.style }
+        loading={ img.loading }
       />
     </picture>
   );
@@ -175,6 +177,7 @@ ProgressiveImage.propTypes = {
     "src": PropTypes.string,
     "alt": PropTypes.string.isRequired,
     "style": PropTypes.object,
+    "loading": PropTypes.oneOf( ["lazy", "eager", "auto"] ),
   } ),
   "inlineSvg": PropTypes.bool,
 };

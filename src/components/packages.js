@@ -106,6 +106,7 @@ const CopyToClipboardButton = () => (
         "width": 17,
         "alt": "icon: clipboard with arrow pointing inward",
         // "style": {},
+        "loading": "lazy",
       } }
     />
   </ClipboardButton>
@@ -260,6 +261,7 @@ class Packages extends React.PureComponent {
                       "width": 17,
                       "alt": "icon: clipboard with arrow pointing inward",
                       // "style": {},
+                      "loading": "lazy",
                     } }
                   />
                 </ClipboardButton>

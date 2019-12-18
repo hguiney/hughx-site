@@ -59,7 +59,9 @@ const Layout = ( { children, siteMetadata } ) => {
       { children }
       <Footer>
         <FooterContent>
-          <p>Designed in the browser. Developed in <ProgressiveImage img={ { "src": reactLogo, "width": 33, "alt": "React logo" } } style={ { "verticalAlign": "middle" } } /> React.</p>
+          <p>Designed in the browser. Developed in <ProgressiveImage img={ {
+            "src": reactLogo, "width": 33, "alt": "React logo", "loading": "lazy",
+          } } style={ { "verticalAlign": "middle" } } /> React.</p>
           <p>&copy; { ( new Date() ).getFullYear() } Hugh Guiney{ /* unless <a href="#">otherwise specified.</a> */ }</p>
           { /* <p><a href="https://www.youtube.com/channel/UCOldDDJyK_oyDkVJLCuaorw">YouTube</a></p> */ }
         </FooterContent>

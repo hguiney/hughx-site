@@ -234,6 +234,7 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
                     "src": contactMethod.src,
                     "alt": contactMethod.alt,
                     "width": 25,
+                    "loading": "lazy",
                   } }
                   style={ {
                     "verticalAlign": "text-bottom",

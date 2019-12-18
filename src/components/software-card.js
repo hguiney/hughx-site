@@ -444,6 +444,7 @@ class SoftwareCard extends React.PureComponent {
                 "height": logo.height || 100,
                 "alt": "Logo",
                 "style": logo.style,
+                "loading": "lazy",
               } }
             />
         }

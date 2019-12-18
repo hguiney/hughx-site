@@ -94,7 +94,7 @@ const Companies = ( props ) => (
   <Section>
     { getHeading( props.mode ) }
     <Logos>
-      { props.logos.map( ( logo, index ) => (
+      { props.logos.map( ( logo ) => (
         <Logo id={ logo.id } key={ logo.id }>
           <ProgressiveImage className="media" img={ logo } />
         </Logo>
@@ -111,6 +111,7 @@ Companies.propTypes = {
     "src": PropTypes.string,
     "alt": PropTypes.string.isRequired,
     "style": PropTypes.object,
+    "loading": PropTypes.string,
   } ) ),
 };
 
@@ -122,24 +123,28 @@ Companies.defaultProps = {
       "width": "250",
       "src": runkeeperLogo,
       "alt": "Runkeeper",
+      "loading": "lazy",
     },
     {
       "id": "oxfam",
       "width": "150",
       "src": oxfamLogo,
       "alt": "Oxfam",
+      "loading": "lazy",
     },
     {
       "id": "sapient",
       "width": "110",
       "src": sapientLogo,
       "alt": "Publicis Sapient",
+      "loading": "lazy",
     },
     {
       "id": "citizens",
       "width": "180",
       "src": citizensLogo,
       "alt": "Citizens Financial Group, Inc.",
+      "loading": "lazy",
     },
     {
       "id": "wb-games",
@@ -149,18 +154,21 @@ Companies.defaultProps = {
       "style": {
         // "filter": "grayscale(100%) contrast(100%) brightness(100%)",
       },
+      "loading": "lazy",
     },
     {
       "id": "reebok",
       "width": "150",
       "src": reebokLogo,
       "alt": "Reebok",
+      "loading": "lazy",
     },
     {
       "id": "the-boston-globe",
       "width": "250",
       "src": bostonGlobeLogo,
       "alt": "The Boston Globe",
+      "loading": "lazy",
     },
 
   ],

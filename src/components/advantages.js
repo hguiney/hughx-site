@@ -123,6 +123,7 @@ const Advantages = () => (
             // "style": {
             //   "fill": "url(#piggy-bank-gradient) black",
             // },
+            "loading": "lazy",
           } }
           style={ {
             ...advantageImageStyle,
@@ -153,6 +154,7 @@ const Advantages = () => (
             "height": ( Math.round( advantageImageWidth * 1.214954662604164 ) ),
             "viewBox": "0 0 423.7782 514.8713",
             "alt": "icon: face with human figure inside",
+            "loading": "lazy",
           } }
           style={ advantageImageStyle }
           inlineSvg
@@ -172,6 +174,7 @@ const Advantages = () => (
             "height": advantageImageWidth,
             "viewBox": "0 0 60 60",
             "alt": "icon: blueprints",
+            "loading": "lazy",
           } }
           style={ advantageImageStyle }
           inlineSvg
