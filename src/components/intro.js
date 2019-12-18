@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import Img from "gatsby-image";
+import { StaticQuery, graphql } from "gatsby";
 import Companies from "./companies";
-import iPhone from "../images/iphone-xs.png";
-import iMac from "../images/imac.png";
 
 import layout from "../util/layout";
 
@@ -48,7 +48,8 @@ const Devices = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  img {
+  img,
+  .gatsby-image-wrapper {
     display: inline-block;
     // max-height: 75%;
     position: relative;
@@ -56,28 +57,32 @@ const Devices = styled.div`
     max-width: 100%;
   }
 
-  .iphone {
+  .iphone,
+  .iphone.gatsby-image-wrapper {
     z-index: 1;
     // max-height: 44.4444vh;
-    width: 22%;
   }
 
-  .imac {
+  .imac,
+  .imac.gatsby-image-wrapper {
     top: 0.25rem;
     // max-height: 66.6667vh;
     // max-height: calc(66.6667vh - 1.5rem);
     display: none;
-    width: 78%;
   }
 
   ${layout.large} {
-    .iphone {
+    .iphone,
+    .iphone.gatsby-image-wrapper {
       left: 1.5rem;
+      width: 22% !important;
     }
 
-    .imac {
+    .imac,
+    .imac.gatsby-image-wrapper {
       right: 1.5rem;
       display: inline-block;
+      width: 78% !important;
     }
   }
 `;
@@ -108,17 +113,42 @@ const Intro = ( props ) => (
     <Hero>
       <h2 className="h1">{ props.heading }</h2>
       <Devices>
-        <img
-          className="iphone"
-          src={ iPhone }
-          // width="200"
-          alt="iPhone XS displaying a dark blue grinning emoji against a white background with gray dots"
-        />
-        <img
-          className="imac"
-          src={ iMac }
-          // width="800"
-          alt="iMac Pro displaying “hughx” in dark blue (with the “u” and “x” in light blue) against a white background with gray dots"
+        <StaticQuery
+          query={ graphql`
+            query {
+              imac: file(relativePath: { eq: "imac.png" }) {
+                childImageSharp {
+                  fixed(width: 604) {
+                    ...GatsbyImageSharpFixed
+                  }
+                }
+              },
+              iphone: file(relativePath: { eq: "iphone-xs.png" }) {
+                childImageSharp {
+                  fixed(width: 171) {
+                    ...GatsbyImageSharpFixed
+                  }
+                }
+              }
+            }
+          ` }
+          render={ ( data ) => (
+            <>
+              <Img
+                className="iphone"
+                fixed={ data.iphone.childImageSharp.fixed }
+                alt="iPhone XS displaying a dark blue grinning emoji against a white background with gray dots"
+              />
+              <Img
+                className="imac"
+                style={ {
+                  "display": null,
+                } }
+                fixed={ data.imac.childImageSharp.fixed }
+                alt="iMac Pro displaying “hughx” in dark blue (with the “u” and “x” in light blue) against a white background with gray dots"
+              />
+            </>
+          ) }
         />
       </Devices>
     </Hero>
