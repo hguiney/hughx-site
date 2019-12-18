@@ -98,9 +98,17 @@ const getSources = ( img ) => {
 const ProgressiveImage = ( {
   className, img, style, inlineSvg, children,
 } ) => {
+  let composedClassName = "";
+
+  if ( className ) {
+    composedClassName = `${className} hughx-progressive-image`;
+  } else {
+    composedClassName = "hughx-progressive-image";
+  }
+
   if ( !isBase64( img.src ) && isSvg( img.src ) && inlineSvg ) {
     return (
-      <picture className={ className } style={ {
+      <span className={ className } style={ {
         "lineHeight": 0,
         "display": "inline-flex",
         "justifyContent": "flex-start",
@@ -119,7 +127,7 @@ const ProgressiveImage = ( {
           <switch>
             <use xlinkHref={ `${img.src}#icon` } />
             <foreignObject>
-              <picture>
+              <picture className="hughx-progressive-image__inline-svg-fallback">
                 <source type="image/webp" srcSet={ getSrcSet( img, true ) } />
                 <img
                   width={ img.width }
@@ -133,12 +141,12 @@ const ProgressiveImage = ( {
             </foreignObject>
           </switch>
         </svg>
-      </picture>
+      </span>
     );
   }
 
   return (
-    <picture className={ className } style={ {
+    <picture className={ composedClassName } style={ {
       "lineHeight": 0,
       "display": "inline-flex",
       "justifyContent": "flex-start",

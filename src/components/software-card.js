@@ -35,7 +35,7 @@ const Article = styled.article`
 
   // max-width: 39rem !important;
 
-  picture {
+  .hughx-progressive-image {
     // border: 1px solid black;
     // float: left;
     // background-color: #fff;
@@ -50,7 +50,7 @@ const Article = styled.article`
   }
 
   @media only screen and (min-width: 40em) {
-    picture > img {
+    .hughx-progressive-image > img {
       margin: 0 auto;
     }
   }

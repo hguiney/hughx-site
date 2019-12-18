@@ -28,7 +28,7 @@ const Article = styled.article`
         // margin-left: auto;
         flex-direction: row-reverse;
 
-        & > picture {
+        & > .hughx-progressive-image {
           margin-right: auto;
           margin-left: 1.5rem;
         }
@@ -51,7 +51,7 @@ const Section = styled.section`
     @media only screen and (min-width: 85em) {
       flex-direction: row;
   
-      & > picture {
+      & > .hughx-progressive-image {
         margin-right: 1.5rem;
         width: 50%;
       }
@@ -150,7 +150,7 @@ const Advantages = () => (
           img={ {
             "src": empathyImage,
             "width": advantageImageWidth,
-            "height": ( advantageImageWidth * 1.214954662604164 ),
+            "height": ( Math.round( advantageImageWidth * 1.214954662604164 ) ),
             "viewBox": "0 0 423.7782 514.8713",
             "alt": "icon: face with human figure inside",
           } }
