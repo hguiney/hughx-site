@@ -29,7 +29,11 @@ const EmailAddress = ( {
       onClick={ ( event ) => event.preventDefault() }
       style={ style }
     >
-      { children ? <>{ children }&nbsp;</> : <>hugh@hughx.dev&nbsp;</> }
+      {
+        children
+          ? <>{ children }&nbsp;</>
+          : <span style={ { "verticalAlign": "baseline" } }>hugh@hughx.dev&nbsp;</span>
+      }
       <ProgressiveImage
         img={ {
           "src": clipboardIcon,
@@ -39,10 +43,15 @@ const EmailAddress = ( {
           "style": {
             "fill": "#007bff",
             "width": ".9em",
+            "lineHeight": "0",
           },
           "loading": "lazy",
         } }
-        style={ iconStyle }
+        style={ {
+          "verticalAlign": "middle",
+          "marginBottom": ".25rem",
+          ...iconStyle,
+        } }
         inlineSvg
       />
     </CopyToClipboardLink>

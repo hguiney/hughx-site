@@ -78,7 +78,7 @@ const Nav = styled.nav`
   & > a:focus,
   & > a:active {
     text-decoration: none;
-    border-bottom: 0;
+    // border-bottom: 0;
   }
 `;
 
@@ -94,6 +94,10 @@ const NavLink = styled.a`
   flex-basis: 0;
   border-radius: 3rem;
   transition: .25s ease background-color;
+
+  &:before {
+    display: none;
+  }
 
   &:hover,
   &:focus,
@@ -172,7 +176,7 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
     "marginBottom": "1rem",
   };
   const contactMethodLinkStyles = {
-    "paddingBottom": ".1875rem",
+    "display": "inline-block",
   };
 
   return (
@@ -237,11 +241,12 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
                     "loading": "lazy",
                   } }
                   style={ {
-                    "verticalAlign": "text-bottom",
+                    "verticalAlign": "middle",
                     "marginRight": ".3333rem",
+                    "marginBottom": ".25rem",
                   } }
                 />
-                <span>{ contactMethod.name }</span>
+                <span style={ { "display": "inline-block", "verticalAlign": "middle", "marginBottom": ".25rem" } }>{ contactMethod.name }</span>
               </>;
 
               if ( key === "email" ) {
