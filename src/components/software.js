@@ -92,7 +92,7 @@ const Software = () => (
         } }
         tagline="Hypervideo Markup Language • Format &amp; Parser"
         description="Stores various details about videos, including interactive UI instructions."
-        url="https://hvml.redblue.video"
+        url="https://hypervideo.tech"
         headingLevel="3"
         github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
         npm={ { "package": "hvml" } }
