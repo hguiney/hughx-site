@@ -4,7 +4,7 @@ const TwoColumns = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  flex-wrap: wrap;
+  // flex-wrap: wrap; // Safari fix
   // max-width: 100%;
   margin-left: -.5rem;
   margin-right: -.5rem;

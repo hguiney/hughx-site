@@ -88,6 +88,7 @@ const AdvantageHeading = styled.h3`
 
 const advantageImageWidth = 200;
 const advantageImageStyle = {
+  "display": "inline-flex",
   "justifyContent": "center",
   "alignItems": "center",
 };

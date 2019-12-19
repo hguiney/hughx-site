@@ -108,10 +108,11 @@ const ProgressiveImage = ( {
 
   if ( !isBase64( img.src ) && isSvg( img.src ) && inlineSvg ) {
     return (
-      <span className={ className } style={ {
+      <span className={ composedClassName } style={ {
         "lineHeight": 0,
-        "display": "inline-flex",
-        "justifyContent": "flex-start",
+        // "display": "inline-flex",
+        // "justifyContent": "flex-start",
+        "display": "inline-block", // Fix for Safari
         ...style,
       } }>
         <svg
@@ -119,6 +120,7 @@ const ProgressiveImage = ( {
           width={ img.width }
           height={ img.height }
           style={ img.style }
+          className="hughx-progressive-image__renderer hughx-progressive-image__inline-svg"
         >
           <defs>
             { children }
@@ -149,8 +151,9 @@ const ProgressiveImage = ( {
   return (
     <picture className={ composedClassName } style={ {
       "lineHeight": 0,
-      "display": "inline-flex",
-      "justifyContent": "flex-start",
+      // "display": "inline-flex",
+      // "justifyContent": "flex-start",
+      "display": "inline-block",
       ...style,
     } }>
       { getSources( img ) }
@@ -162,6 +165,7 @@ const ProgressiveImage = ( {
         alt={ img.alt }
         style={ img.style }
         loading={ img.loading }
+        className="hughx-progressive-image__renderer"
       />
     </picture>
   );
