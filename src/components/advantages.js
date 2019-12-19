@@ -68,7 +68,7 @@ const Section = styled.section`
 `;
 
 const AdvantageHeading = styled.h3`
-  font-size: 3.1rem;
+  font-size: 2.6rem;
   // font-size: 13vw;
   // white-space: nowrap;
   hyphens: auto;
@@ -76,6 +76,11 @@ const AdvantageHeading = styled.h3`
   font-weight: 900;
   -webkit-background-clip: text;
   background-clip: text;
+  white-space: nowrap;
+
+  @media only screen and (min-width: 40em) {
+    font-size: 3.1rem;
+  }
 
   .two-column & {
     @media only screen and (min-width: 85em) {

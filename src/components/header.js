@@ -52,6 +52,7 @@ const Heading = styled.h1`
     font-weight: normal;
   }
 
+  @media only screen and (max-width: 20em),
   ${layout.medium} {
     margin-bottom: 0;
     text-align: left;
@@ -68,6 +69,11 @@ const Heading = styled.h1`
 
 const Nav = styled.nav`
   // display: inline-block;
+  margin-top: 1rem;
+
+  ${layout.medium} {
+    margin-top: 0;
+  }
 
   & > a,
   & > a:visited {

@@ -43,10 +43,12 @@ const Article = styled.article`
     text-align: center;
     margin-bottom: 1rem;
     max-height: 150px;
-    margin-right: 1rem;
     margin-bottom: 0;
     max-height: 100%;
-    // justify-content: f
+
+    @media only screen and (min-width: 40em) {
+      margin-right: 1rem;
+    }
   }
 
   @media only screen and (min-width: 40em) {
@@ -73,6 +75,43 @@ const Article = styled.article`
 
 const Column = styled.div`
   // 
+`;
+
+const SoftwareCardHeader = styled.hgroup`
+  margin-top: -.25rem;
+  margin-bottom: .5rem;
+  // text-align: center;
+
+  @media only screen and (min-width: 40em) {
+    // text-align: left;
+  }
+`;
+
+const Stats = styled.dl`
+  margin-left: -0.125rem;
+  margin-bottom: .5rem;
+  // text-align: center;
+
+  @media only screen and (min-width: 40em) {
+    // text-align: left;
+  }
+`;
+
+const Description = styled.div`
+  // margin: 0 auto;
+  width: 100%;
+  // text-align: center;
+  max-width: 29rem;
+
+  // @media only screen and (min-width: 30em) {
+  //   width: 80%;
+  // }
+
+  @media only screen and (min-width: 40em) {
+    width: 100%;
+    // text-align: left;
+    margin: 0;
+  }
 `;
 
 const AccessibleIcon = ( props ) => {
@@ -437,23 +476,24 @@ class SoftwareCard extends React.PureComponent {
                 // "alignItems": "center",
                 // "backgroundColor": "rgb(40,40,40)",
                 // "padding": "1rem",
+                "textAlign": "left",
               } }
               img={ {
                 "src": logo.src || logo,
                 "width": logo.width || 100,
                 "height": logo.height || 100,
-                "alt": "Logo",
+                "alt": "",
                 "style": logo.style,
                 "loading": "lazy",
               } }
             />
         }
         <Column>
-          <hgroup style={ { "marginTop": "-.25rem", "marginBottom": ".5rem" } }>
+          <SoftwareCardHeader>
             { url ? title( url ) : title() }
             { ( tagline !== "" ) && <Subheading className="software-card__subheading hx hx--modest">{ tagline || github.description }</Subheading> }
-          </hgroup>
-          <dl className="inline" style={ { "marginLeft": "-0.125rem", "marginBottom": ".5rem" } }>
+          </SoftwareCardHeader>
+          <Stats className="inline">
             {
               github
               && <>
@@ -521,8 +561,8 @@ class SoftwareCard extends React.PureComponent {
                    alt=" "
                  />
             */ }
-          </dl>
-          { description && <div style={ { "marginBottom": 0, "maxWidth": "29rem" } } dangerouslySetInnerHTML={ { "__html": description } } /> }
+          </Stats>
+          { description && <Description dangerouslySetInnerHTML={ { "__html": description } } /> }
         </Column>
       </Article>
     );
