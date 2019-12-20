@@ -35,10 +35,7 @@ const Header = styled.header`
 `;
 
 const Heading = styled.h1`
-  margin-bottom: 1rem;
-  text-align: center;
-  // font-size: 2em;
-  // font-weight: normal;
+  text-align: left;
 
   &, &.hx.hx--modest {
     margin-bottom: 0;
@@ -48,22 +45,12 @@ const Heading = styled.h1`
     font-weight: 600;
   }
 
-  .comma, .job-title {
+  .job-title {
     font-weight: normal;
   }
 
-  @media only screen and (max-width: 20em),
-  ${layout.medium} {
-    margin-bottom: 0;
-    text-align: left;
-
-    span {
-      display: block;
-    }
-
-    .comma {
-      display: none;
-    }
+  span {
+    display: block;
   }
 `;
 
@@ -201,7 +188,7 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
         </Heading>
       </hgroup> */ }
       <Heading className="h2 hx hx--modest">
-        <span className="author">{ author }</span><span className="comma">, </span><span className="job-title">{ jobTitle }</span>
+        <span className="author">{ author }</span><span className="comma sr-only">, </span><span className="job-title">{ jobTitle }</span>
       </Heading>
       <Nav>
         <h2 hidden>Main Navigation</h2>
