@@ -33,6 +33,7 @@ const SoftwareCards = styled( TwoColumns )`
 
   @media only screen and (min-width: 75em) {
     flex-direction: row;
+    flex-wrap: wrap;
 
     @supports (display: grid) {
       display: grid;

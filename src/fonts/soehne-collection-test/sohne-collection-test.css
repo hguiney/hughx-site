@@ -1,7 +1,7 @@
 /* Söhne Breit */
 
 @font-face {
-  font-family: 'Söhne Breit';
+  font-family: 'Soehne Breit';
   font-weight: 400;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-buch.woff') format('woff');
@@ -9,14 +9,14 @@
 }
 
 /* @font-face {
-  font-family: 'Söhne Breit';
+  font-family: 'Soehne Breit';
   font-weight: 400;
   font-style: italic;
   src: url('Söhne Breit Test/soehne-breit-test-buch-kursiv.woff') format('woff');
 } */
 
 @font-face {
-  font-family: 'Söhne Breit';
+  font-family: 'Soehne Breit';
   font-weight: 500;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-kraftig.woff') format('woff');
@@ -24,7 +24,7 @@
 }
 
 @font-face {
-  font-family: 'Söhne Breit';
+  font-family: 'Soehne Breit';
   font-weight: 600;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-halbfett.woff') format('woff');
@@ -32,21 +32,21 @@
 }
 
 /* @font-face {
-  font-family: 'Söhne Breit';
+  font-family: 'Soehne Breit';
   font-weight: 700;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-dreiviertelfett.woff') format('woff');
 } */
 
 /* @font-face {
-  font-family: 'Söhne Breit';
+  font-family: 'Soehne Breit';
   font-weight: 800;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-fett.woff') format('woff');
 } */
 
 @font-face {
-  font-family: 'Söhne Breit';
+  font-family: 'Soehne Breit';
   font-weight: 900;
   font-style: normal;
   src: url('Söhne Breit Test/soehne-breit-test-extrafett.woff') format('woff');

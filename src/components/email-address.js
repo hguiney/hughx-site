@@ -103,7 +103,8 @@ const CopiedToClipboardToast = ( {
         "width": "45rem",
         "maxWidth": "100%",
         "top": "0",
-        "height": "100%",
+        // "height": "100%",
+        "height": "0", // Fix for Edge
         "alignItems": "center",
         ...containerStyle,
       } }
