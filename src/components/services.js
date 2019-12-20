@@ -186,7 +186,7 @@ const getListOfServices = ( designOrDevelopment ) => (
           <ServiceLogo
             src={ `${logoDirectory}/${key}${logo.monochrome ? "--monochrome" : ""}.svg` }
             containerStyle={ {
-              "marginRight": ".25rem",
+              "marginRight": ".5rem",
               ...logo.containerStyle,
             } }
             alt={ logo.alt }
