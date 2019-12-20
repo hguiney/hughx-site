@@ -128,7 +128,7 @@ const ProgressiveImage = ( {
           <desc>{ img.alt }</desc>
           <switch>
             <use xlinkHref={ `${img.src}#icon` } />
-            <foreignObject>
+            <foreignObject width={ img.width } height={ img.height }>
               <picture className="hughx-progressive-image__inline-svg-fallback">
                 <source type="image/webp" srcSet={ getSrcSet( img, true ) } />
                 <img

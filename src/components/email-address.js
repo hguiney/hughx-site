@@ -37,7 +37,8 @@ const EmailAddress = ( {
       <ProgressiveImage
         img={ {
           "src": clipboardIcon,
-          // "width": "17",
+          "width": "1.111797405806053em",
+          "height": ".964em",
           "viewBox": "0 0 14 15",
           "alt": "icon: clipboard with arrow pointing inward",
           "style": {
