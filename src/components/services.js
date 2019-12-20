@@ -190,13 +190,13 @@ const getListOfServices = ( designOrDevelopment ) => (
               ...logo.containerStyle,
             } }
             alt={ logo.alt }
-          />&#20;
+          />&#32;
           <span style={ { "lineHeight": 1.25 } }>
             <span dangerouslySetInnerHTML={ { "__html": logo.name } } />
             {
               shouldShowFrameworks
               && <>
-                &#20;—&#20;<Incl />&#20;{
+                &#32;—&#32;<Incl />&#32;{
                 logo.frameworks.map( ( framework, index ) => {
                   const isNotLastFramework = (
                     logos._showFrameworkNames
@@ -214,7 +214,7 @@ const getListOfServices = ( designOrDevelopment ) => (
                         <ServiceLogo
                           src={ `${logoDirectory}/${framework}.svg` }
                           containerStyle={ framework.containerStyle }
-                        />&#20;
+                        />&#32;
                       </>
                     }
                     { shouldShowFrameworkNames && frameworkNames[framework] }
