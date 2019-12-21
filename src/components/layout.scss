@@ -669,6 +669,14 @@ dd + dt {
   margin-top: .25rem;
 }
 
+dl.inline > dt {
+  margin-right: .25rem;
+}
+
+dl.inline > dd + dt {
+  margin-left: .25rem;
+}
+
 dl.inline > dt,
 dl.inline > dd,
 dt.inline,
@@ -683,7 +691,7 @@ dl.inline > dd,
 dt.inline,
 dd.inline {
   display: inline-flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
 }

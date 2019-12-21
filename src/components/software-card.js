@@ -89,7 +89,7 @@ const SoftwareCardHeader = styled.hgroup`
 `;
 
 const Stats = styled.dl`
-  margin-left: -0.125rem;
+  // margin-left: -0.125rem;
   margin-bottom: .5rem;
   // text-align: center;
 
@@ -174,7 +174,7 @@ const Stat = ( props ) => {
 
   const sharedStyles = `
     height: ${props.height}px;
-    min-width: ${props.containerWidth}px;
+    min-width: ${props.containerWidth};
     // border: 1px solid black;
     margin-bottom: 0;
     text-align: center;
@@ -535,7 +535,7 @@ class SoftwareCard extends React.PureComponent {
                   && <Stat
                       title="GitHub Stars"
                       src={ starIcon }
-                      containerWidth={ iconSize }
+                      containerWidth="1em"
                       height={ iconSize }
                       value={ github.stars }
                       alt="★"
@@ -548,7 +548,7 @@ class SoftwareCard extends React.PureComponent {
                   && <Stat
                       title="GitHub Forks"
                       src={ forkIcon }
-                      containerWidth={ iconSize }
+                      containerWidth="1em"
                       height={ iconSize }
                       value={ github.forks }
                       alt=" "
@@ -565,12 +565,12 @@ class SoftwareCard extends React.PureComponent {
               && <Stat
                   title="NPM Downloads"
                   src={ downloadIcon }
-                  containerWidth={ iconSize }
+                  containerWidth="1em"
                   height={ Math.round( iconSize * 0.95 ) }
                   value={ ( npm.downloadScale === "total" ) ? npm.downloads : `${npm.downloads}/${this.getScaleNounFromAdverb( npm.downloadScale )}` }
                   alt="⭳" // \u2B73
                   style={ {
-                    "marginLeft": "-0.2rem",
+                    // "marginLeft": "-0.2rem",
                     "position": "relative",
                     "top": "0.125rem",
                   } }
@@ -581,7 +581,7 @@ class SoftwareCard extends React.PureComponent {
               && <Stat
                    title="Website"
                    src={ websiteIcon }
-                   containerWidth={ iconSize }
+                   containerWidth="1em"
                    width={ iconSize }
                    height={ iconSize }
                    value={ url }
