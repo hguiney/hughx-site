@@ -26,6 +26,7 @@
     "gatsby-source-strapi": "^0.0.10",
     "gatsby-source-strapi-multiple-images": "^0.0.11",
     "gatsby-transformer-sharp": "^2.2.6",
+    "moment": "^2.24.0",
     "node-sass": "^4.13.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",

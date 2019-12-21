@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import fetchPonyfill from "fetch-ponyfill";
 import NumberFormat from "react-number-format";
+import moment from "moment";
 
 import ProgressiveImage from "./progressive-image";
 
@@ -315,7 +316,7 @@ class SoftwareCard extends React.PureComponent {
         && ( typeof props.npm.downloadScale !== "undefined" )
       )
         ? props.npm.downloadScale
-        : "monthly"
+        : "total"
     );
 
     this.state.iconSize = (
@@ -352,72 +353,98 @@ class SoftwareCard extends React.PureComponent {
     // }
   }
 
-  populateNpmDetails() {
+  async populateNpmDetails() {
     const packageName = this.state.npm.package;
 
     if ( packageName === "" ) {
       return;
     }
 
-    // if ( typeof window !== "undefined" ) {
-    const endpoint = `https://api.npmjs.org/downloads/range/1000-01-01:3000-01-01/${packageName}`;
+    const dataFormat = "point"; // "range"
+    const fromDate = ( this.state.npm.fromDate || "1000-01-01" );
+    const $fromDate = moment( fromDate );
+    const { toDate } = this.state.npm;
+    const $toDate = ( toDate ? moment( toDate ) : moment() );
+    const dateRange = {
+      "days": $toDate.diff( $fromDate, "days" ),
+      "weeks": $toDate.diff( $fromDate, "weeks" ),
+      "months": $toDate.diff( $fromDate, "months" ),
+      "years": $toDate.diff( $fromDate, "years" ),
+    };
+    let totalDownloads = 0;
+    const downloadTotals = [];
+    const addToDownloadTotal = ( _$fromDate, _$toDate ) => {
+      const batchedEndpoint = `https://api.npmjs.org/downloads/${dataFormat}`
+        + `/${_$fromDate.format( "YYYY-MM-DD" )}`
+        + `:${_$toDate.format( "YYYY-MM-DD" )}`
+        + `/${packageName}`;
 
-    fetch( endpoint, { "cache": "force-cache" } )
-      .then( ( response ) => response.json() )
-      .then( ( response ) => {
-        const months = ( ( this.state.npm.downloadScale === "monthly" ) ? new Set() : null );
-        const years = ( ( this.state.npm.downloadScale === "weekly" ) ? new Set() : null );
-        let downloads;
-
-        const totalDownloads = response.downloads.reduce( ( total, currentStat ) => {
-          switch ( this.state.npm.downloadScale ) {
-            case "daily":
-              break;
-
-            case "weekly":
-              years.add( currentStat.day.slice( 0, -6 ) );
-              break;
-
-            case "monthly":
-            default:
-              months.add( currentStat.day.slice( 0, -3 ) );
-          }
-
-          total += currentStat.downloads;
-
-          return total;
-        }, 0 );
-
-        switch ( this.state.npm.downloadScale ) {
-          case "daily":
-            downloads = ( totalDownloads / response.downloads.length );
-            break;
-
-          case "weekly":
-            downloads = ( totalDownloads / ( years.size * ( 365 / 7 ) ) );
-            break;
-
-          case "monthly":
-          default:
-            downloads = ( totalDownloads / months.size );
-            break;
-        }
-
-        if ( ( downloads > 0 ) && ( downloads < 1 ) ) {
-          downloads = Math.ceil( downloads );
-        } else {
-          downloads = Math.round( downloads );
-        }
-
-        this.setState( {
-          ...this.state,
-          "npm": {
-            ...this.state.npm,
-            downloads,
-          },
-        } );
+      return (
+        fetch( batchedEndpoint, { "cache": "force-cache" } )
+          .then( ( response ) => response.json() )
+          .then( ( response ) => {
+            totalDownloads += response.downloads;
+          } )
+      );
+    };
+    const updateDownloadTotal = ( downloadRate ) => {
+      this.setState( {
+        ...this.state,
+        "npm": {
+          ...this.state.npm,
+          "downloads": ( downloadRate || totalDownloads ),
+        },
       } );
-    // }
+    };
+
+    // NPM API only allows querying in 18-month intervals.
+    // If toDate is more than 18 months after the fromDate,
+    // batch several API queries to get the overall total.
+    if ( dateRange.months > 18 ) {
+      let $batchedFromDate = $fromDate;
+      let $batchedToDate = $fromDate.clone().add( 18, "months" );
+
+      while ( $batchedToDate.isBefore( $toDate ) ) {
+        downloadTotals.push( addToDownloadTotal( $batchedFromDate, $batchedToDate ) );
+        $batchedFromDate = $batchedToDate.clone().add( 1, "day" );
+        $batchedToDate = $batchedFromDate.clone().add( 18, "months" );
+      } // while
+
+      downloadTotals.push( addToDownloadTotal( $batchedFromDate, $toDate ) );
+
+      await Promise.all( downloadTotals );
+    } else {
+      await addToDownloadTotal( $fromDate, $toDate );
+    }
+
+    if ( this.state.npm.downloadScale === "total" ) {
+      updateDownloadTotal();
+    } else {
+      let downloadRate;
+
+      switch ( this.state.npm.downloadScale ) {
+        case "daily":
+          downloadRate = ( totalDownloads / dateRange.days );
+          break;
+
+        case "weekly":
+          downloadRate = ( totalDownloads / dateRange.weeks );
+          break;
+
+        case "monthly":
+        default:
+          downloadRate = ( totalDownloads / dateRange.months );
+          break;
+      }
+
+      if ( ( downloadRate > 0 ) && ( downloadRate < 1 ) ) {
+        downloadRate = Math.ceil( downloadRate );
+      } else {
+        downloadRate = Math.round( downloadRate );
+      }
+
+      updateDownloadTotal( downloadRate );
+    } // if not total
   }
 
   getScaleNounFromAdverb( scale ) {
@@ -540,7 +567,7 @@ class SoftwareCard extends React.PureComponent {
                   src={ downloadIcon }
                   containerWidth={ iconSize }
                   height={ Math.round( iconSize * 0.95 ) }
-                  value={ `${npm.downloads}/${this.getScaleNounFromAdverb( npm.downloadScale )}` }
+                  value={ ( npm.downloadScale === "total" ) ? npm.downloads : `${npm.downloads}/${this.getScaleNounFromAdverb( npm.downloadScale )}` }
                   alt="⭳" // \u2B73
                   style={ {
                     "marginLeft": "-0.2rem",
@@ -581,9 +608,10 @@ SoftwareCard.propTypes = {
   "headingLevel": PropTypes.oneOf( ["1", "2", "3", "4", "5", "6"] ),
   "name": PropTypes.string.isRequired,
   "npm": PropTypes.shape( {
-    "downloadScale": PropTypes.oneOf( ["daily", "weekly", "monthly"] ),
+    "downloadScale": PropTypes.oneOf( ["daily", "weekly", "monthly", "total"] ),
     "showDownloads": PropTypes.bool,
     "package": PropTypes.string,
+    "fromDate": PropTypes.string,
   } ),
   "url": PropTypes.string,
   "iconSize": isNumeric,

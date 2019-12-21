@@ -81,7 +81,11 @@ const Software = () => (
         description={ "Free interactive video player. Add links and forms; build <span style=\"white-space: nowrap;\">choose-your-own-story</span> films." }
         headingLevel="3"
         github={ { "package": "RedBlueVideo/redblue", "showForks": false } }
-        npm={ { "package": "redblue" } }
+        npm={ {
+          "package": "redblue",
+          "fromDate": "2017-10-01",
+          // "downloadScale": "monthly"
+        } }
         // iconSize="25"
       />
       <SoftwareCard
@@ -96,7 +100,11 @@ const Software = () => (
         url="https://hypervideo.tech"
         headingLevel="3"
         github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
-        npm={ { "package": "hvml" } }
+        npm={ {
+          "package": "hvml",
+          "fromDate": "2017-10-01",
+          // "downloadScale": "monthly"
+        } }
       />
       <SoftwareCard
         name="npm-minify"
@@ -114,7 +122,11 @@ const Software = () => (
         url="https://github.com/hguiney/npm-minify"
         headingLevel="3"
         github={ { "package": "hguiney/npm-minify", "showStars": false } }
-        npm={ { "package": "npm-minify" } }
+        npm={ {
+          "package": "npm-minify",
+          "fromDate": "2019-03-29",
+          // "downloadScale": "monthly"
+        } }
       />
       <SoftwareCard
         name="eslint-config-hughx"
@@ -128,7 +140,11 @@ const Software = () => (
         url="https://github.com/hguiney/eslint-config-hughx"
         headingLevel="3"
         github={ { "package": "hguiney/eslint-config-hughx", "showStars": false } }
-        npm={ { "package": "eslint-config-hughx" } }
+        npm={ {
+          "package": "eslint-config-hughx",
+          "fromDate": "2019-03-29",
+          // "downloadScale": "monthly"
+        } }
       />
     </SoftwareCards>
     { /* <h3>Commercial</h3>
