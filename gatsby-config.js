@@ -68,6 +68,7 @@ module.exports = {
           "modal-title",
           "modal-body",
           "modal-backdrop",
+          "modal-open",
           "toast",
           "toast-body",
           "sr-only",
