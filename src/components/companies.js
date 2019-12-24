@@ -7,7 +7,7 @@ import ProgressiveImage from "./progressive-image";
 import layout from "../util/layout";
 import isNumeric from "../util/isNumeric";
 
-const citizensLogo = "/images/logos/citizens-financial-group.svg";
+const citizensBankLogo = "/images/logos/citizens-bank.svg";
 const oxfamLogo = "/images/logos/oxfam-horizontal.svg";
 const sapientLogo = "/images/logos/publicis-sapient.svg";
 const runkeeperLogo = "/images/logos/runkeeper-asics.svg";
@@ -142,7 +142,7 @@ Companies.defaultProps = {
     {
       "id": "citizens",
       "width": "180",
-      "src": citizensLogo,
+      "src": citizensBankLogo,
       "alt": "Citizens Financial Group, Inc.",
       "loading": "lazy",
     },

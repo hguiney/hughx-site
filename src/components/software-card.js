@@ -15,8 +15,8 @@ import starIcon from "../images/octicons/star.svg";
 import forkIcon from "../images/octicons/repo-forked.svg";
 import downloadIcon from "../images/npm/download.svg";
 // import globeIcon from "../images/globe.svg";
-import websiteIcon from "../images/website.svg";
-import githubLogo from "../images/octicons/mark-github.svg";
+// import websiteIcon from "../images/website.svg";
+// import githubLogo from "../images/octicons/mark-github.svg";
 
 const { fetch } = fetchPonyfill();
 
