@@ -52,7 +52,7 @@ function SEO( {
             },
             {
               "property": "og:title",
-              "content": title,
+              "content": site.siteMetadata.title,
             },
             {
               "property": "og:url",
@@ -85,14 +85,6 @@ function SEO( {
             {
               "name": "twitter:creator",
               "content": `@${site.siteMetadata.twitter.username}`,
-            },
-            {
-              "name": "twitter:title",
-              "content": title,
-            },
-            {
-              "name": "twitter:description",
-              "content": metaDescription,
             },
           ].concat( meta ) }
         />
