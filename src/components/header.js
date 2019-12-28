@@ -148,7 +148,7 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
       "alt": " ",
       "url": "https://twitter.com/$username",
       "name": "Twitter",
-      "username": "TurboHax",
+      "username": "HughxDev",
     },
   };
   // const ContactDt = styled.dt`
