@@ -4,7 +4,12 @@ module.exports = {
     "description": "On-Demand UI/UX for Web Apps",
     "jobTitle": "UX Developer",
     "author": "Hugh Guiney",
+    "baseUrl": "https://hughx.dev",
     "previewImage": "/images/hughx-preview-image.png",
+    "facebookAppId": "619005955582190",
+    "twitter": {
+      "username": "HughxDev",
+    },
   },
   "plugins": [
     "gatsby-plugin-react-helmet",
