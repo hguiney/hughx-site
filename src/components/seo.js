@@ -21,6 +21,7 @@ function SEO( {
             title
             description
             author
+            previewImage
           }
         }
       }
@@ -44,6 +45,10 @@ function SEO( {
         {
           "property": "og:title",
           "content": title,
+        },
+        {
+          "property": "og:image",
+          "content": site.siteMetadata.previewImage,
         },
         {
           "property": "og:description",
