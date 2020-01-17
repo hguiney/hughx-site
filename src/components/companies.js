@@ -143,7 +143,7 @@ Companies.defaultProps = {
       "id": "citizens",
       "width": "180",
       "src": citizensBankLogo,
-      "alt": "Citizens Financial Group, Inc.",
+      "alt": "Citizens Bank",
       "loading": "lazy",
     },
     {
