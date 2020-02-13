@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Modal, Button } from "react-bootstrap";
+import ReactGA from "react-ga";
 
 import layout from "../util/layout";
+import { isInternalTraffic } from "../util/analytics";
 import ProgressiveImage from "./progressive-image";
 import EmailAddress, { CopiedToClipboardToast } from "./email-address";
 
@@ -106,7 +108,17 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
   const showContactModal = () => setContactModalIsVisible( true );
   const hideContactModal = () => setContactModalIsVisible( false );
 
-  const showCopiedToast = () => setCopied( true );
+  const showCopiedToast = () => {
+    setCopied( true );
+
+    if ( !isInternalTraffic() ) {
+      ReactGA.event( {
+        "category": "Link",
+        "action": "Click",
+        "label": "E-mail (Contact Modal)",
+      } );
+    }
+  };
   const hideCopiedToast = () => setCopied( false );
 
   const contactMethods = {

@@ -6,6 +6,7 @@ import {
 } from "react-bootstrap";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import ReactGA from "react-ga";
 import CheckoutForm from "./checkout-form";
 import FinePrint from "./fine-print";
 import OrderFormModal from "./order-form-modal";
@@ -15,6 +16,7 @@ import TwoColumns from "./two-columns";
 import getPrice from "../util/getPrice";
 import ProgressiveImage from "./progressive-image";
 import EmailAddress, { CopiedToClipboardToast } from "./email-address";
+import { isInternalTraffic } from "../util/analytics";
 
 const Product = styled.article`
   // margin: 1rem auto 1rem 0;
@@ -148,6 +150,14 @@ class Packages extends React.PureComponent {
       ...this.state,
       "copiedToClipboardToastIsVisible": true,
     } );
+
+    if ( !isInternalTraffic() ) {
+      ReactGA.event( {
+        "category": "Link",
+        "action": "Click",
+        "label": "E-mail (Packages CTA)",
+      } );
+    }
   }
 
   hideCopiedToClipboardToast() {
