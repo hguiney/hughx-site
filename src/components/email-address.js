@@ -19,20 +19,20 @@ const EmailAddress = ( {
   onCopy, style, iconStyle, children,
 } ) => (
   <CopyToClipboard
-    text="hugh@hughx.dev"
+    text="hugh@hughguiney.com"
     onCopy={ onCopy }
   >
     <CopyToClipboardLink
       arial-label="Copy to clipboard"
       title="Copy to clipboard"
-      href="mailto:hugh@hughx.dev"
+      href="mailto:hugh@hughguiney.com"
       onClick={ ( event ) => event.preventDefault() }
       style={ style }
     >
       {
         children
           ? <>{ children }&nbsp;</>
-          : <span style={ { "verticalAlign": "baseline" } }>hugh@hughx.dev&nbsp;</span>
+          : <span style={ { "verticalAlign": "baseline" } }>hugh@hughguiney.com&nbsp;</span>
       }
       <ProgressiveImage
         img={ {

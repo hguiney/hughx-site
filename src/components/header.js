@@ -128,7 +128,7 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
       "alt": " ",
       "url": "mailto:$username",
       "name": "E-mail",
-      "username": "hugh@hughx.dev",
+      "username": "hugh@hughguiney.com",
     },
     "github": {
       "src": githubIcon,

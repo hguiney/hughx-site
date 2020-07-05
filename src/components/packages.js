@@ -240,11 +240,11 @@ class Packages extends React.PureComponent {
           { /* <Modal show={ this.state.contactModalIsVisible }>
             <Modal.Header>Contact</Modal.Header>
             <Modal.Body>
-              <a href="mailto:hugh@hughx.dev">hugh@hughx.dev</a>
+              <a href="mailto:hugh@hughguiney.com">hugh@hughguiney.com</a>
             </Modal.Body>
             <Modal.Footer>
               <a href="#" onClick={ ( event ) => { this.hideContactModal(); event.preventDefault(); } }>Close</a>
-              <CopyToClipboard text="hugh@hughx.dev" onCopy={ this.hideContactModal }>
+              <CopyToClipboard text="hugh@hughguiney.com" onCopy={ this.hideContactModal }>
                 <Button>Copy to clipboard</Button>
               </CopyToClipboard>
             </Modal.Footer>
@@ -258,9 +258,9 @@ class Packages extends React.PureComponent {
               "display": "inline-flex",
             } }
           >
-            <FormControl type="text" value="hugh@hughx.dev" readOnly onFocus={ ( event ) => event.target.select() } />
+            <FormControl type="text" value="hugh@hughguiney.com" readOnly onFocus={ ( event ) => event.target.select() } />
             <InputGroup.Append as="span">
-              <CopyToClipboard text="hugh@hughx.dev" onCopy={  }>
+              <CopyToClipboard text="hugh@hughguiney.com" onCopy={  }>
                 <ClipboardButton
                   aria-label="Copy to clipboard"
                   title="Copy to clipboard"
