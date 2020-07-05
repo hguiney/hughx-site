@@ -1,0 +1,24 @@
+[[redirects]]
+  from = "/twitter"
+  to = "https://twitter.com/HughxDev"
+  status = 302
+
+[[redirects]]
+  from = "/twitter-personal"
+  to = "https://twitter.com/LordPancreas"
+  status = 302
+
+[[redirects]]
+  from = "/github"
+  to = "https://github.com/hguiney"
+  status = 302
+
+[[redirects]]
+  from = "/stackoverflow"
+  to = "https://stackoverflow.com/users/214325/hugh-guiney"
+  status = 302
+
+[[redirects]]
+  from = "/linkedin"
+  to = "https://www.linkedin.com/in/hughguiney"
+  status = 302

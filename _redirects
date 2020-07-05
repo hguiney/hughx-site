@@ -1,0 +1,13 @@
+## Clean Google Analytics URLs
+/from-twitter           https://hughx.dev/?utm_source=profile&utm_medium=twitter-dev
+/from-twitter-personal  https://hughx.dev/?utm_source=profile&utm_medium=twitter
+/from-github            https://hughx.dev/?utm_source=profile&utm_medium=github
+/from-stackoverflow     https://hughx.dev/?utm_source=profile&utm_medium=stackoverflow
+/from-linkedin          https://hughx.dev/?utm_source=profile&utm_medium=linkedin
+/from-turbohax          https://hughx.dev/?utm_source=profile&utm_medium=twitter-turbohax
+/from-email             https://hughx.dev/?utm_source=signature&utm_medium=email
+/from-angellist         https://hughx.dev/?utm_source=profile&utm_medium=angellist
+/from-resume            https://hughx.dev/?utm_source=document&utm_medium=resume
+/from-cv                https://hughx.dev/?utm_source=document&utm_medium=curriculum-vitae
+/from-hired             https://hughx.dev/?utm_source=profile&utm_medium=hired
+## End Clean Google Analytics URLs
