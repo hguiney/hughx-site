@@ -1,3 +1,5 @@
+## Shortcuts
+
 [[redirects]]
   from = "/twitter"
   to = "https://twitter.com/HughxDev"
@@ -22,3 +24,64 @@
   from = "/linkedin"
   to = "https://www.linkedin.com/in/hughguiney"
   status = 302
+
+## End Shortcuts
+
+## Clean Google Analytics URLs
+
+[[redirects]]
+  from = "/from-twitter"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=twitter-dev"
+  status = 301
+
+[[redirects]]
+  from = "/from-twitter-personal"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=twitter"
+  status = 301
+
+[[redirects]]
+  from = "/from-github"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=github"
+  status = 301
+
+[[redirects]]
+  from = "/from-stackoverflow"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=stackoverflow"
+  status = 301
+
+[[redirects]]
+  from = "/from-linkedin"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=linkedin"
+  status = 301
+
+[[redirects]]
+  from = "/from-turbohax"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=twitter-turbohax"
+  status = 301
+
+[[redirects]]
+  from = "/from-email"
+  to = "https://hughx.dev/?utm_source=signature&utm_medium=email"
+  status = 301
+
+[[redirects]]
+  from = "/from-angellist"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=angellist"
+  status = 301
+
+[[redirects]]
+  from = "/from-resume"
+  to = "https://hughx.dev/?utm_source=document&utm_medium=resume"
+  status = 301
+
+[[redirects]]
+  from = "/from-cv"
+  to = "https://hughx.dev/?utm_source=document&utm_medium=curriculum-vitae"
+  status = 301
+
+[[redirects]]
+  from = "/from-hired"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=hired"
+  status = 301
+
+## End Clean Google Analytics URLs
