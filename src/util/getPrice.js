@@ -1,10 +1,11 @@
 export default function getPrice( rate ) {
-  const hourlyRate = 125;
+  const hourlyRate = 80;
   let multiplier;
   let giveDiscount = false;
   let psychologicalPricingSubtrahend = 50;
   // psychologicalPricingSubtrahend = 0;
   const discount = ( 1 / 10 );
+  const roundToNearestMultipleOfSubtrahend = true;
 
   switch ( rate ) {
     case "hourly":
@@ -40,7 +41,9 @@ export default function getPrice( rate ) {
   }
 
   const baseRate = hourlyRate * multiplier;
-  const discountedPrice = baseRate - ( giveDiscount ? ( baseRate * discount ) : 0 ) - psychologicalPricingSubtrahend;
+  const psychologicalRate = baseRate - psychologicalPricingSubtrahend;
+  const roundedRate = roundToNearestMultipleOfSubtrahend ? ( Math.round( psychologicalRate / psychologicalPricingSubtrahend ) * psychologicalPricingSubtrahend ) : psychologicalRate;
+  const discountedPrice = giveDiscount ? ( roundedRate - ( roundedRate * discount ) ) : roundedRate;
 
   return {
     "value": discountedPrice,

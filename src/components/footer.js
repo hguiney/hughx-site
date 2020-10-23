@@ -90,12 +90,16 @@ const nodeJsLogo = {
   "src": "/images/logos/nodejs-icon--monochrome.svg",
   "alt": "shaded hexagon",
 };
-const phpLogo = {
-  "src": "/images/logos/php-alt--monochrome.svg",
-  "alt": "“php”",
-  "style": {
-    "maxWidth": "75px",
-  },
+// const phpLogo = {
+//   "src": "/images/logos/php-alt--monochrome.svg",
+//   "alt": "“php”",
+//   "style": {
+//     "maxWidth": "75px",
+//   },
+// };
+const gatsbyLogo = {
+  "src": "/images/logos/gatsby--monochrome.svg",
+  "alt": "stylized “G” enclosed in circle",
 };
 const wordpressLogo = {
   "src": "/images/logos/wordpress--monochrome.svg",
@@ -302,8 +306,10 @@ const SiteFooter = ( {} ) => {
             <dd>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>.</dd>
             <dt>{ renderIcon( nodeJsLogo ) }</dt>
             <dd>Node.js® Logo © Joyent, Inc.</dd>
-            <dt>{ renderIcon( phpLogo ) }</dt>
-            <dd>Alternative PHP Logo by Levi Morrison.</dd>
+            { /* <dt>{ renderIcon( phpLogo ) }</dt>
+            <dd>Alternative PHP Logo by Levi Morrison.</dd> */ }
+            <dt>{ renderIcon( gatsbyLogo ) }</dt>
+            <dd>Gatsby Logo by Sacha Greif. © Gatsby, Inc.</dd>
             <dt>{ renderIcon( wordpressLogo ) }</dt>
             <dd>WordPress Logo © the WordPress Foundation.</dd>
             <dt>{ renderIcon( shopifyLogo ) }</dt>

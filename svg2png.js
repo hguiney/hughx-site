@@ -30,7 +30,7 @@ glob( imagesSearch, ( error, files ) => {
       const outputDirectory = `${rasterizedDirectory}/${subpath}`;
       const outfile = `${outputDirectory}/${path.basename( file ).replace( ".svg", `${density}.png` )}`; // .replace('/', path.sep);
       const params = [
-        "-z", "-e", `'${outfile}'`,
+        "-z", "-o", `'${outfile}'`,
         "-w", width.toString(),
         `'${file}'`,
       ];

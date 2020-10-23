@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 // Layout
 import Layout from "../components/layout";
@@ -9,12 +9,12 @@ import Container from "../components/container";
 
 // Sections
 import Intro from "../components/intro";
-import Companies from "../components/companies";
+// import Companies from "../components/companies";
 import Services from "../components/services";
 import Packages from "../components/packages";
 import Software from "../components/software";
-import Résumé from "./resume";
-import BlogPreview from "../components/blog-preview";
+// import Résumé from "./resume";
+// import BlogPreview from "../components/blog-preview";
 import Advantages from "../components/advantages";
 
 class IndexPage extends React.PureComponent {

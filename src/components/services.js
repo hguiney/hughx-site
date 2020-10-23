@@ -118,9 +118,13 @@ const logos = {
       "name": "Node.js",
       "monochrome": true,
     },
-    "php-alt": {
-      "name": "PHP",
-      // "frameworks": ["wordpress"],
+    // "php-alt": {
+    //   "name": "PHP",
+    //   // "frameworks": ["wordpress"],
+    //   "monochrome": true,
+    // },
+    "gatsby": {
+      "name": "Gatsby",
       "monochrome": true,
     },
     "wordpress": {

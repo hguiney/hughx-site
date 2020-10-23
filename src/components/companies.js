@@ -14,8 +14,10 @@ const runkeeperLogo = "/images/logos/runkeeper-asics.svg";
 const reebokLogo = "/images/logos/reebok.svg";
 const bostonGlobeLogo = "/images/logos/the-boston-globe.svg";
 const wbGamesLogo = "/images/logos/wb-games-color.svg";
+const cityOfBostonLogo = "/images/logos/city-of-boston.svg";
 
 const logoSpacing = ".5rem";
+const numberOfColumns = 3;
 
 const Section = styled.section`
   text-align: left;
@@ -29,11 +31,6 @@ const Logos = styled.div`
   margin-right: -${logoSpacing};
   display: flex;
   flex-wrap: wrap;
-
-  ${layout.medium} {
-    display: grid;
-    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-  }
 `;
 
 const Logo = styled.span`
@@ -69,11 +66,15 @@ const Logo = styled.span`
   }
 
   ${layout.medium} {
-    flex-basis: 33.3333%;
+    height: 5.707222222222222rem;
+    flex-basis: ${100 / numberOfColumns}%;
 
-    &:last-child {
+    &.span-3 {
       flex-basis: 100%;
-      grid-column-end: span 3;
+    }
+
+    &.span-1_5 {
+      flex-basis: 50%;
     }
 
     &#citizens img {
@@ -90,18 +91,34 @@ const getHeading = ( mode ) => {
   return <h3>Companies I’ve Worked With</h3>;
 };
 
-const Companies = ( props ) => (
-  <Section>
-    { getHeading( props.mode ) }
-    <Logos>
-      { props.logos.map( ( logo ) => (
-        <Logo id={ logo.id } key={ logo.id }>
-          <ProgressiveImage className="media" img={ logo } />
-        </Logo>
-      ) ) }
-    </Logos>
-  </Section>
-);
+const Companies = ( props ) => {
+  const remainder = props.logos.length % numberOfColumns;
+  const classNameStart = ( props.logos.length - 1 ) - remainder;
+  let logoClassName;
+
+  switch ( remainder ) { // eslint-disable-line default-case
+    case 1:
+      logoClassName = "span-3";
+      break;
+
+    case 2:
+      logoClassName = "span-1_5";
+      break;
+  }
+
+  return (
+    <Section>
+      { getHeading( props.mode ) }
+      <Logos>
+        { props.logos.map( ( logo, index ) => (
+          <Logo id={ logo.id } key={ logo.id } className={ index > classNameStart && logoClassName }>
+            <ProgressiveImage className="media" img={ logo } />
+          </Logo>
+        ) ) }
+      </Logos>
+    </Section>
+  );
+};
 
 Companies.propTypes = {
   "mode": PropTypes.oneOf( ["casual", "formal"] ),
@@ -170,7 +187,18 @@ Companies.defaultProps = {
       "alt": "The Boston Globe",
       "loading": "lazy",
     },
-
+    {
+      "id": "city-of-boston",
+      "width": "250",
+      "src": cityOfBostonLogo,
+      "alt": "City of Boston",
+      "style": {
+        "position": "relative",
+        "top": ".5rem",
+        "marginBottom": ".5rem",
+      },
+      "loading": "lazy",
+    },
   ],
 };
 

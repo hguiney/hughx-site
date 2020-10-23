@@ -73,6 +73,7 @@ const getSources = ( img ) => {
   const imgIsSvg = isSvg( img.src );
   const imgIsPng = isPng( img.src );
   const sources = [];
+  const svg = "svg"; // workaround for syntax highlighting bug
 
   if ( !imgIsBase64 ) {
     // Additive:
@@ -86,7 +87,7 @@ const getSources = ( img ) => {
 
     // Exclusive:
     if ( imgIsSvg ) {
-      sources.push( <source key={ `${img.src}--svg` } type="image/svg+xml" srcSet={ img.src } /> );
+      sources.push( <source key={ `${img.src}--${svg}` } type="image/svg+xml" srcSet={ img.src } /> );
     } else if ( imgIsPng ) {
       sources.push( <source key={ `${img.src}--webp` } type="image/webp" srcSet={ getSrcSet( img, true ) } /> );
     }
@@ -172,6 +173,7 @@ const ProgressiveImage = ( {
 };
 
 ProgressiveImage.propTypes = {
+  "children": PropTypes.object,
   "className": PropTypes.oneOfType( [PropTypes.string, PropTypes.object] ),
   "img": PropTypes.shape( {
     "id": PropTypes.string,
@@ -183,6 +185,7 @@ ProgressiveImage.propTypes = {
     "style": PropTypes.object,
     "loading": PropTypes.oneOf( ["lazy", "eager", "auto"] ),
   } ),
+  "style": PropTypes.object,
   "inlineSvg": PropTypes.bool,
 };
 
