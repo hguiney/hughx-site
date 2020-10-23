@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import ProgressiveImage from "./progressive-image";
 
 import layout from "../util/layout";
+import theme from "../util/theme";
 
 const footerReactLogo = "/images/logos/react.svg";
 
@@ -160,7 +161,7 @@ const Footer = styled.footer`
   text-align: center;
   margin-top: 3rem;
   padding: 1.5rem ${layout.pageGutter};
-  background-color: #2d3e4f;
+  background-color: ${theme.darkBlue};
   color: white;
   // position: sticky;
   bottom: 0;
