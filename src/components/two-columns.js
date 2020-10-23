@@ -13,14 +13,16 @@ const TwoColumns = styled.div`
   & > article {
     display: inline-block;
     background-color: #eee;
-    // background-color: lightgrey;
-    padding: 1.5rem 1rem;
     flex: .5;
     text-align: left;
     margin: .5rem;
 
-    // border-radius: 15% 37% 5% 5%;
-    // padding: 3rem 2rem;
+    border-radius: 3rem 0;
+    padding: 1.5rem 3rem;
+
+    &:nth-child(2) {
+      border-radius: 0 3rem;
+    }
   }
 
   @media only screen and (min-width: 60em) {
