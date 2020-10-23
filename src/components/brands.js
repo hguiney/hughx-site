@@ -85,13 +85,13 @@ const Logo = styled.span`
 
 const getHeading = ( mode ) => {
   if ( mode === "casual" ) {
-    return <h3 className="p">Companies I’ve worked with:</h3>;
+    return <h3 className="p">Brands I’ve worked with:</h3>;
   }
 
-  return <h3>Companies I’ve Worked With</h3>;
+  return <h3>Brands I’ve Worked With</h3>;
 };
 
-const Companies = ( props ) => {
+const Brands = ( props ) => {
   const remainder = props.logos.length % numberOfColumns;
   const classNameStart = ( props.logos.length - 1 ) - remainder;
   let logoClassName;
@@ -120,7 +120,7 @@ const Companies = ( props ) => {
   );
 };
 
-Companies.propTypes = {
+Brands.propTypes = {
   "mode": PropTypes.oneOf( ["casual", "formal"] ),
   "logos": PropTypes.arrayOf( PropTypes.shape( {
     "id": PropTypes.string,
@@ -132,7 +132,7 @@ Companies.propTypes = {
   } ) ),
 };
 
-Companies.defaultProps = {
+Brands.defaultProps = {
   "mode": "formal",
   "logos": [
     {
@@ -202,4 +202,4 @@ Companies.defaultProps = {
   ],
 };
 
-export default Companies;
+export default Brands;

@@ -9,7 +9,7 @@ import Container from "../components/container";
 
 // Sections
 import Intro from "../components/intro";
-// import Companies from "../components/companies";
+// import Brands from "../components/Brands";
 import Services from "../components/services";
 import Packages from "../components/packages";
 import Software from "../components/software";
@@ -25,7 +25,7 @@ class IndexPage extends React.PureComponent {
       <Layout siteMetadata={ data.site.siteMetadata }>
         <Intro heading={ data.site.siteMetadata.description } />
         <Container>
-          { /* <Companies /> */ }
+          { /* <Brands /> */ }
           <Services />
           <Advantages />
           <Packages />

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Img from "gatsby-image";
 import { StaticQuery, graphql } from "gatsby";
-import Companies from "./companies";
+import Brands from "./Brands";
 
 import layout from "../util/layout";
 
@@ -153,7 +153,7 @@ const Intro = ( props ) => (
       </Devices>
     </Hero>
     <p>Hi, my name’s Hugh Guiney (<abbr style={ { "borderBottom": 0 } } title="pronounced">🗣 </abbr>GUY-knee). I’m a UX Developer, which means I design and code thoughtful digital products. I’ve worked with organizations of all sizes, from startups to <abbr>SMBs</abbr> to household names. In my spare time I build open-source software, make movies, and study Japanese.</p>
-    <Companies mode="casual" />
+    <Brands mode="casual" />
   </Article>
 );
 
