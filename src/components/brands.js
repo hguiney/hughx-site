@@ -137,7 +137,8 @@ Brands.defaultProps = {
   "logos": [
     {
       "id": "runkeeper",
-      "width": "250",
+      "width": "222",
+      "height": "28",
       "src": runkeeperLogo,
       "alt": "Runkeeper",
       "loading": "lazy",
@@ -145,6 +146,7 @@ Brands.defaultProps = {
     {
       "id": "oxfam",
       "width": "150",
+      "height": "56",
       "src": oxfamLogo,
       "alt": "Oxfam",
       "loading": "lazy",
@@ -152,13 +154,15 @@ Brands.defaultProps = {
     {
       "id": "sapient",
       "width": "110",
+      "height": "60",
       "src": sapientLogo,
       "alt": "Publicis Sapient",
       "loading": "lazy",
     },
     {
       "id": "citizens",
-      "width": "180",
+      "width": "222",
+      "height": "25",
       "src": citizensBankLogo,
       "alt": "Citizens Bank",
       "loading": "lazy",
@@ -166,6 +170,7 @@ Brands.defaultProps = {
     {
       "id": "wb-games",
       "width": "75",
+      "height": "85",
       "src": wbGamesLogo,
       "alt": "WB Games",
       "style": {
@@ -176,6 +181,7 @@ Brands.defaultProps = {
     {
       "id": "reebok",
       "width": "150",
+      "height": "30",
       "src": reebokLogo,
       "alt": "Reebok",
       "loading": "lazy",
@@ -183,6 +189,7 @@ Brands.defaultProps = {
     {
       "id": "the-boston-globe",
       "width": "250",
+      "height": "33",
       "src": bostonGlobeLogo,
       "alt": "The Boston Globe",
       "loading": "lazy",
@@ -190,6 +197,7 @@ Brands.defaultProps = {
     {
       "id": "city-of-boston",
       "width": "250",
+      "height": "33",
       "src": cityOfBostonLogo,
       "alt": "City of Boston",
       "style": {

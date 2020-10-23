@@ -31,13 +31,14 @@ const ServiceList = styled.ul`
 `;
 
 const ServiceLogo = ( {
-  src, alt, width, style, containerStyle,
+  src, alt, width, height, style, containerStyle,
 } ) => (
   <ProgressiveImage
     img={ {
       src,
       "alt": ( alt || "" ),
       "width": ( width || 50 ),
+      "height": ( height || 50 ),
       style,
       "loading": "lazy",
     } }
@@ -80,6 +81,7 @@ const logos = {
   "development": {
     "html-icon": {
       "name": "HTML5, CSS3, &amp; JavaScript (ES6+)",
+      "height": 57,
       "monochrome": true,
     },
     // "css--addon": {
@@ -107,6 +109,7 @@ const logos = {
     // },
     "react": {
       "name": "React",
+      "height": 44,
       "monochrome": true,
       "frameworks": [
         "redux",
@@ -116,6 +119,7 @@ const logos = {
     },
     "nodejs-icon": {
       "name": "Node.js",
+      "height": 58,
       "monochrome": true,
     },
     // "php-alt": {
@@ -133,10 +137,12 @@ const logos = {
     },
     "shopify": {
       "name": "Shopify",
+      "height": 57,
       "monochrome": true,
     },
     "seo-performance": {
       "name": "SEO<sup>1</sup> & Performance",
+      "height": 52,
       "monochrome": true,
       "containerStyle": {
         "marginTop": ".25rem",
@@ -146,21 +152,26 @@ const logos = {
   "design": {
     "ui-ux": {
       "name": "<abbr title=\"User Interface\">UI</abbr>/<abbr title=\"User Experience\">UX</abbr> (Look &amp; Feel)",
+      "height": 37,
     },
     "ia": {
       "name": "Information Architecture",
+      "height": 39,
     },
     "component": {
       "name": "Components & Design Systems",
+      "height": 43,
     },
     "u7y-a11y": {
       "name": "Usability/Accessibility",
     },
     "copyediting": {
       "name": "Copyediting",
+      "height": 49,
     },
     "logos-brand-identity": {
       "name": "Logos &amp; Brand Identity",
+      "height": 40,
     },
     "responsive-design": {
       "name": "Responsive Design",
@@ -181,6 +192,7 @@ const getListOfServices = ( designOrDevelopment ) => (
       );
       const shouldShowFrameworkLogos = logos._showFrameworkLogos;
       const shouldShowFrameworkNames = logos._showFrameworkNames;
+      const svg = "svg";
 
       return (
         <li
@@ -188,7 +200,8 @@ const getListOfServices = ( designOrDevelopment ) => (
           // style={ { "marginBottom": "1.5rem" } }
         >
           <ServiceLogo
-            src={ `${logoDirectory}/${key}${logo.monochrome ? "--monochrome" : ""}.svg` }
+            height={ logo.height }
+            src={ `${logoDirectory}/${key}${logo.monochrome ? "--monochrome" : ""}.${svg}` }
             containerStyle={ {
               "marginRight": ".5rem",
               ...logo.containerStyle,
@@ -216,7 +229,7 @@ const getListOfServices = ( designOrDevelopment ) => (
                       shouldShowFrameworkLogos
                       && <>
                         <ServiceLogo
-                          src={ `${logoDirectory}/${framework}.svg` }
+                          src={ `${logoDirectory}/${framework}.${svg}` }
                           containerStyle={ framework.containerStyle }
                         />&#32;
                       </>
