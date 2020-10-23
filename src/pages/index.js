@@ -9,7 +9,7 @@ import Container from "../components/container";
 
 // Sections
 import Intro from "../components/intro";
-// import Brands from "../components/Brands";
+// import Brands from "../components/brands";
 import Services from "../components/services";
 import Packages from "../components/packages";
 import Software from "../components/software";

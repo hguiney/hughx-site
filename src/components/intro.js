@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Img from "gatsby-image";
 import { StaticQuery, graphql } from "gatsby";
-import Brands from "./Brands";
+import Brands from "./brands";
 
 import layout from "../util/layout";
 
