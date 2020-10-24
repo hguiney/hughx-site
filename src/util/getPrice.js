@@ -11,6 +11,7 @@ export default function getPrice( rate ) {
     case "hourly":
       multiplier = 1;
       psychologicalPricingSubtrahend = 0;
+      // roundToNearestMultipleOfSubtrahend = false;
       break;
 
     case "daily":
@@ -40,15 +41,31 @@ export default function getPrice( rate ) {
     default:
   }
 
+  const psychologicalPricingDenominator = ( ( psychologicalPricingSubtrahend === 0 ) ? 1 : psychologicalPricingSubtrahend );
   const baseRate = hourlyRate * multiplier;
   const psychologicalRate = baseRate - psychologicalPricingSubtrahend;
-  const roundedRate = roundToNearestMultipleOfSubtrahend ? ( Math.round( psychologicalRate / psychologicalPricingSubtrahend ) * psychologicalPricingSubtrahend ) : psychologicalRate;
+  const roundedRate = roundToNearestMultipleOfSubtrahend ? ( Math.ceil( psychologicalRate / psychologicalPricingDenominator ) * psychologicalPricingDenominator ) : psychologicalRate;
   const discountedPrice = giveDiscount ? ( roundedRate - ( roundedRate * discount ) ) : roundedRate;
-
-  return {
+  const returnValue = {
     "value": discountedPrice,
     discount,
     "isDiscounted": giveDiscount,
     "originalValue": baseRate,
   };
+
+  // console.log( `baseRate = ${hourlyRate} * ${multiplier};` );
+  // console.log( baseRate );
+
+  // console.log( `psychologicalRate = ${baseRate} - ${psychologicalPricingSubtrahend}` );
+  // console.log( psychologicalRate );
+
+  // console.log( `roundedRate = ${roundToNearestMultipleOfSubtrahend} ? ( Math.ceil( ${psychologicalRate} / ${psychologicalPricingDenominator} ) * ${psychologicalPricingDenominator} ) : ${psychologicalRate};` );
+  // console.log( roundedRate );
+
+  // console.log( `discountedPrice = ${giveDiscount} ? ( ${roundedRate} - ( ${roundedRate} * ${discount} ) ) : ${roundedRate};` );
+  // console.log( discountedPrice );
+
+  // console.log( "returnValue", returnValue );
+
+  return returnValue;
 } // getPrice

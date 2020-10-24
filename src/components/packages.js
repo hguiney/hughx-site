@@ -116,6 +116,8 @@ const CopyToClipboardButton = () => (
 
 // const Section = styled.section``;
 
+const videoAddOnPrice = getPrice( "hourly" ).value;
+
 class Packages extends React.PureComponent {
   constructor() {
     super();
@@ -185,7 +187,7 @@ class Packages extends React.PureComponent {
           <Product>
             <ProductName>Audit</ProductName>
             <ProductDescription>
-              <p>You’ll get a list of actionable feedback from me on ways to improve your app or site. For an additional fee of $125, I’ll send you a screencast of me using your product with real-time commentary. (Fee waived if you give me permission to use the video for marketing purposes.)</p>
+              <p>You’ll get a list of actionable feedback from me on ways to improve your app or site. For an additional fee of ${ videoAddOnPrice }, I’ll send you a screencast of me using your product with real-time commentary. (Fee waived if you give me permission to use the video for marketing purposes.)</p>
             </ProductDescription>
             <ProductPricing>
               <dl>
