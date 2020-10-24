@@ -8,7 +8,7 @@
   src:
     url('Tiempos Text/tiempos-text-web-regular.eot?#iefix') format('embedded-opentype'),
     url('Tiempos Text/tiempos-text-web-regular.woff2') format('woff2'),
-    url('Tiempos Text/tiempos-text-web-regular.woff') format('woff'),
+    url('Tiempos Text/tiempos-text-web-regular.woff') format('woff')
   ;
   font-display: swap;
 }
@@ -21,7 +21,7 @@
   src:
     url('Tiempos Text/tiempos-text-web-regular-italic.eot?#iefix') format('embedded-opentype'),
     url('Tiempos Text/tiempos-text-web-regular-italic.woff2') format('woff2'),
-    url('Tiempos Text/tiempos-text-web-regular-italic.woff') format('woff'),
+    url('Tiempos Text/tiempos-text-web-regular-italic.woff') format('woff')
   ;
   font-display: swap;
 }
@@ -34,7 +34,7 @@
   src:
     url('Tiempos Text/tiempos-text-web-semibold.eot?#iefix') format('embedded-opentype'),
     url('Tiempos Text/tiempos-text-web-semibold.woff2') format('woff2'),
-    url('Tiempos Text/tiempos-text-web-semibold.woff') format('woff'),
+    url('Tiempos Text/tiempos-text-web-semibold.woff') format('woff')
   ;
 } */
 
@@ -46,6 +46,6 @@
   src:
     url('Tiempos Text/tiempos-text-web-semibold-italic.eot?#iefix') format('embedded-opentype'),
     url('Tiempos Text/tiempos-text-web-semibold-italic.woff2') format('woff2'),
-    url('Tiempos Text/tiempos-text-web-semibold-italic.woff') format('woff'),
+    url('Tiempos Text/tiempos-text-web-semibold-italic.woff') format('woff')
   ;
 } */
