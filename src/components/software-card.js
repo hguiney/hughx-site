@@ -9,7 +9,7 @@ import moment from "moment";
 import ProgressiveImage from "./progressive-image";
 
 import isNumeric from "../util/isNumeric";
-import layout from "../util/layout";
+// import layout from "../util/layout";
 
 import starIcon from "../images/octicons/star.svg";
 import forkIcon from "../images/octicons/repo-forked.svg";
@@ -336,9 +336,17 @@ class SoftwareCard extends React.PureComponent {
     // if ( typeof window !== "undefined" ) {
     const endpoint = `https://api.github.com/repos/${packageName}`;
 
-    fetch( endpoint, { "cache": "force-cache" } )
+    fetch( endpoint, {
+      // "headers": {
+      //   "Content-Type": "application/json",
+      //   "If-Modified-Since": localStorage.getItem( "lastFetchedFromGithub" ),
+      // },
+      "cache": "force-cache",
+    } )
       .then( ( response ) => response.json() )
       .then( ( response ) => {
+        // localStorage.setItem( "lastFetchedFromGithub", ( new Date() ).toUTCString() );
+
         this.setState( {
           ...this.state,
           "github": {
@@ -349,7 +357,8 @@ class SoftwareCard extends React.PureComponent {
             "forks": response.forks_count,
           },
         } );
-      } );
+      } )
+      .catch( ( error ) => console.error( error ) );
     // }
   }
 
@@ -380,11 +389,20 @@ class SoftwareCard extends React.PureComponent {
         + `/${packageName}`;
 
       return (
-        fetch( batchedEndpoint, { "cache": "force-cache" } )
+        fetch( batchedEndpoint, {
+          // "headers": {
+          //   "Content-Type": "application/json",
+          //   "If-Modified-Since": localStorage.getItem( "lastFetchedFromNpm" ),
+          // },
+          "cache": "force-cache",
+        } )
           .then( ( response ) => response.json() )
           .then( ( response ) => {
+            // localStorage.setItem( "lastFetchedFromNpm", ( new Date() ).toUTCString() );
+
             totalDownloads += response.downloads;
           } )
+          .catch( ( error ) => console.error( error ) )
       );
     };
     const updateDownloadTotal = ( downloadRate ) => {
