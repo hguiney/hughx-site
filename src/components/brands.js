@@ -180,8 +180,8 @@ Brands.defaultProps = {
     },
     {
       "id": "reebok",
-      "width": "150",
-      "height": "30",
+      "width": "118",
+      "height": "60",
       "src": reebokLogo,
       "alt": "Reebok",
       "loading": "lazy",
