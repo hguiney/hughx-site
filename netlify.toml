@@ -84,4 +84,9 @@
   to = "https://hughx.dev/?utm_source=profile&utm_medium=hired"
   status = 301
 
+[[redirects]]
+  from = "/from-linktree"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=linktree"
+  status = 301
+
 ## End Clean Google Analytics URLs
