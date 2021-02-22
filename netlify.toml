@@ -40,6 +40,11 @@
   status = 301
 
 [[redirects]]
+  from = "/from-instagram"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=instagram"
+  status = 301
+
+[[redirects]]
   from = "/from-github"
   to = "https://hughx.dev/?utm_source=profile&utm_medium=github"
   status = 301
