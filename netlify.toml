@@ -74,6 +74,11 @@
   to = "https://hughx.dev/?utm_source=profile&utm_medium=angellist"
   status = 301
 
+  [[redirects]]
+  from = "/from-crunchbase"
+  to = "https://hughx.dev/?utm_source=profile&utm_medium=crunchbase"
+  status = 301
+
 [[redirects]]
   from = "/from-resume"
   to = "https://hughx.dev/?utm_source=document&utm_medium=resume"
