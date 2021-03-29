@@ -6,6 +6,7 @@ import TwoColumns from "./two-columns";
 import FinePrint from "./fine-print";
 import ProgressiveImage from "./progressive-image";
 
+const displayMonochromeLogos = true;
 const Incl = () => <abbr title="including" style={ { "borderBottom": 0 } }>incl.</abbr>;
 
 const ServiceList = styled.ul`
@@ -82,7 +83,7 @@ const logos = {
     "html-icon": {
       "name": "HTML5, CSS3, &amp; JavaScript (ES6+)",
       "height": 57,
-      "monochrome": true,
+      "monochrome": displayMonochromeLogos,
     },
     // "css--addon": {
     //   "name": "CSS3",
@@ -110,7 +111,7 @@ const logos = {
     "react": {
       "name": "React",
       "height": 44,
-      "monochrome": true,
+      "monochrome": displayMonochromeLogos,
       "frameworks": [
         "redux",
         "contextApi",
@@ -120,7 +121,7 @@ const logos = {
     "nodejs-icon": {
       "name": "Node.js",
       "height": 58,
-      "monochrome": true,
+      "monochrome": displayMonochromeLogos,
     },
     // "php-alt": {
     //   "name": "PHP",
@@ -129,21 +130,21 @@ const logos = {
     // },
     "gatsby": {
       "name": "Gatsby",
-      "monochrome": true,
+      "monochrome": displayMonochromeLogos,
     },
     "wordpress": {
       "name": "WordPress",
-      "monochrome": true,
+      "monochrome": displayMonochromeLogos,
     },
     "shopify": {
       "name": "Shopify",
       "height": 57,
-      "monochrome": true,
+      "monochrome": displayMonochromeLogos,
     },
     "seo-performance": {
       "name": "SEO<sup>1</sup> & Performance",
       "height": 52,
-      "monochrome": true,
+      "monochrome": displayMonochromeLogos,
       "containerStyle": {
         "marginTop": ".25rem",
       },

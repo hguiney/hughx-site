@@ -6,6 +6,8 @@ import ProgressiveImage from "./progressive-image";
 
 import layout from "../util/layout";
 import theme from "../util/theme";
+import blocksBackground from "../images/use_your_illusion.png";
+import blocksBackground2x from "../images/use_your_illusion@2x.png";
 
 const footerReactLogo = "/images/logos/react.svg";
 
@@ -158,10 +160,16 @@ const bostonGlobeLogo = {
 };
 
 const Footer = styled.footer`
+  background-image: url(${blocksBackground});
+  ${layout.hiDpi( `
+    background-image: url(${blocksBackground2x});
+    background-size: 54px 58px;
+  ` )}
+
   text-align: center;
   margin-top: 3rem;
   padding: 1.5rem ${layout.pageGutter};
-  background-color: ${theme.darkBlue};
+  background-color: ${theme.black};
   color: white;
   // position: sticky;
   bottom: 0;

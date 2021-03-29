@@ -9,7 +9,7 @@ import moment from "moment";
 import ProgressiveImage from "./progressive-image";
 
 import isNumeric from "../util/isNumeric";
-// import layout from "../util/layout";
+import layout from "../util/layout";
 
 import starIcon from "../images/octicons/star.svg";
 import forkIcon from "../images/octicons/repo-forked.svg";
@@ -18,10 +18,15 @@ import downloadIcon from "../images/npm/download.svg";
 // import websiteIcon from "../images/website.svg";
 // import githubLogo from "../images/octicons/mark-github.svg";
 
+import blockPattern from "../images/use_your_illusion.png";
+import blockPattern2x from "../images/use_your_illusion@2x.png";
+
 const { fetch } = fetchPonyfill();
 
 const Article = styled.article`
   background-color: #eee;
+  // background-image: url(${blockPattern});
+  // color: white;
   padding: 1rem !important;
   display: flex !important;
   flex: auto !important;
@@ -29,6 +34,8 @@ const Article = styled.article`
   // max-width: 100% !important;
 
   flex-direction: column;
+
+  // ${layout.hiDpi( `background-image: url(${blockPattern2x});`, 2 )}
 
   @media only screen and (min-width: 40em) {
     flex-direction: row;

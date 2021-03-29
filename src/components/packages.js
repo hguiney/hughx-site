@@ -17,8 +17,13 @@ import getPrice from "../util/getPrice";
 import ProgressiveImage from "./progressive-image";
 import EmailAddress, { CopiedToClipboardToast } from "./email-address";
 import { isInternalTraffic } from "../util/analytics";
+import blueprintsBackground from "../images/blueprints.png";
 
 const Product = styled.article`
+  // background-image: url(${blueprintsBackground});
+  // color: white;
+  // padding: 2rem !important;
+  // text-shadow: 1px 1px 0 rgba(0,0,0,0.125);
   // margin: 1rem auto 1rem 0;
   text-align: left;
   display: inline-block;
