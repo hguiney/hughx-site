@@ -267,7 +267,7 @@ const SiteFooter = ( {} ) => {
             <dd>{ ccBy3US }</dd>
             <dt>{ renderIcon( legoPieceIcon ) }</dt>
             <dd><cite>Lego piece</cite> by <a href="https://thenounproject.com/davosime">Davo Sime</a> from the Noun Project.</dd>
-            <dd>{ ccBy3US }</dd>
+            <dd>Licensed commercially.</dd>
             <dt>{ renderIcon( accessibilityIcon ) }</dt>
             <dd><cite>Accessibility</cite> by <a href="https://thenounproject.com/melolonta">Alfonso Melolonta Urbán</a> from the Noun Project.</dd>
             <dd>Used by way of the <a href="https://creativecommons.org/publicdomain/zero/1.0/">public domain</a>.</dd>
