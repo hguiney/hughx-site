@@ -119,7 +119,7 @@ const Software = () => (
         } }
         tagline="CLI Tool for Library Authors"
         description="Minifies NPM packages to reduce dependency bloat."
-        url="https://github.com/hguiney/npm-minify"
+        url="https://github.com/HughxDev/npm-minify"
         headingLevel="3"
         github={ { "package": "hguiney/npm-minify", "showStars": false } }
         npm={ {
@@ -137,7 +137,7 @@ const Software = () => (
         } }
         tagline="Hughx ESLint Configuration"
         description="Sensible defaults for JavaScript coding style."
-        url="https://github.com/hguiney/eslint-config-hughx"
+        url="https://github.com/HughxDev/eslint-config-hughx"
         headingLevel="3"
         github={ { "package": "hguiney/eslint-config-hughx", "showStars": false } }
         npm={ {

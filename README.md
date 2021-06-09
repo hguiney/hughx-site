@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/hguiney/hughx-site/master/src/images/hughx-logo-face.png" width="150" alt="logo" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/HughxDev/hughx-site/master/src/images/hughx-logo-face.png" width="150" alt="logo" /></p>
 
 <h1 align="center">hughx-site</h1>
 
