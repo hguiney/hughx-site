@@ -136,7 +136,7 @@ const SiteHeader = ( { siteTitle, author, jobTitle } ) => {
       "alt": " ",
       "url": "https://github.com/$username",
       "name": "GitHub",
-      "username": "hguiney",
+      "username": "HughxDev",
     },
     "stackoverflow": {
       "src": stackoverflowIcon,

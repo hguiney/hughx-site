@@ -79,10 +79,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hguiney/hughx-site"
+    "url": "https://github.com/HughxDev/hughx-site"
   },
   "bugs": {
-    "url": "https://github.com/hguiney/hughx-site/issues"
+    "url": "https://github.com/HughxDev/hughx-site/issues"
   },
   "peerDependencies": {
     "moment": "^2.24.0"

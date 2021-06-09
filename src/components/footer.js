@@ -240,7 +240,7 @@ const SiteFooter = ( {} ) => {
             "src": footerReactLogo, "width": 33, "alt": "React logo", "loading": "lazy",
           } } style={ { "verticalAlign": "middle" } } /> React.</p>
           <p>© { ( new Date() ).getFullYear() } Hugh Guiney unless <a href="#credits" onClick={ ( event ) => { showCreditsModal(); event.preventDefault(); } }>otherwise specified.</a></p>
-          <p><a href="https://github.com/hguiney/hughx-site">View source</a></p>
+          <p><a href="https://github.com/HughxDev/hughx-site">View source</a></p>
           { /* <p><a href="https://www.youtube.com/channel/UCOldDDJyK_oyDkVJLCuaorw">YouTube</a></p> */ }
         </FooterContent>
       </Footer>
