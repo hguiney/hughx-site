@@ -481,8 +481,45 @@ class SoftwareCard extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.populateGithubDetails();
-    this.populateNpmDetails();
+    if ( this.props.github ) {
+      const githubProps = Object.keys( this.props.github );
+
+      if ( githubProps.length ) {
+        const hasPackage = !!this.props.github.package;
+        const hasShowForks = ( "showForks" in this.props.github );
+        const hasShowStars = ( "showStars" in this.props.github );
+        const hasShowWatchers = ( "showWatchers" in this.props.github );
+
+        if ( hasPackage ) {
+          if ( hasShowForks || hasShowStars || hasShowWatchers ) {
+            this.populateGithubDetails();
+          }
+        } else {
+          throw new Error( "props.github has no package set" );
+        }
+      } else {
+        throw new Error( "props.github has no options set" );
+      }
+    }
+
+    if ( this.props.npm ) {
+      const npmProps = Object.keys( this.props.npm );
+
+      if ( npmProps.length ) {
+        const hasPackage = !!this.props.npm.package;
+        const hasShowDownloads = ( "showDownloads" in this.props.npm );
+
+        if ( hasPackage ) {
+          if ( hasShowDownloads ) {
+            this.populateNpmDetails();
+          }
+        } else {
+          throw new Error( "props.npm has no package set" );
+        }
+      } else {
+        throw new Error( "props.npm has no options set" );
+      }
+    }
   }
 
   render() {
