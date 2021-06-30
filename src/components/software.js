@@ -15,6 +15,8 @@ const npmMinifyLogoAlt = "/images/logos/alt/npm-minify.jpg";
 
 const npmLogo = "/images/logos/npm.svg";
 const eslintConfigHughxLogo = "/images/logos/eslint-config-hughx.svg";
+const componentCliLogo = "/images/logos/component-cli.svg";
+const standardStandardsLogo = "/images/logos/standard-standards.svg";
 
 const SoftwareCards = styled( TwoColumns )`
   @media only screen and (min-width: 40em) {
@@ -80,7 +82,10 @@ const Software = () => (
         url="https://redblue.video"
         description={ "Free interactive video player. Add links and forms; build <span style=\"white-space: nowrap;\">choose-your-own-story</span> films." }
         headingLevel="3"
-        github={ { "package": "RedBlueVideo/redblue", "showForks": false } }
+        github={ {
+          "package": "RedBlueVideo/redblue",
+          "showForks": false,
+        } }
         npm={ {
           "package": "redblue",
           "fromDate": "2017-10-01",
@@ -99,7 +104,10 @@ const Software = () => (
         description="Stores various details about videos, including interactive UI instructions."
         url="https://hypervideo.tech"
         headingLevel="3"
-        github={ { "package": "RedBlueVideo/hvml", "showStars": false } }
+        github={ {
+          "package": "RedBlueVideo/hvml",
+          "showStars": false,
+        } }
         npm={ {
           "package": "hvml",
           "fromDate": "2017-10-01",
@@ -121,7 +129,10 @@ const Software = () => (
         description="Minifies NPM packages to reduce dependency bloat."
         url="https://github.com/HughxDev/npm-minify"
         headingLevel="3"
-        github={ { "package": "HughxDev/npm-minify", "showStars": false } }
+        github={ {
+          "package": "HughxDev/npm-minify",
+          "showStars": false,
+        } }
         npm={ {
           "package": "npm-minify",
           "fromDate": "2019-03-29",
@@ -139,11 +150,51 @@ const Software = () => (
         description="Sensible defaults for JavaScript coding style."
         url="https://github.com/HughxDev/eslint-config-hughx"
         headingLevel="3"
-        github={ { "package": "HughxDev/eslint-config-hughx", "showStars": false } }
+        github={ {
+          "package": "HughxDev/eslint-config-hughx",
+          "showStars": false,
+        } }
         npm={ {
           "package": "eslint-config-hughx",
           "fromDate": "2019-03-29",
           // "downloadScale": "monthly"
+        } }
+      />
+      <SoftwareCard
+        name="Component CLI"
+        logo={ {
+          "src": componentCliLogo,
+          "width": 150,
+          "height": 150,
+        } }
+        tagline="CLI Tool for Front-end Developers"
+        description="Perform CRUD operations on components. Framework-agnostic."
+        url="https://github.com/HughxDev/component-cli"
+        headingLevel="3"
+        github={ {
+          "package": "HughxDev/component-cli",
+          "showStars": false,
+        } }
+        npm={ {
+          "package": "@hughx/component-cli",
+          "fromDate": "2021-06-09",
+          // "downloadScale": "monthly"
+        } }
+      />
+      <SoftwareCard
+        name="Standard Standards"
+        logo={ {
+          "src": standardStandardsLogo,
+          "width": 150,
+          "height": 150,
+        } }
+        tagline="Recommendations for team coding practices"
+        description="Aids maintenance of large projects."
+        url="https://github.com/HughxDev/standard-standards"
+        headingLevel="3"
+        github={ {
+          "package": "HughxDev/standard-standards",
+          "showStars": false,
         } }
       />
     </SoftwareCards>
