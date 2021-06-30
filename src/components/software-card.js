@@ -508,10 +508,9 @@ class SoftwareCard extends React.PureComponent {
 
       if ( npmProps.length ) {
         const hasPackage = !!this.props.npm.package;
-        const hasShowDownloads = ( "showDownloads" in this.props.npm );
 
         if ( hasPackage ) {
-          if ( hasShowDownloads ) {
+          if ( this.props.npm.showDownloads === true ) {
             this.populateNpmDetails();
           }
         } else {
@@ -624,6 +623,7 @@ class SoftwareCard extends React.PureComponent {
             {
               npm
               && npm.downloads
+              && ( parseInt( npm.downloads, 10 ) > 0 )
               && npm.showDownloads
               && <Stat
                   title="NPM Downloads"
