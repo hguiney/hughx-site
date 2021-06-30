@@ -105,3 +105,13 @@
   status = 301
 
 ## End Clean Google Analytics URLs
+
+## Proxy NPM API requests to avoid CORS issues
+
+[[redirects]]
+  from = "/api/npm/*"
+  to = "https://api.npmjs.org/:splat"
+  status = 200
+  force = true
+
+## End Proxy NPM API requests to avoid CORS issues

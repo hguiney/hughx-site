@@ -389,8 +389,9 @@ class SoftwareCard extends React.PureComponent {
     };
     let totalDownloads = 0;
     const downloadTotals = [];
+    // /api/npm proxies to https://api.npmjs.org via netlify.toml
     const addToDownloadTotal = ( _$fromDate, _$toDate ) => {
-      const batchedEndpoint = `https://api.npmjs.org/downloads/${dataFormat}`
+      const batchedEndpoint = `/api/npm/downloads/${dataFormat}`
         + `/${_$fromDate.format( "YYYY-MM-DD" )}`
         + `:${_$toDate.format( "YYYY-MM-DD" )}`
         + `/${packageName}`;
