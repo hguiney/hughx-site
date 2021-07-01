@@ -231,7 +231,7 @@ const Stat = ( props ) => {
             displayType={ "text" }
             thousandSeparator={ true }
             decimalScale={ 0 }
-            renderText={ ( value ) => <div>{ value }</div> }
+            renderText={ ( value ) => <>{ value }</> }
           />
           : props.value
       }</DD>
@@ -554,6 +554,19 @@ class SoftwareCard extends React.PureComponent {
       );
     };
 
+    const statsProps = {};
+
+    if (
+      ( !github && !npm )
+      || (
+        ( !github.stars && !github.forks )
+        && ( !npm.downloads && !npm.showDownloads )
+      )
+    ) {
+      statsProps["aria-hidden"] = "true";
+      statsProps.role = "presentation";
+    }
+
     return (
       <Article id={ _id }>
         {
@@ -582,7 +595,7 @@ class SoftwareCard extends React.PureComponent {
             { url ? title( url ) : title() }
             { ( tagline !== "" ) && <Subheading className="software-card__subheading hx hx--modest">{ tagline || github.description }</Subheading> }
           </SoftwareCardHeader>
-          <Stats className="inline">
+          <Stats className="inline" { ...statsProps }>
             {
               github
               && <>
@@ -622,10 +635,8 @@ class SoftwareCard extends React.PureComponent {
             }
             {
               npm
-              && npm.downloads
-              && ( parseInt( npm.downloads, 10 ) > 0 )
               && npm.showDownloads
-              && <Stat
+                ? <Stat
                   title="NPM Downloads"
                   src={ downloadIcon }
                   containerWidth="1em"
@@ -638,6 +649,7 @@ class SoftwareCard extends React.PureComponent {
                     "top": "0.125rem",
                   } }
                 />
+                : <dd></dd>
             }
             { /*
               url
