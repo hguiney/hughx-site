@@ -80,6 +80,7 @@ const Software = () => (
           },
         } }
         url="https://redblue.video"
+        tagline="Open-Source Hypervideo Player"
         description={ "Free interactive video player. Add links and forms; build <span style=\"white-space: nowrap;\">choose-your-own-story</span> films." }
         headingLevel="3"
         github={ {

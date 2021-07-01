@@ -99,6 +99,7 @@ const Stats = styled.dl`
   // margin-left: -0.125rem;
   margin-bottom: .5rem;
   // text-align: center;
+  height: 1.707466666666667rem;
 
   @media only screen and (min-width: 40em) {
     // text-align: left;
