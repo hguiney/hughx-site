@@ -50,6 +50,41 @@
   status = 301
 
 [[redirects]]
+  from = "/from-github-project"
+  to = "https://hughx.dev/?utm_source=project&utm_medium=github"
+  status = 301
+
+  [[redirects]]
+  from = "/from-github-elint-config-hughx"
+  to = "https://hughx.dev/?utm_source=project&utm_medium=github&utm_campaign=elint-config-hughx"
+  status = 301
+
+[[redirects]]
+  from = "/from-github-elint-config-hughx-ts"
+  to = "https://hughx.dev/?utm_source=project&utm_medium=github&utm_campaign=elint-config-hughx-ts"
+  status = 301
+
+[[redirects]]
+  from = "/from-github-component-cli"
+  to = "https://hughx.dev/?utm_source=project&utm_medium=github&utm_campaign=component-cli"
+  status = 301
+
+[[redirects]]
+  from = "/from-github-standard-standards"
+  to = "https://hughx.dev/?utm_source=project&utm_medium=github&utm_campaign=standard-standards"
+  status = 301
+
+[[redirects]]
+  from = "/from-github-redblue"
+  to = "https://hughx.dev/?utm_source=project&utm_medium=github&utm_campaign=redblue"
+  status = 301
+
+[[redirects]]
+  from = "/from-github-npm-minify"
+  to = "https://hughx.dev/?utm_source=project&utm_medium=github&utm_campaign=npm-minify"
+  status = 301
+
+[[redirects]]
   from = "/from-stackoverflow"
   to = "https://hughx.dev/?utm_source=profile&utm_medium=stackoverflow"
   status = 301
